@@ -1,0 +1,908 @@
+fileFormatVersion: 2
+guid: 33692f324c4de6e4d910c088075a7490
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3490799100292530197
+    second: skull knight-Sheet_0
+  - first:
+      213: 8359882802969593435
+    second: skull knight-Sheet_1
+  - first:
+      213: 5011572228764296879
+    second: skull knight-Sheet_2
+  - first:
+      213: -2150924327646119067
+    second: skull knight-Sheet_3
+  - first:
+      213: -5205257300601355
+    second: skull knight-Sheet_4
+  - first:
+      213: 8667974690529506543
+    second: skull knight-Sheet_5
+  - first:
+      213: 3471049156601809123
+    second: skull knight-Sheet_6
+  - first:
+      213: 6718023856728444381
+    second: skull knight-Sheet_7
+  - first:
+      213: -5038866228371174071
+    second: skull knight-Sheet_8
+  - first:
+      213: 1246128869867777928
+    second: skull knight-Sheet_9
+  - first:
+      213: 7692174999079488501
+    second: skull knight-Sheet_10
+  - first:
+      213: -1408914189785085061
+    second: skull knight-Sheet_11
+  - first:
+      213: -8226089111339604410
+    second: skull knight-Sheet_12
+  - first:
+      213: 2780398298613344467
+    second: skull knight-Sheet_13
+  - first:
+      213: 744753246023208045
+    second: skull knight-Sheet_14
+  - first:
+      213: 5332155309198908953
+    second: skull knight-Sheet_15
+  - first:
+      213: 3184169416539196403
+    second: skull knight-Sheet_16
+  - first:
+      213: -2363950130218803585
+    second: skull knight-Sheet_17
+  - first:
+      213: -6191117909313660113
+    second: skull knight-Sheet_18
+  - first:
+      213: -5098906149019492630
+    second: skull knight-Sheet_19
+  - first:
+      213: -6527170519732831250
+    second: skull knight-Sheet_20
+  - first:
+      213: -9201553074939670769
+    second: skull knight-Sheet_21
+  - first:
+      213: 4210401860371720292
+    second: skull knight-Sheet_22
+  - first:
+      213: 4912839972121398382
+    second: skull knight-Sheet_23
+  - first:
+      213: -476689103243997302
+    second: skull knight-Sheet_24
+  - first:
+      213: 6126806495354496959
+    second: skull knight-Sheet_25
+  - first:
+      213: 7407674137648475418
+    second: skull knight-Sheet_26
+  - first:
+      213: -41986600639930480
+    second: skull knight-Sheet_27
+  - first:
+      213: 6670426974187956230
+    second: skull knight-Sheet_28
+  - first:
+      213: -3723869296915171560
+    second: skull knight-Sheet_29
+  - first:
+      213: -7420826175232371929
+    second: skull knight-Sheet_30
+  - first:
+      213: 7643324628130925127
+    second: skull knight-Sheet_31
+  - first:
+      213: 7108322097743992480
+    second: skull knight-Sheet_32
+  - first:
+      213: -8899125766476874306
+    second: skull knight-Sheet_33
+  - first:
+      213: 6000289164131046993
+    second: skull knight-Sheet_34
+  - first:
+      213: -6017186354981613977
+    second: skull knight-Sheet_35
+  - first:
+      213: 6930084922170811191
+    second: skull knight-Sheet_36
+  - first:
+      213: 5368812702200234523
+    second: skull knight-Sheet_37
+  - first:
+      213: 2866674697442069344
+    second: skull knight-Sheet_38
+  - first:
+      213: -2739095383553561180
+    second: skull knight-Sheet_39
+  - first:
+      213: -2625911442350051494
+    second: skull knight-Sheet_40
+  - first:
+      213: -7660451308674421393
+    second: skull knight-Sheet_41
+  - first:
+      213: 3027126542068551781
+    second: skull knight-Sheet_42
+  - first:
+      213: 4082491739973316160
+    second: skull knight-Sheet_43
+  - first:
+      213: 5713671579550971705
+    second: skull knight-Sheet_44
+  - first:
+      213: -7064947262568614559
+    second: skull knight-Sheet_45
+  - first:
+      213: -4037761179014743666
+    second: skull knight-Sheet_46
+  - first:
+      213: 556102450873809814
+    second: skull knight-Sheet_47
+  - first:
+      213: 8151528430134512087
+    second: skull knight-Sheet_48
+  - first:
+      213: 4236763771533757779
+    second: skull knight-Sheet_49
+  - first:
+      213: 3095184145030953767
+    second: skull knight-Sheet_50
+  - first:
+      213: -3251219712488095209
+    second: skull knight-Sheet_51
+  - first:
+      213: -910620499500919607
+    second: skull knight-Sheet_52
+  - first:
+      213: 1387562565236735616
+    second: skull knight-Sheet_53
+  - first:
+      213: 3300011784602450838
+    second: skull knight-Sheet_54
+  - first:
+      213: 2988271615967979788
+    second: skull knight-Sheet_55
+  - first:
+      213: 2594143999026214825
+    second: skull knight-Sheet_56
+  - first:
+      213: 2635910860720701400
+    second: skull knight-Sheet_57
+  - first:
+      213: 3334130137090317769
+    second: skull knight-Sheet_58
+  - first:
+      213: -2752213052299912831
+    second: skull knight-Sheet_59
+  - first:
+      213: 2007755566128539154
+    second: skull knight-Sheet_60
+  - first:
+      213: -3259208382508413546
+    second: skull knight-Sheet_61
+  - first:
+      213: 5431679711400388013
+    second: skull knight-Sheet_62
+  - first:
+      213: -8899017461191035030
+    second: skull knight-Sheet_63
+  - first:
+      213: -4333770433914973559
+    second: skull knight-Sheet_64
+  - first:
+      213: -2875814071340898293
+    second: skull knight-Sheet_65
+  - first:
+      213: 1400902493061322234
+    second: skull knight-Sheet_66
+  - first:
+      213: 8704806747142160830
+    second: skull knight-Sheet_67
+  - first:
+      213: -5592738888408937019
+    second: skull knight-Sheet_68
+  - first:
+      213: -6843005502736125805
+    second: skull knight-Sheet_69
+  - first:
+      213: -7627258057323076098
+    second: skull knight-Sheet_70
+  - first:
+      213: -1159663008525654211
+    second: skull knight-Sheet_71
+  - first:
+      213: 99744295953559178
+    second: skull knight-Sheet_72
+  - first:
+      213: 2104331179935186064
+    second: skull knight-Sheet_73
+  - first:
+      213: 7025182520980041064
+    second: skull knight-Sheet_74
+  - first:
+      213: -3232517917592588020
+    second: skull knight-Sheet_75
+  - first:
+      213: -4650969617729162881
+    second: skull knight-Sheet_76
+  - first:
+      213: -7119795734904052476
+    second: skull knight-Sheet_77
+  - first:
+      213: 8838170448414994412
+    second: skull knight-Sheet_78
+  - first:
+      213: -3690567136483156940
+    second: skull knight-Sheet_79
+  - first:
+      213: -6461461835784828325
+    second: skull knight-Sheet_80
+  - first:
+      213: -8106697767982318781
+    second: skull knight-Sheet_81
+  - first:
+      213: -1396767847566011256
+    second: skull knight-Sheet_82
+  - first:
+      213: -8010877385821934002
+    second: skull knight-Sheet_83
+  - first:
+      213: -7880051253771187538
+    second: skull knight-Sheet_84
+  - first:
+      213: 2463144056551376550
+    second: skull knight-Sheet_85
+  - first:
+      213: -2347376966278958896
+    second: skull knight-Sheet_86
+  - first:
+      213: -6052202951129047618
+    second: skull knight-Sheet_87
+  - first:
+      213: 5527162952739118576
+    second: skull knight-Sheet_88
+  - first:
+      213: 7080826062427144650
+    second: skull knight-Sheet_89
+  - first:
+      213: -2438934378523173232
+    second: skull knight-Sheet_90
+  - first:
+      213: 4978917246253455454
+    second: skull knight-Sheet_91
+  - first:
+      213: -4113128947643782390
+    second: skull knight-Sheet_92
+  - first:
+      213: 5376381482744409836
+    second: skull knight-Sheet_93
+  - first:
+      213: -8322328671310919928
+    second: skull knight-Sheet_94
+  - first:
+      213: -421271884162652245
+    second: skull knight-Sheet_95
+  - first:
+      213: 7181377696834145128
+    second: skull knight-Sheet_96
+  - first:
+      213: 2013307912563177658
+    second: skull knight-Sheet_97
+  - first:
+      213: -7724769937895200967
+    second: skull knight-Sheet_98
+  - first:
+      213: 1559460249076462647
+    second: skull knight-Sheet_99
+  - first:
+      213: 3361502893789458256
+    second: skull knight-Sheet_100
+  - first:
+      213: 135565137875220750
+    second: skull knight-Sheet_101
+  - first:
+      213: -4253763068810470600
+    second: skull knight-Sheet_102
+  - first:
+      213: -5908145363112419048
+    second: skull knight-Sheet_103
+  - first:
+      213: 6742506809949037107
+    second: skull knight-Sheet_104
+  - first:
+      213: 6841875048377388526
+    second: skull knight-Sheet_105
+  - first:
+      213: 1709582401856480278
+    second: skull knight-Sheet_106
+  - first:
+      213: -2053930847674137746
+    second: skull knight-Sheet_107
+  - first:
+      213: 8071808949992691372
+    second: skull knight-Sheet_108
+  - first:
+      213: -4340309291553142208
+    second: skull knight-Sheet_109
+  - first:
+      213: 8955309815288862343
+    second: skull knight-Sheet_110
+  - first:
+      213: 7974565062653937485
+    second: skull knight-Sheet_111
+  - first:
+      213: 7997259545738159546
+    second: skull knight-Sheet_112
+  - first:
+      213: 2755106101423830513
+    second: skull knight-Sheet_113
+  - first:
+      213: -740529013420246477
+    second: skull knight-Sheet_114
+  - first:
+      213: -8434985756857112083
+    second: skull knight-Sheet_115
+  - first:
+      213: -4675526243789049939
+    second: skull knight-Sheet_116
+  - first:
+      213: 5525690166761545870
+    second: skull knight-Sheet_117
+  - first:
+      213: -8462474480184990328
+    second: skull knight-Sheet_118
+  - first:
+      213: 3811359772028268864
+    second: skull knight-Sheet_119
+  - first:
+      213: 4249982307799056950
+    second: skull knight-Sheet_120
+  - first:
+      213: -7499402601650596795
+    second: skull knight-Sheet_121
+  - first:
+      213: 1993960322167666530
+    second: skull knight-Sheet_122
+  - first:
+      213: 7457408618644741164
+    second: skull knight-Sheet_123
+  - first:
+      213: 6862186091365437858
+    second: skull knight-Sheet_124
+  - first:
+      213: 5004457528692509080
+    second: skull knight-Sheet_125
+  - first:
+      213: -5735526801167976464
+    second: skull knight-Sheet_126
+  - first:
+      213: 6599634365590961418
+    second: skull knight-Sheet_127
+  - first:
+      213: -5068404106082936343
+    second: skull knight-Sheet_128
+  - first:
+      213: -1902324453774539803
+    second: skull knight-Sheet_129
+  - first:
+      213: -3133523169546365017
+    second: skull knight-Sheet_130
+  - first:
+      213: 3833825682214373549
+    second: skull knight-Sheet_131
+  - first:
+      213: -2183494133118845364
+    second: skull knight-Sheet_132
+  - first:
+      213: -2285124156547964449
+    second: skull knight-Sheet_133
+  - first:
+      213: 4814867377620611615
+    second: skull knight-Sheet_134
+  - first:
+      213: 8738099439017218837
+    second: skull knight-Sheet_135
+  - first:
+      213: 6340257380748159610
+    second: skull knight-Sheet_136
+  - first:
+      213: -281897873305986522
+    second: skull knight-Sheet_137
+  - first:
+      213: -3572838441807480894
+    second: skull knight-Sheet_138
+  - first:
+      213: -3419934629404660717
+    second: skull knight-Sheet_139
+  - first:
+      213: -5846433335892064435
+    second: skull knight-Sheet_140
+  - first:
+      213: -1350579996179114860
+    second: skull knight-Sheet_141
+  - first:
+      213: -521094708804420245
+    second: skull knight-Sheet_142
+  - first:
+      213: 4060560939815195579
+    second: skull knight-Sheet_143
+  - first:
+      213: 448971410799689928
+    second: skull knight-Sheet_144
+  - first:
+      213: -9148347761397016820
+    second: skull knight-Sheet_145
+  - first:
+      213: 2281021601840913095
+    second: skull knight-Sheet_146
+  - first:
+      213: 2034584266454217070
+    second: skull knight-Sheet_147
+  - first:
+      213: 121746713521552564
+    second: skull knight-Sheet_148
+  - first:
+      213: -1810242845259818237
+    second: skull knight-Sheet_149
+  - first:
+      213: 11524652494378566
+    second: skull knight-Sheet_150
+  - first:
+      213: -5089758635982682947
+    second: skull knight-Sheet_151
+  - first:
+      213: -7928764663803543996
+    second: skull knight-Sheet_152
+  - first:
+      213: 3415454869292675552
+    second: skull knight-Sheet_153
+  - first:
+      213: 472061769107095316
+    second: skull knight-Sheet_154
+  - first:
+      213: 6850363021768407238
+    second: skull knight-Sheet_155
+  - first:
+      213: -5229196430560759033
+    second: skull knight-Sheet_156
+  - first:
+      213: 4918931213527244849
+    second: skull knight-Sheet_157
+  - first:
+      213: 724026898174376077
+    second: skull knight-Sheet_158
+  - first:
+      213: -5740684676914222883
+    second: skull knight-Sheet_159
+  - first:
+      213: 6267096065523391223
+    second: skull knight-Sheet_160
+  - first:
+      213: 5336406784713075153
+    second: skull knight-Sheet_161
+  - first:
+      213: -2825908775781366037
+    second: skull knight-Sheet_162
+  - first:
+      213: 606706930471773484
+    second: skull knight-Sheet_163
+  - first:
+      213: 6897471581786782529
+    second: skull knight-Sheet_164
+  - first:
+      213: 2575484556397360666
+    second: skull knight-Sheet_165
+  - first:
+      213: 3738104459554855209
+    second: skull knight-Sheet_166
+  - first:
+      213: 6241111732700717780
+    second: skull knight-Sheet_167
+  - first:
+      213: 1543500008585474834
+    second: skull knight-Sheet_168
+  - first:
+      213: 2912702055924106942
+    second: skull knight-Sheet_169
+  - first:
+      213: 8024746869893345685
+    second: skull knight-Sheet_170
+  - first:
+      213: -1512701093146308736
+    second: skull knight-Sheet_171
+  - first:
+      213: -4903525152541894099
+    second: skull knight-Sheet_172
+  - first:
+      213: 1539769078371232369
+    second: skull knight-Sheet_173
+  - first:
+      213: -2322091339042908882
+    second: skull knight-Sheet_174
+  - first:
+      213: -4503808609420966217
+    second: skull knight-Sheet_175
+  - first:
+      213: -4356668659360893175
+    second: skull knight-Sheet_176
+  - first:
+      213: 4189771971128476939
+    second: skull knight-Sheet_177
+  - first:
+      213: -6070167076078665002
+    second: skull knight-Sheet_178
+  - first:
+      213: 587044400608596905
+    second: skull knight-Sheet_179
+  - first:
+      213: -8701748015610715897
+    second: skull knight-Sheet_180
+  - first:
+      213: 33991737486532845
+    second: skull knight-Sheet_181
+  - first:
+      213: -2449667182642680583
+    second: skull knight-Sheet_182
+  - first:
+      213: 4276962830642528655
+    second: skull knight-Sheet_183
+  - first:
+      213: -8785858653753015036
+    second: skull knight-Sheet_184
+  - first:
+      213: 4864650114592252383
+    second: skull knight-Sheet_185
+  - first:
+      213: 5615046735030488706
+    second: skull knight-Sheet_186
+  - first:
+      213: 3141061451189515639
+    second: skull knight-Sheet_187
+  - first:
+      213: -6090538724432286969
+    second: skull knight-Sheet_188
+  - first:
+      213: -8093599471939788421
+    second: skull knight-Sheet_189
+  - first:
+      213: -5801213044138278778
+    second: skull knight-Sheet_190
+  - first:
+      213: -1687281953017260726
+    second: skull knight-Sheet_191
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 22
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 23
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e128de0594469ab4eaa2dcaf34e4df81
+      internalID: 760494346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_1
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 5
+        width: 38
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 626ff2801a41b734186ad8dfaf97d0db
+      internalID: 1335306976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_3
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 3
+        width: 41
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 870aedd532dfd7940807f938d914a116
+      internalID: -1181435666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_4
+      rect:
+        serializedVersion: 2
+        x: 175
+        y: 16
+        width: 4
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 146d3c69bb44a1542be03e7c36308978
+      internalID: -1673268033
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_5
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 6
+        width: 36
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69e034d0115753e4095f601060c3e3dc
+      internalID: -64464463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_6
+      rect:
+        serializedVersion: 2
+        x: 273
+        y: 5
+        width: 34
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbacec1560b6bb24f9b0669dc0a1e558
+      internalID: -854692336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_7
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 22
+        width: 18
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0790bc2fb4237d64985cb280aa2b7cc3
+      internalID: -678864748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_13
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 4
+        width: 19
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d1c9ed83575f545be2f2a653ef34a5
+      internalID: -1530533526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: skull knight-Sheet 4_14
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 6
+        width: 7
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfeb6799d61978e4ca9ba342980d316e
+      internalID: -697784505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: faf70bd226294a447b1c0eb4a123fc8e
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      skull knight-Sheet 4_0: 760494346
+      skull knight-Sheet 4_1: 1335306976
+      skull knight-Sheet 4_10: -997745757
+      skull knight-Sheet 4_11: 1892745011
+      skull knight-Sheet 4_12: 127303735
+      skull knight-Sheet 4_13: -1530533526
+      skull knight-Sheet 4_14: -697784505
+      skull knight-Sheet 4_2: 1276569771
+      skull knight-Sheet 4_3: -1181435666
+      skull knight-Sheet 4_4: -1673268033
+      skull knight-Sheet 4_5: -64464463
+      skull knight-Sheet 4_6: -854692336
+      skull knight-Sheet 4_7: -678864748
+      skull knight-Sheet 4_8: -1169166839
+      skull knight-Sheet 4_9: 1918919307
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
