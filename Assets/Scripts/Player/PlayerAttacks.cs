@@ -18,6 +18,9 @@ public class PlayerAttacks : MonoBehaviour
 
 
     public bool isAttacking;
+    private bool AttackHitBoxStill;
+    private bool AttackHitBoxDone;
+    private bool allowedToTakeDmg;
 
     private Animator anim;
 
@@ -27,8 +30,9 @@ public class PlayerAttacks : MonoBehaviour
     public float attackRadius;
     private float attackCooldown = 0.4f;
     private float attackTimer = 0f;
+    public float attackDuration = 0.5f;  // hur länge hitboxen ska vara aktiv
 
-    private bool allowedToTakeDmg;
+    
 
     public SpriteRenderer sr;
 
@@ -39,6 +43,8 @@ public class PlayerAttacks : MonoBehaviour
     private Vector2 lastMoveDir = Vector2.down;
 
     public GameObject AttackHitboxP;
+    public GameObject activeHitBox;
+
 
 
 
@@ -69,12 +75,6 @@ public class PlayerAttacks : MonoBehaviour
         }
         anim.SetBool(Attacking, isAttacking);
 
-
-        //if (move.magnitude > 0.1)
-        //{
-        //    lastMoveDir = move.normalized;
-        //}
-
         if (InputManager.Movement.sqrMagnitude > 0.1)
         {
             lastMoveDir = InputManager.Movement.normalized;
@@ -82,6 +82,12 @@ public class PlayerAttacks : MonoBehaviour
 
         if (InputManager.Attack)
             Debug.Log("PlayerAttacks sees attack input");
+
+      if (activeHitBox != null && isAttacking)
+        {
+            activeHitBox.SetActive(true);
+            activeHitBox.transform.position = AttackingPoint.position;
+        }
 
         anim.SetBool(Attacking, isAttacking);
     }
@@ -121,17 +127,8 @@ public class PlayerAttacks : MonoBehaviour
             }
             
         }
-
-        if (AttackHitboxP != null)
-        {
-            GameObject hb = Instantiate(AttackHitboxP, AttackingPoint.position, Quaternion.identity);
-            hb.transform.localScale = Vector3.one * attackRadius * 2.5f; // scale matches radius
-            Destroy(hb, 0.6f); // destroy after attack duration
-            
-        }
+        
         Debug.Log("ATTACK FUNCTION RAN");
-
-
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackingPoint.position, attackRadius, enemyLayers);
 
@@ -139,16 +136,28 @@ public class PlayerAttacks : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {   
             Debug.Log("Hit" +  enemy.name);
-            enemy.GetComponent<Enemie>().TakeDmg(playerDmg); 
+            enemy.GetComponent<Enemie>().TakeDmg(playerDmg);
         }
 
+        if (AttackHitboxP != null && activeHitBox == null)
+            activeHitBox = Instantiate(AttackHitboxP, AttackingPoint.position, Quaternion.identity);
 
-        Invoke(nameof(StopAttack), 0.2f);
+        
+        if (activeHitBox != null)
+            activeHitBox.SetActive(true); activeHitBox.transform.position = AttackingPoint.position;
+
+        
+
+        Invoke(nameof(StopAttack), attackDuration);
 
     }
 
+
     void StopAttack()
-    { isAttacking = false; }
+    { 
+        isAttacking = false;
+        if (activeHitBox != null)   {activeHitBox.SetActive(false);}
+    }
 
 
     private void OnDrawGizmos()

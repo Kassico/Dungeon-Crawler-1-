@@ -341,16 +341,6 @@ Tilemap:
   m_GameObject: {fileID: 537596119}
   m_Enabled: 1
   m_Tiles:
-  - first: {x: -7, y: -3, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 14
-      m_TileSpriteIndex: 9
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
   - first: {x: -4, y: -3, z: 0}
     second:
       serializedVersion: 2
@@ -506,16 +496,6 @@ Tilemap:
       serializedVersion: 2
       m_TileIndex: 13
       m_TileSpriteIndex: 8
-      m_TileMatrixIndex: 0
-      m_TileColorIndex: 0
-      m_TileObjectToInstantiateIndex: 65535
-      dummyAlignment: 0
-      m_AllTileFlags: 1073741825
-  - first: {x: -7, y: -1, z: 0}
-    second:
-      serializedVersion: 2
-      m_TileIndex: 14
-      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1991,7 +1971,7 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 18
     m_Data: {fileID: 11400000, guid: e30724c13c8d17140af7ec2698c9fe6c, type: 2}
-  - m_RefCount: 20
+  - m_RefCount: 18
     m_Data: {fileID: 11400000, guid: fb5d2070ec2d33a4898a4aac385e44be, type: 2}
   - m_RefCount: 29
     m_Data: {fileID: 11400000, guid: 8b0a2e3f8b126244f88bf2313a9114a4, type: 2}
@@ -2032,7 +2012,7 @@ Tilemap:
     m_Data: {fileID: 28657665, guid: b65107c2013f55a43ba15e740e855cbe, type: 3}
   - m_RefCount: 18
     m_Data: {fileID: -1312801616, guid: b65107c2013f55a43ba15e740e855cbe, type: 3}
-  - m_RefCount: 20
+  - m_RefCount: 18
     m_Data: {fileID: -145241510, guid: b65107c2013f55a43ba15e740e855cbe, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
@@ -2065,7 +2045,7 @@ Tilemap:
   - m_RefCount: 0
     m_Data: {fileID: 0}
   m_TileMatrixArray:
-  - m_RefCount: 162
+  - m_RefCount: 160
     m_Data:
       e00: 1
       e01: 0
@@ -2084,7 +2064,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 162
+  - m_RefCount: 160
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
@@ -3518,6 +3498,7 @@ GameObject:
   - component: {fileID: 1437103301}
   - component: {fileID: 1437103306}
   - component: {fileID: 1437103307}
+  - component: {fileID: 1437103308}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -3719,14 +3700,31 @@ MonoBehaviour:
   attackDownPoint: {fileID: 583959633}
   attackLeftPoint: {fileID: 663826047}
   attackRightPoint: {fileID: 1830955371}
+  AttackingPoint: {fileID: 0}
   isAttacking: 0
   playerDmg: 1
   attackRadius: 1
+  attackDuration: 0.5
   sr: {fileID: 0}
   enemyLayers:
     serializedVersion: 2
     m_Bits: 64
   AttackHitboxP: {fileID: 836214964}
+  activeHitBox: {fileID: 0}
+--- !u!114 &1437103308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437103300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e84c46b2ea254cf4ba1df3b7b55eea6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthManeger
+  maxHealth: 10
+  playerHealth: 0
 --- !u!1 &1613567961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3818,6 +3816,7 @@ GameObject:
   - component: {fileID: 1821559569}
   - component: {fileID: 1821559568}
   - component: {fileID: 1821559572}
+  - component: {fileID: 1821559573}
   m_Layer: 6
   m_Name: Enemie (Orc)
   m_TagString: Enemie
@@ -3833,7 +3832,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1821559567}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -3974,9 +3973,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424e170dec97fe944b64779e256bf2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemieOrc
-  OrcHealth: 10
-  difficulty: 0
   playerTransform: {fileID: 1437103304}
+  StanderdmaxHealth: 5
+  StanderdmoveSpeed: 2
+  StanderdchaseRange: 5
+  StanderdattackRange: 1.2
+  StanderdattackDamage: 1
+  StanderdattackRate: 1
+  currentHealth: 10
+  distanceToPlayer: 0
+  isChasing: 0
+--- !u!95 &1821559573
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821559567}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1a01d2f09a322ac4ba62495570cd01f6, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1830955370
 GameObject:
   m_ObjectHideFlags: 0
@@ -4007,6 +4035,52 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1437103304}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1951700092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1951700094}
+  - component: {fileID: 1951700093}
+  m_Layer: 0
+  m_Name: PlayerHealthj
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1951700093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951700092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd7ff6d470ff16e44a95be0328ab9a02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthj
+  maxHealth: 10
+  playerHealth: 0
+--- !u!4 &1951700094
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951700092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.7987954, y: 5.971856, z: 0.020455202}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2104811360
 GameObject:
@@ -4113,3 +4187,4 @@ SceneRoots:
   - {fileID: 1613567963}
   - {fileID: 1073564894}
   - {fileID: 1821559571}
+  - {fileID: 1951700094}

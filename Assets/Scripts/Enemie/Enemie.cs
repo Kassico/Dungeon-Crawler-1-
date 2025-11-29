@@ -1,111 +1,112 @@
-using NUnit.Framework.Constraints;
-using System.Security.Cryptography.X509Certificates;
-using Unity.VisualScripting;
-using UnityEditor.VersionControl;
 using UnityEngine;
 
 public class Enemie : MonoBehaviour
 {
-    public float StanderdmaxHealth = 3f;
-    public float StanderdmoveSpeed = 2f;
-    public float StanderdchaseRange = 5f;
-    public float StanderdattackRange = 1f;
-    public float StanderdattackDamage = 1f;
-
-    
-    public float distanceToPlayer = 3f;
-
-    public bool isChasing = false;
-
-
 
     public Transform playerTransform;
+
+
+    public float StanderdmaxHealth = 5f;
+    public float StanderdmoveSpeed = 2f;
+    public float StanderdchaseRange = 5f;
+    public float StanderdattackRange = 1.2f;
+    public float StanderdattackDamage = 1f;
+    public float StanderdattackRate = 1f;
+
+    private float nextAttackTime = 0f;
+    //private PlayerHealthManeger playerHealth;
+    
+
+    public float currentHealth;
+    public float distanceToPlayer;
+    public bool isChasing = false;
+
+    private PlayerHealthManager playerHealth;
+
+    private const string _horizontal = "Horizontal";
+    private const string _Vertical = "Vertical";
+
+    private Vector2 _movement;
+    private Rigidbody2D _rb;
+    private Animator _animator;
 
     void Start()
     {
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
-
-        //orc stats
-        float OrcHealth = StanderdmaxHealth * 2;
-        float OrcmoveSpeed = StanderdmoveSpeed /4;
-        float OrcchaseRange = StanderdchaseRange *2;
-        float OrcattackRange = StanderdattackRange * 2;
-        float OrcattackDamage = StanderdattackDamage * 2;
-
-        // skeleton stats
-        float SkeletonHealth = StanderdmaxHealth /2;
-        float SkeletonmoveSpeed = StanderdmoveSpeed * 2;
-        float SkeletonchaseRange = StanderdchaseRange;
-        float SkeletonattackRange = StanderdattackRange;
-        float SkeletonattackDamage = StanderdattackDamage;
-
-
+        if (Player != null)
+        {
+            playerTransform = Player.transform;
+            playerHealth = Player.GetComponent<PlayerHealthManager>();
+        }
     }
+    private void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
+    }
+
 
 
     // Update is called once per frame
     void Update()
     {
-       
-        if (playerTransform == null)
-        {
-            return;
-        }
+
+
+        if (playerTransform == null) {return;}
 
         distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
-        Vector2 directionToPlayer = (playerTransform.position - playerTransform.forward).normalized;
 
-        if (if (distanceToPlayer <= chaseRange && distanceToPlayer > attackRange))
-        {
-            isChasing = true;
-            EnemieMovement(OrcchaseRange, SkeletonattackRange, StanderdattackRange)
+        isChasing = distanceToPlayer <= StanderdchaseRange;
 
+        if (isChasing) { ChasePlayer(); }
 
-        }
-
-
-        if (isChasing)
-        {
-            // Rotate to face the player
-            float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
-            transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-        }
+        if (distanceToPlayer <= StanderdattackRange) { AttackPlayer(); }
 
 
     }
 
-    
 
-    public static EnemieMovement(chaseRange, attackRange, moveSpeed)
+    public void ChasePlayer()
     {
-       
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
 
-        
-        
-            
-            transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, moveSpeed * Time.deltaTime);
-            if (attackRange >= distanceToPlayer)
-            {
-                //attack player saker här
-            }
+        _animator.SetFloat(_horizontal, direction.x);
+        _animator.SetFloat(_Vertical, direction.y);
 
-        
-        else
+        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, StanderdmoveSpeed * Time.deltaTime);
+    }
+
+    private void AttackPlayer() // makes the enemy attack the player once every second
+    {
+        if (Time.time >= nextAttackTime)
         {
-            isChasing = false;
+            nextAttackTime = Time.time + 1f / StanderdattackRate;
+            PerformAttack();
+            Debug.Log("Enemy Attacks Player");
         }
+        
+        
+    }
 
-
+    private void PerformAttack()
+    {
+        playerHealth.TakeDmg(StanderdattackDamage);
     }
 
 
     public void TakeDmg(float dmg)
     {
-        OrcHealth -= dmg;
-        if (OrcHealth < 0)
-        {
-            Destroy(gameObject);
-        }
+        currentHealth -= dmg;
+        Debug.Log($"Enemy takes " + dmg + " damage. And Has {playerHealth} Health Left");
+
+        if (currentHealth <= 0) {Die();}
     }
+
+    private void Die()
+    {
+        Debug.Log("Enemy Died");
+        Destroy(gameObject);
+    }
+
 
 }
