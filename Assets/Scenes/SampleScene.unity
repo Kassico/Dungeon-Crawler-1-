@@ -3983,6 +3983,7 @@ MonoBehaviour:
   currentHealth: 10
   distanceToPlayer: 0
   isChasing: 0
+  isAttacking: 0
 --- !u!95 &1821559573
 Animator:
   serializedVersion: 7
@@ -4065,8 +4066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd7ff6d470ff16e44a95be0328ab9a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthj
-  maxHealth: 10
-  playerHealth: 0
 --- !u!4 &1951700094
 Transform:
   m_ObjectHideFlags: 0

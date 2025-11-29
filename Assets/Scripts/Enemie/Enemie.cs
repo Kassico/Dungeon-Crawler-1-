@@ -1,9 +1,11 @@
 using UnityEngine;
+using UnityEngine.InputSystem.Processors;
 
 public class Enemie : MonoBehaviour
 {
 
     public Transform playerTransform;
+    public Transform attackpoint;
 
 
     public float StanderdmaxHealth = 5f;
@@ -20,6 +22,9 @@ public class Enemie : MonoBehaviour
     public float currentHealth;
     public float distanceToPlayer;
     public bool isChasing = false;
+    public bool isAttacking = false;
+    private bool isDead = false;
+
 
     private PlayerHealthManager playerHealth;
 
@@ -29,9 +34,11 @@ public class Enemie : MonoBehaviour
     private Vector2 _movement;
     private Rigidbody2D _rb;
     private Animator _animator;
+    public LayerMask playerLayer;
 
     void Start()
     {
+        currentHealth = StanderdmaxHealth;
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
         {
@@ -41,7 +48,7 @@ public class Enemie : MonoBehaviour
     }
     private void Awake()
     {
-        _rb = GetComponent<Rigidbody2D>();
+        //_rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -50,7 +57,7 @@ public class Enemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (isDead) { return; }
 
         if (playerTransform == null) {return;}
 
@@ -58,9 +65,10 @@ public class Enemie : MonoBehaviour
 
         isChasing = distanceToPlayer <= StanderdchaseRange;
 
-        if (isChasing) { ChasePlayer(); }
+        if (isChasing && !isAttacking ) { ChasePlayer(); }
 
-        if (distanceToPlayer <= StanderdattackRange) { AttackPlayer(); }
+        if (distanceToPlayer <= StanderdattackRange && !isAttacking) { AttackPlayer(); }
+
 
 
     }
@@ -81,6 +89,13 @@ public class Enemie : MonoBehaviour
         if (Time.time >= nextAttackTime)
         {
             nextAttackTime = Time.time + 1f / StanderdattackRate;
+            isAttacking = true;
+            isChasing = false;
+            Vector2 direction = (playerTransform.position - transform.position).normalized;
+            _animator.SetFloat(_horizontal, direction.x);
+            _animator.SetFloat(_Vertical, direction.y);
+            _animator.SetTrigger("Attack");
+
             PerformAttack();
             Debug.Log("Enemy Attacks Player");
         }
@@ -90,6 +105,7 @@ public class Enemie : MonoBehaviour
 
     private void PerformAttack()
     {
+        Collider2D hitPlayer = Physics2D.OverlapCircle(attackpoint.position, StanderdattackRange, playerLayer);
         playerHealth.TakeDmg(StanderdattackDamage);
     }
 
@@ -105,7 +121,19 @@ public class Enemie : MonoBehaviour
     private void Die()
     {
         Debug.Log("Enemy Died");
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        _animator.SetBool("isDead", true);
+        isDead = true;
+
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackpoint == null)
+            return;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackpoint.position, StanderdattackRange);
     }
 
 
