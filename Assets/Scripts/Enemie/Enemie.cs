@@ -10,20 +10,21 @@ public class Enemie : MonoBehaviour
     public Transform attackpoint;
     public Transform attackHitBox;
 
+    float difficulty = Difficulty.CurrentDifficulty;
 
-    public float StanderdmaxHealth = 5f;
-    public float StanderdmoveSpeed = 2f;
-    public float StanderdchaseRange = 5f;
+
+    public float StanderdmaxHealth = 5f / 2;
+    public float StanderdmoveSpeed = 2f / 2;
+    public float StanderdchaseRange = 5f / 2;
     public float StanderdattackRange = 1.2f;
     public float StanderdattackDamage = 1f;
     public float StanderdattackRate = 0.001f;
     public float StanderdAttackDuration = 0.5f;
-    private float StanderdAttackTimer;
     public float StandardAttackHitBox = 1.4f;
-
     private float nextAttackTime = 0f;
+    private float StanderdAttackTimer;
     //private PlayerHealthManeger playerHealth;
-    
+
 
     public float currentHealth;
     public float distanceToPlayer;
@@ -45,13 +46,31 @@ public class Enemie : MonoBehaviour
 
     void Start()
     {
-        currentHealth = StanderdmaxHealth;
+        
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
         {
             playerTransform = Player.transform;
             playerHealth = Player.GetComponent<PlayerHealthManager>();
         }
+
+
+
+        //StanderdmaxHealth = (int)(StanderdmaxHealth *(PlayerPrefs.GetInt("Difficulty") + 1));
+        //StanderdmoveSpeed = (int)(StanderdmoveSpeed * (PlayerPrefs.GetInt("Difficulty") + 1));
+        //StanderdchaseRange = (int)(StanderdchaseRange * (PlayerPrefs.GetInt("Difficulty") + 1));
+        //StanderdattackRange = (int)(StanderdattackRange * (PlayerPrefs.GetInt("Difficulty") + 1));
+        //StanderdattackDamage = (int)(StanderdattackDamage * (PlayerPrefs.GetInt("Difficulty") + 1));
+        //StanderdattackRate = (int)(StanderdattackRate *(PlayerPrefs.GetInt("Difficulty") + 1));
+        
+        StanderdmaxHealth = (int)(StanderdmaxHealth * (difficulty + 1));
+        StanderdmoveSpeed = (int)(StanderdmoveSpeed * (difficulty + 1));
+        StanderdchaseRange = (int)(StanderdchaseRange * (difficulty + 1));
+        StanderdattackDamage = (int)(StanderdattackDamage * (difficulty + 1));
+ 
+
+
+        currentHealth = StanderdmaxHealth;
     }
     private void Awake()
     {
@@ -64,6 +83,7 @@ public class Enemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Enemy Health: " + currentHealth);
         if (isDead) { return; }
 
         if (playerTransform == null) {return;}
