@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public float maxHealth = 10f;
-    public float playerHealth;
+    public static float maxHealth = 10f;
+    public static float playerHealth;
 
     void Start()
     {

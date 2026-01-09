@@ -101,6 +101,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Dash",
+            "id": "5fe63a95-3405-482d-9805-bca6982b9f28",
+            "actions": [
+                {
+                    "name": "dash",
+                    "type": "Button",
+                    "id": "58a7539e-d4bb-4482-a783-cdef3135a58f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "48334e72-5e85-40d6-84d2-4afda995925b",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

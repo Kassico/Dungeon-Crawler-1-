@@ -18,15 +18,15 @@ public class PlayerAttacks : MonoBehaviour
 
 
     public bool isAttacking;
-    private bool AttackHitBoxStill;
-    private bool AttackHitBoxDone;
+    //private bool AttackHitBoxStill;
+    //private bool AttackHitBoxDone;
     private bool allowedToTakeDmg;
 
     private Animator anim;
 
     private Rigidbody2D rd;
     
-    public float playerDmg;
+    public static float playerDmg;
     public float attackRadius;
     private float attackCooldown = 0.4f;
     private float attackTimer = 0f;

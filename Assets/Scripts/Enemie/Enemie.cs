@@ -11,7 +11,7 @@ public class Enemie : MonoBehaviour
     public Transform attackHitBox;
 
     float difficulty = Difficulty.CurrentDifficulty;
-
+    public static float pointsValue = 1f;
 
     public float StanderdmaxHealth = 5f / 2;
     public float StanderdmoveSpeed = 2f / 2;
@@ -219,13 +219,14 @@ public class Enemie : MonoBehaviour
     public void TakeDmg(float dmg)
     {
         currentHealth -= dmg;   
-        Debug.Log($"Enemy takes " + dmg + $" damage. And Has {playerHealth.playerHealth} Health Left");
+        //Debug.Log($"Enemy takes " + dmg + $" damage. And Has {playerHealth.playerHealth} Health Left");
 
         if (currentHealth <= 0) {Die();}
     }
 
     private void Die()
     {
+        PlayerPowerUpps.playerpoints += pointsValue;
         Debug.Log("Enemy Died");
         //Destroy(gameObject);
         _animator.SetBool("isDead", true);
