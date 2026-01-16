@@ -31,8 +31,9 @@ public class PlayerAttacks : MonoBehaviour
     private float attackCooldown = 0.4f;
     private float attackTimer = 0f;
     public float attackDuration = 0.5f;  // hur länge hitboxen ska vara aktiv
+    public static float knockbackForce = 20f;
 
-    
+
 
     public SpriteRenderer sr;
 

@@ -1,7 +1,9 @@
 ﻿using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
+using System.Collections;
 
 public class Enemie : MonoBehaviour
 {
@@ -11,8 +13,8 @@ public class Enemie : MonoBehaviour
     public Transform attackHitBox;
 
     float difficulty = Difficulty.CurrentDifficulty;
-    public static float pointsValue = 1f;
-
+    public static float pointsValue = 1;
+    public float standardKnockbackForceResistans = 0.5f;
     public float StanderdmaxHealth = 5f / 2;
     public float StanderdmoveSpeed = 2f / 2;
     public float StanderdchaseRange = 5f / 2;
@@ -21,8 +23,12 @@ public class Enemie : MonoBehaviour
     public float StanderdattackRate = 0.001f;
     public float StanderdAttackDuration = 0.5f;
     public float StandardAttackHitBox = 1.4f;
-    private float nextAttackTime = 0f;
+    private float nextAttackTime;
     private float StanderdAttackTimer;
+    private float standardKnockbackduration = 10f;
+    private float attackCooldown = 1f;
+
+    public bool allowedToAttack = true;
     //private PlayerHealthManeger playerHealth;
 
 
@@ -83,6 +89,7 @@ public class Enemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Debug.Log("Enemy Health: " + currentHealth);
         if (isDead) { return; }
 
@@ -94,7 +101,7 @@ public class Enemie : MonoBehaviour
 
         if (isChasing && !isAttacking ) { ChasePlayer(); }
 
-        if (distanceToPlayer <= StanderdattackRange && !isAttacking) { AttackPlayer(); }
+        if (distanceToPlayer <= StanderdattackRange && !isAttacking && allowedToAttack) { AttackPlayer(); }
 
         if (isAttacking)
         {
@@ -104,6 +111,17 @@ public class Enemie : MonoBehaviour
                 EndAttack();
             }
         }
+       if (!allowedToAttack)
+        {   attackCooldown -= Time.deltaTime;
+            if (attackCooldown <= 0)
+            {
+                allowedToAttack = true;
+                attackCooldown = 1f;
+            }
+        }
+
+
+
         //Debug.Log("Distance attackpoint → Player = " +
         //  Vector2.Distance(attackpoint.position, playerTransform.position));
     }
@@ -213,15 +231,18 @@ public class Enemie : MonoBehaviour
         isChasing = true;
         _animator.SetBool("isAttacking", false);
         Debug.Log("Enemy Finished Attack");
+        allowedToAttack = false;
     }
 
 
     public void TakeDmg(float dmg)
     {
-        currentHealth -= dmg;   
+        currentHealth -= dmg;
         //Debug.Log($"Enemy takes " + dmg + $" damage. And Has {playerHealth.playerHealth} Health Left");
-
+        //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, StanderdmoveSpeed * 10 * Time.deltaTime);
+        StartCoroutine(KnockbackCoroutine());
         if (currentHealth <= 0) {Die();}
+
     }
 
     private void Die()
@@ -234,16 +255,23 @@ public class Enemie : MonoBehaviour
 
 
     }
-
-    //private void OnDrawGizmosSelected()
+    IEnumerator KnockbackCoroutine()
+    {
+        Vector2 direction = (transform.position - playerTransform.position).normalized;
+        //_rb.AddForce(new Vector2(direction.x * PlayerAttacks.knockbackForce * standardKnockbackForceResistans, direction.y * PlayerAttacks.knockbackForce* standardKnockbackForceResistans), ForceMode2D.Impulse);
+        transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(direction.x, direction.y), PlayerAttacks.knockbackForce * standardKnockbackForceResistans);
+        yield return new WaitForSeconds(standardKnockbackduration);
+    }
+    //IEnumerator knockback(float knockbackDuration, float knockbackPower, Transform obj)
     //{
-    //    if (attackpoint == null ) return;
-
-    //    if (!isAttacking)             return;
-
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(attackpoint.position, StanderdattackRange);
-        
+    //    float timer = 0;
+    //    while (knockbackDuration > timer)
+    //    {
+    //        timer += Time.deltaTime;
+    //        Vector2 direction = (obj.position - playerTransform.position).normalized;
+    //        _rb.AddForce(new Vector2(direction.x * knockbackPower, direction.y * knockbackPower));
+    //    }
+    //    yield return 0;
     //}
     private void OnDrawGizmos()
     {

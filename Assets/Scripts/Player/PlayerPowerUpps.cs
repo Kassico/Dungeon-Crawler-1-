@@ -15,6 +15,7 @@ public class PlayerPowerUpps : MonoBehaviour
     public  float pointsToPowerup = 1;
     public  bool powerupActive = false;
     public  bool powerUppselected;
+    public TextMeshProUGUI scoreText;
 
 
 
@@ -23,6 +24,7 @@ public class PlayerPowerUpps : MonoBehaviour
     private float playerMoveSpeed;
     private float playerDamage;
     private float playerDashCooldown;
+    private float playerknockbackForce;
 
     [Header("UI")]
     public GameObject powerUpPanel;
@@ -30,7 +32,7 @@ public class PlayerPowerUpps : MonoBehaviour
     public TMP_Text[] powerUpText;
 
 
-    string[] powerUpps = { "Health + 5", "Damage + 2", " Speed + 0.5", "Health + 10", "damage + 1", "Speed + 0.8", "dashCooldown -0.1" };
+    string[] powerUpps = { "Health + 5", "Damage + 2", " Speed + 0.5", "Health + 10", "damage + 1", "Speed + 0.8", "dashCooldown -0.1", "knockbackForce + 1" };
 
     public static Scene Currentscene;
 
@@ -45,12 +47,14 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void Update()
     {
+        scoreText.text = "Score: " + playerpoints.ToString();
         Points();
         PlayerAttacks.playerDmg += playerDamage;
         PlayerMovem._moveSpeed += playerMoveSpeed;
         PlayerDash.dashCooldown += playerDashCooldown;
         PlayerHealthManager.maxHealth += playerHealth;
         PlayerHealthManager.playerHealth += playerHealth;
+        
     }
     public void Points()
     {
@@ -112,6 +116,10 @@ public class PlayerPowerUpps : MonoBehaviour
             case 6:
                 playerDashCooldown -= 0.1f;
                 break;
+            case 7: 
+                playerknockbackForce += 1;
+                break;
+
         }
         powerUppselected = true;
         powerUpPanel.SetActive(false);
