@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 using System.Collections;
 
-public class PlayerMovem : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
 
     //[SerializeField] private float _moveSpeed = 2.5f;

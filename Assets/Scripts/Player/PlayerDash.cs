@@ -26,13 +26,13 @@ public class PlayerDash : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         PlayerMovem.allowedToMove = _allowedToMove;
+        PlayerMovement.allowedToMove = _allowedToMove;
         if (InputManager.Dash && allowedToDash )
         {
             
             Debug.Log("DASH BUTTON PRESSED");
             isDashing = true;
-            PlayerMovem._moveSpeed *= dashSpeedmultiplier;
+            PlayerMovement._moveSpeed *= dashSpeedmultiplier;
             _allowedToMove = false;
         }
         if (isDashing)
@@ -46,7 +46,7 @@ public class PlayerDash : MonoBehaviour
             {
                 isDashing = false;
                 dashTime = 0f;
-                PlayerMovem._moveSpeed /= dashSpeedmultiplier;
+                PlayerMovement._moveSpeed /= dashSpeedmultiplier;
                 Invoke("ResetDash", dashCooldown);
                 _allowedToMove = true;
             }

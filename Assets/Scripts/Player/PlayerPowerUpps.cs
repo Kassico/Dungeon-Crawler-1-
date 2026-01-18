@@ -28,12 +28,12 @@ public class PlayerPowerUpps : MonoBehaviour
     public TMP_Text[] powerUpText;
     public TextMeshProUGUI scoreText;
 
-    // base stats
-    private float baseHealth = 10;
-    private float baseMoveSpeed = 5;
-    private float baseDamage = 1;
-    private float baseDashCooldown = 1;
-    private float baseknockbackForce = 20;
+    //// base stats
+    //private float baseHealth = 10;
+    //private float baseMoveSpeed = 5;
+    //private float baseDamage = 1;
+    //private float baseDashCooldown = 1;
+    //private float baseknockbackForce = 20;
 
 
 
@@ -57,7 +57,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     public bool powerupActive = false;
-    private bool powerUpChosen = false;
+    //private bool powerUpChosen = false;
 
 
 
@@ -92,7 +92,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void initializePlayerstats()
     {
-        playerMoveSpeed = PlayerMovem._moveSpeed;
+        playerMoveSpeed = PlayerMovement._moveSpeed;
         playerDamage = PlayerAttacks.playerDmg;
         playerDashCooldown = PlayerDash.dashCooldown;
         playerknockbackForce = PlayerAttacks.knockbackForce;
@@ -178,7 +178,7 @@ void ChosePowerUp(int index)
 
         PlayerAttacks.playerDmg = playerDamage;
         PlayerHealthManager.playerHealth += extraPlayerHealth;
-        PlayerMovem._moveSpeed = playerMoveSpeed;
+        PlayerMovement._moveSpeed = playerMoveSpeed;
         PlayerDash.dashCooldown = playerDashCooldown;
         PlayerAttacks.knockbackForce = playerknockbackForce;
       

@@ -20,7 +20,7 @@ public class PlayerAttacks : MonoBehaviour
     public bool isAttacking;
     //private bool AttackHitBoxStill;
     //private bool AttackHitBoxDone;
-    private bool allowedToTakeDmg;
+    //private bool allowedToTakeDmg;
 
     private Animator anim;
 
@@ -57,7 +57,7 @@ public class PlayerAttacks : MonoBehaviour
 
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        allowedToTakeDmg = true;
+        //allowedToTakeDmg = true;
 
     }
 
@@ -137,7 +137,7 @@ public class PlayerAttacks : MonoBehaviour
         foreach (Collider2D enemy in hitEnemies)
         {   
             Debug.Log("Hit" +  enemy.name);
-            enemy.GetComponent<Enemie>().TakeDmg(playerDmg);
+            enemy.GetComponent<Enemy>().TakeDmg(playerDmg);
         }
 
         if (AttackHitboxP != null && activeHitBox == null)

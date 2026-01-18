@@ -6,38 +6,47 @@ using UnityEngine.InputSystem.Processors;
 using System.Collections;
 
 using Unity.Mathematics;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
-public class Enemie : MonoBehaviour
+public class Enemy: MonoBehaviour
 {
 
     public Transform playerTransform;
     public Transform attackpoint;
     public Transform attackHitBox;
 
-    float difficulty = Difficulty.CurrentDifficulty;
+
+
+    //Changeble Stats
+
+    public float maxHealth = 10f;
+    private float currentHealth;
+    private float moveSpeed = 2f;
+    private float chaseRange = 6f;
+    private float attackDamage = 1f;
+    private float attackRange = 1.1f;
+    private float attackRate = 2f;
+    private float KnockbackForceResistans = 0.5f;
+    
+
+    //Fixed Stats 
+    private float StunDuration = 1f;
+    private float attackCooldown = 2f;
+    private float Knockbackduration = 0.1f;
+    public static float KnockbackForce = 20f;
+    public float AttackHitBox = 1.4f;
+    public float AttackDuration = 0.5f;
     public static float pointsValue = 1;
-    public float standardKnockbackForceResistans = 0.5f;
-    public float StanderdmaxHealth = 5f / 2;
-    public float StanderdmoveSpeed = 2f / 2;
-    public float StanderdchaseRange = 5f / 2;
-    public float StanderdattackRange = 1.2f;
-    public float StanderdattackDamage = 1f;
-    public float StanderdattackRate = 0.001f;
-    public float StanderdAttackDuration = 0.5f;
-    public float StandardAttackHitBox = 1.4f;
+
+
+    //Needed float
     private float nextAttackTime;
-    private float StanderdAttackTimer;
-    private float standardKnockbackduration = 0.1f;
-    private float attackCooldown = 4f;
-    private float standardStunDuration = 1f;
-    public static float standardKnockbackForce = 20f;
+    private float AttackTimer;
+    private float distanceToPlayer;
 
+
+    //needed bools
     public bool allowedToAttack = true;
-    //private PlayerHealthManeger playerHealth;
-
-
-    public float currentHealth;
-    public float distanceToPlayer;
     public bool isChasing = false;
     public bool isAttacking = false;
     private bool isDead = false;
@@ -59,44 +68,39 @@ public class Enemie : MonoBehaviour
     private Animator _animator;
     public LayerMask playerLayer;
 
-    public static string enemietype = "StandardEnemy";
-
-
-    void Start()
+    public static string enemietype = "Enemy";
+    private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
-        _rb.AddForce(Vector2.right * 5f, ForceMode2D.Impulse);
+        _animator = GetComponent<Animator>();
 
-        GameObject Player = GameObject.FindGameObjectWithTag("Player");
+        var Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
         {
             playerTransform = Player.transform;
             playerHealth = Player.GetComponent<PlayerHealthManager>();
         }
+    }
+
+    void Start()
+    {
+
+       float difficulty = Difficulty.CurrentDifficulty;
 
 
-
-        //StanderdmaxHealth = (int)(StanderdmaxHealth *(PlayerPrefs.GetInt("Difficulty") + 1));
-        //StanderdmoveSpeed = (int)(StanderdmoveSpeed * (PlayerPrefs.GetInt("Difficulty") + 1));
-        //StanderdchaseRange = (int)(StanderdchaseRange * (PlayerPrefs.GetInt("Difficulty") + 1));
-        //StanderdattackRange = (int)(StanderdattackRange * (PlayerPrefs.GetInt("Difficulty") + 1));
-        //StanderdattackDamage = (int)(StanderdattackDamage * (PlayerPrefs.GetInt("Difficulty") + 1));
-        //StanderdattackRate = (int)(StanderdattackRate *(PlayerPrefs.GetInt("Difficulty") + 1));
-        
-        StanderdmaxHealth = (int)(StanderdmaxHealth * (difficulty + 1));
-        StanderdmoveSpeed = (int)(StanderdmoveSpeed * (difficulty + 1));
-        StanderdchaseRange = (int)(StanderdchaseRange * (difficulty + 1));
-        StanderdattackDamage = (int)(StanderdattackDamage * (difficulty + 1));
+         maxHealth *= (difficulty + 1);
+         moveSpeed *= (difficulty + 1);
+         chaseRange *= (difficulty + 1);
+         attackDamage *= (difficulty + 1);
+        KnockbackForceResistans *= (1 - (difficulty * 0.1f));
+        currentHealth = maxHealth;
+      
  
 
 
-        currentHealth = StanderdmaxHealth;
+
     }
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
-    }
+    
 
 
 
@@ -112,22 +116,23 @@ public class Enemie : MonoBehaviour
 
         distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
-        isChasing = distanceToPlayer <= StanderdchaseRange;
+        isChasing = distanceToPlayer <= chaseRange;
 
         if (isChasing && !isAttacking ) { ChasePlayer(); }
 
-        if (distanceToPlayer <= StanderdattackRange && !isAttacking && allowedToAttack) { AttackPlayer(); }
+        if (distanceToPlayer <= attackRange && !isAttacking && allowedToAttack) { AttackPlayer(); }
 
         if (isAttacking)
         {
-            StanderdAttackTimer -= Time.deltaTime;
-            if (StanderdAttackTimer <= 0)
+            AttackTimer -= Time.deltaTime;
+            if (AttackTimer <= 0)
             {
                 EndAttack();
             }
         }
-       if (!allowedToAttack)
-        {   attackCooldown -= Time.deltaTime;
+        if (!allowedToAttack)
+        {
+            attackCooldown -= Time.deltaTime;
             if (attackCooldown <= 0)
             {
                 allowedToAttack = true;
@@ -135,10 +140,6 @@ public class Enemie : MonoBehaviour
             }
         }
 
-
-
-        //Debug.Log("Distance attackpoint → Player = " +
-        //  Vector2.Distance(attackpoint.position, playerTransform.position));
     }
 
 
@@ -152,34 +153,35 @@ public class Enemie : MonoBehaviour
         _animator.SetFloat(_horizontal, direction.x);
         _animator.SetFloat(_Vertical, direction.y);
 
-        //transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, StanderdmoveSpeed * Time.deltaTime);
-        _rb.linearVelocity = direction * StanderdmoveSpeed;
+        _rb.linearVelocity = direction * moveSpeed;
     }
 
     private void AttackPlayer() 
     {
         if (isStunned || !allowedToAttack)
             return;
-        if (Time.time >= nextAttackTime)
-        {
+        //if (Time.time >= nextAttackTime)
+        //{
             Dir();
-            nextAttackTime = Time.time + 1f / StanderdattackRate;
-            StanderdAttackTimer = StanderdAttackDuration;
+            nextAttackTime = Time.time + 1f / attackRate;
+            AttackTimer = AttackDuration;
             isAttacking = true;
+
             isChasing = false;
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             _animator.SetFloat(_horizontal, direction.x);
             _animator.SetFloat(_Vertical, direction.y);
             _animator.SetBool("isAttacking", true);
+
             Debug.Log("Enemy Attacks Player");
             DealDmg();
 
-        }
+        //}
     }
 
     public void DealDmg()
     {
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, StandardAttackHitBox, playerLayer);
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, AttackHitBox, playerLayer);
         Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
@@ -188,18 +190,16 @@ public class Enemie : MonoBehaviour
             Debug.Log("Enemy Hit Player");
             if (playerHealth != null)
             {
-                playerHealth.TakeDmg(StanderdattackDamage, transform.position, enemietype);
-                Debug.Log("Enemy Dealt " + StanderdattackDamage + " Damage to Player");
+                playerHealth.TakeDmg(attackDamage, transform.position, enemietype);
+                Debug.Log("Enemy Dealt " + attackDamage + " Damage to Player");
             }
             else { Debug.LogError("playerHealth IS NULL"); }
             Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
         }
-        
+ 
+
+
     }
-
-
-
-
 
 
     public void Dir()
@@ -290,7 +290,7 @@ public class Enemie : MonoBehaviour
     {
         currentHealth -= dmg;
         //Debug.Log($"Enemy takes " + dmg + $" damage. And Has {playerHealth.playerHealth} Health Left");
-        //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, StanderdmoveSpeed * 10 * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, moveSpeed * 10 * Time.deltaTime);
         StartCoroutine(KnockbackCoroutine());
         if (currentHealth <= 0) {Die();}
 
@@ -298,7 +298,9 @@ public class Enemie : MonoBehaviour
 
     private void Die()
     {
-        PlayerPowerUpps.playerpoints += pointsValue;
+        //PlayerPowerUpps.playerpoints += pointsValue;
+
+
         Debug.Log("Enemy Died");
         //Destroy(gameObject);
         _animator.SetBool("isDead", true);
@@ -314,16 +316,16 @@ public class Enemie : MonoBehaviour
 
 
         //_rb.velocity = Vector2.zero;
-        _rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - standardKnockbackForceResistans)), ForceMode2D.Impulse);
+        _rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - KnockbackForceResistans)), ForceMode2D.Impulse);
         Debug.Log("FORCE: " + PlayerAttacks.knockbackForce);
 
 
-        yield return new WaitForSeconds(standardKnockbackduration);
+        yield return new WaitForSeconds(Knockbackduration);
         _rb.linearVelocity = Vector2.zero;
 
         allowedToMove = false;
         isStunned = true;
-        yield return new WaitForSeconds(standardStunDuration);
+        yield return new WaitForSeconds(StunDuration);
 
         
         isStunned = false;
@@ -336,7 +338,7 @@ public class Enemie : MonoBehaviour
         if (attackpoint == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackpoint.position, StandardAttackHitBox);
+        Gizmos.DrawWireSphere(attackpoint.position, AttackHitBox);
     }
 
 
