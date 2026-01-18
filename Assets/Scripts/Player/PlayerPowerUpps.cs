@@ -12,15 +12,11 @@ public class PlayerPowerUpps : MonoBehaviour
     [Header("Points")]
 
     public static float playerpoints = 0;
-    public  float pointsToPowerup = 1;
-    public  bool powerupActive = false;
-    public  bool powerUppselected;
-    public TextMeshProUGUI scoreText;
-
+    public float pointsToPowerup = 1;
 
 
     [Header("Player Stats")]
-    private float playerHealth;
+    private float extraPlayerHealth;
     private float playerMoveSpeed;
     private float playerDamage;
     private float playerDashCooldown;
@@ -30,101 +26,168 @@ public class PlayerPowerUpps : MonoBehaviour
     public GameObject powerUpPanel;
     public Button[] powerUpButtons;
     public TMP_Text[] powerUpText;
+    public TextMeshProUGUI scoreText;
+
+    // base stats
+    private float baseHealth = 10;
+    private float baseMoveSpeed = 5;
+    private float baseDamage = 1;
+    private float baseDashCooldown = 1;
+    private float baseknockbackForce = 20;
 
 
-    string[] powerUpps = { "Health + 5", "Damage + 2", " Speed + 0.5", "Health + 10", "damage + 1", "Speed + 0.8", "dashCooldown -0.1", "knockbackForce + 1" };
 
-    public static Scene Currentscene;
+    //current stats
+    private float currentHealth;
+    private float currentMoveSpeed;
+    private float currentDamage;
+    private float currentDashCooldown;
+    private float currentknockbackForce;
+
+    private List<int> usedIddices = new List<int>();
+
+    [System.Serializable]
+    public class PowerUp
+    {
+        public string description;
+        public System.Action applayEffect;
+    }
+
+    public List<PowerUp> powerUps;
+
+
+    public bool powerupActive = false;
+    private bool powerUpChosen = false;
+
 
 
 
     void Start()
     {
         powerUpPanel.SetActive(false);
+        initializePlayerstats();
+        initialzePowerUps();
 
 
     }
+
 
     void Update()
     {
         scoreText.text = "Score: " + playerpoints.ToString();
-        Points();
-        PlayerAttacks.playerDmg += playerDamage;
-        PlayerMovem._moveSpeed += playerMoveSpeed;
-        PlayerDash.dashCooldown += playerDashCooldown;
-        PlayerHealthManager.maxHealth += playerHealth;
-        PlayerHealthManager.playerHealth += playerHealth;
-        
-    }
-    public void Points()
-    {
-        if (playerpoints >= pointsToPowerup)
+
+        // kollar efter powerups
+
+        if (playerpoints >= pointsToPowerup && !powerupActive)
         {
-            playerpoints = 0;
+            powerupActive = true;
             showPowerUps();
+            playerpoints = 0;
         }
 
+       
+
 
     }
-    void showPowerUps()
+
+    void initializePlayerstats()
     {
+        playerMoveSpeed = PlayerMovem._moveSpeed;
+        playerDamage = PlayerAttacks.playerDmg;
+        playerDashCooldown = PlayerDash.dashCooldown;
+        playerknockbackForce = PlayerAttacks.knockbackForce;
+    }
+    void initialzePowerUps()
+    {
+    
+        powerUps.Add(new PowerUp
+        {
+            description = "Health + 5",
+            applayEffect = () => extraPlayerHealth += 5
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Damage + 2",
+            applayEffect = () => playerDamage += 2
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Speed + 0.5",
+            applayEffect = () => playerMoveSpeed += 0.5f
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Health + 10",
+            applayEffect = () => extraPlayerHealth += 10
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Damage + 1",
+            applayEffect = () => playerDamage += 1
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Speed + 0.8",
+            applayEffect = () => playerMoveSpeed += 0.8f
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Dash Cooldown - 0.1",
+            applayEffect = () => playerDashCooldown -= 0.1f
+        });
+        powerUps.Add(new PowerUp
+        {
+            description = "Knockback Force + 5",
+            applayEffect = () => playerknockbackForce += 5
+        });
+    }
+
+void showPowerUps()
+{
         Time.timeScale = 0;
         powerUpPanel.SetActive(true);
+        usedIddices.Clear();
+
 
         List<int> usedIndices = new List<int>();
 
-        for (int i = 0; i < 3; i++)
-        {
-            int randomIndex;
-            do
-            {
-                randomIndex = Random.Range(0, powerUpps.Length);
-            } while (usedIndices.Contains(randomIndex));
-            usedIndices.Add(randomIndex);
-            powerUpText[i].text = powerUpps[randomIndex];
+        
 
-            int idexcopy = randomIndex;
-            powerUpButtons[i].onClick.RemoveAllListeners();
-            powerUpButtons[i].onClick.AddListener(() =>
-            {
-                ChosePowerUp(idexcopy);
-            });
-        }
-    }
-    void ChosePowerUp(int index)
+    for (int i = 0; i < powerUpButtons.Length; i++)
     {
-        switch (index)
+        int randomIndex;
+        do
         {
-            case 0:
-                playerHealth += 5;
-                break;
-            case 1:
-                playerDamage += 2;
-                break;
-            case 2:
-                playerMoveSpeed += 0.5f;
-                break;
-            case 3:
-                playerHealth += 10;
-                break;
-            case 4:
-                playerDamage += 1;
-                break;
-            case 5:
-                playerMoveSpeed += 0.8f;
-                break;
-            case 6:
-                playerDashCooldown -= 0.1f;
-                break;
-            case 7: 
-                playerknockbackForce += 1;
-                break;
+            randomIndex = Random.Range(0, powerUps.Count);
+        } while (usedIndices.Contains(randomIndex));
+        usedIndices.Add(randomIndex);
+        powerUpText[i].text = powerUps[randomIndex].description;
 
-        }
-        powerUppselected = true;
+        int idexcopy = randomIndex;
+        powerUpButtons[i].onClick.RemoveAllListeners();
+        powerUpButtons[i].onClick.AddListener(() =>
+        {
+            ChosePowerUp(idexcopy);
+
+        });
+    }
+}
+void ChosePowerUp(int index)
+{
+        powerUps[index].applayEffect.Invoke();
+
+        PlayerAttacks.playerDmg = playerDamage;
+        PlayerHealthManager.playerHealth += extraPlayerHealth;
+        PlayerMovem._moveSpeed = playerMoveSpeed;
+        PlayerDash.dashCooldown = playerDashCooldown;
+        PlayerAttacks.knockbackForce = playerknockbackForce;
+      
+        
+
+
         powerUpPanel.SetActive(false);
         Time.timeScale = 1;
-    }
+}
 }
 
 

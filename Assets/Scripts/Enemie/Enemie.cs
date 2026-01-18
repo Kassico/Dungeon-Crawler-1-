@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.InputSystem.Processors;
 using System.Collections;
 
+using Unity.Mathematics;
+
 public class Enemie : MonoBehaviour
 {
 
@@ -25,8 +27,10 @@ public class Enemie : MonoBehaviour
     public float StandardAttackHitBox = 1.4f;
     private float nextAttackTime;
     private float StanderdAttackTimer;
-    private float standardKnockbackduration = 10f;
-    private float attackCooldown = 1f;
+    private float standardKnockbackduration = 0.1f;
+    private float attackCooldown = 4f;
+    private float standardStunDuration = 1f;
+    public static float standardKnockbackForce = 20f;
 
     public bool allowedToAttack = true;
     //private PlayerHealthManeger playerHealth;
@@ -37,6 +41,12 @@ public class Enemie : MonoBehaviour
     public bool isChasing = false;
     public bool isAttacking = false;
     private bool isDead = false;
+    private bool facingRight = false;
+    private bool facingLeft = false;
+    private bool facingUp = false;
+    private bool facingDown = false;
+    private bool isStunned = false;
+    private bool allowedToMove = true;
 
 
     private PlayerHealthManager playerHealth;
@@ -49,10 +59,14 @@ public class Enemie : MonoBehaviour
     private Animator _animator;
     public LayerMask playerLayer;
 
+    public static string enemietype = "StandardEnemy";
+
 
     void Start()
     {
-        
+        _rb = GetComponent<Rigidbody2D>();
+        _rb.AddForce(Vector2.right * 5f, ForceMode2D.Impulse);
+
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
         {
@@ -80,7 +94,7 @@ public class Enemie : MonoBehaviour
     }
     private void Awake()
     {
-        //_rb = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
     }
 
@@ -89,8 +103,9 @@ public class Enemie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
 
-        Debug.Log("Enemy Health: " + currentHealth);
+        //Debug.Log("Enemy Health: " + currentHealth);
         if (isDead) { return; }
 
         if (playerTransform == null) {return;}
@@ -129,16 +144,22 @@ public class Enemie : MonoBehaviour
 
     public void ChasePlayer()
     {
+        if (isStunned || !allowedToMove)
+            return;
+
         Vector2 direction = (playerTransform.position - transform.position).normalized;
 
         _animator.SetFloat(_horizontal, direction.x);
         _animator.SetFloat(_Vertical, direction.y);
 
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, StanderdmoveSpeed * Time.deltaTime);
+        //transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, StanderdmoveSpeed * Time.deltaTime);
+        _rb.linearVelocity = direction * StanderdmoveSpeed;
     }
 
-    private void AttackPlayer() // makes the enemy attack the player once every second and makes the attack take 0.5 seconds
+    private void AttackPlayer() 
     {
+        if (isStunned || !allowedToAttack)
+            return;
         if (Time.time >= nextAttackTime)
         {
             Dir();
@@ -167,40 +188,15 @@ public class Enemie : MonoBehaviour
             Debug.Log("Enemy Hit Player");
             if (playerHealth != null)
             {
-                playerHealth.TakeDmg(StanderdattackDamage);
+                playerHealth.TakeDmg(StanderdattackDamage, transform.position, enemietype);
                 Debug.Log("Enemy Dealt " + StanderdattackDamage + " Damage to Player");
             }
             else { Debug.LogError("playerHealth IS NULL"); }
+            Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
         }
-        Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
+        
     }
 
-
-    //public void DealDmg()
-    //{
-    //    Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(
-    //        attackpoint.position,
-    //        StandardAttackHitBox,
-    //        playerLayer
-    //    );
-
-    //    Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
-
-    //    foreach (Collider2D player in hitPlayers)
-    //    {
-    //        Debug.Log("Enemy Hit Player: " + player.name);
-
-    //        if (playerHealth != null)
-    //        {
-    //            playerHealth.TakeDmg(StanderdattackDamage);
-    //            Debug.Log("Enemy Dealt " + StanderdattackDamage + " Damage");
-    //        }
-    //        else
-    //        {
-    //            Debug.LogError("playerHealth IS NULL");
-    //        }
-    //    }
-    //}
 
 
 
@@ -208,22 +204,77 @@ public class Enemie : MonoBehaviour
 
     public void Dir()
         {
-       
-        if (transform.position.x < playerTransform.position.x )
-        {             _animator.SetBool("isFacingRight", true);         }
+
+        // det som händer här är att den kollar vilken riktning fienden borde attackera/kolla i förhållande till spelaren, och sätter bools för det.
+        // om fienden är till höger om spelaren så är facingRight true, annars facingLeft true. samma sak för upp och ner.
+        // den gör detta genom att jämföra positionerna för fienden och spelaren på x och y axeln. och om spelaren är både höger och under fienden kommer den attackera där man är närmast.
+
+        if (transform.position.x < playerTransform.position.x)
+        { 
+        facingRight = true; facingLeft = false;
+        }
         else
         {
-            _animator.SetBool("isFacingRight", false);
+           facingLeft = true; facingRight = false;
         }
         if (transform.position.y < playerTransform.position.y)
         {
-            _animator.SetBool("isFacingUp", true);
+           facingUp = true; facingDown = false;
         }
         else
         {
-            _animator.SetBool("isFacingUp", false);
+            facingDown = true; facingUp = false;
+        }
+
+
+        if (facingRight && facingDown)
+        {
+            if (Mathf.Abs(transform.position.x - playerTransform.position.x) > Mathf.Abs(transform.position.y - playerTransform.position.y))
+            {
+                _animator.SetBool("isFacingRight", true); ;
+            }
+            else
+            {
+                _animator.SetBool("isFacingUp", false); ;
+            }
+        }
+
+        if (facingRight && facingUp)
+        {
+            if (Mathf.Abs(transform.position.x - playerTransform.position.x) > Mathf.Abs(transform.position.y - playerTransform.position.y))
+            {
+                _animator.SetBool("isFacingRight", true); ;
+            }
+            else
+            {
+                _animator.SetBool("isFacingUp", true); ;
+            }
+        }
+        if (facingLeft && facingDown)
+        {
+            if (Mathf.Abs(transform.position.x - playerTransform.position.x) > Mathf.Abs(transform.position.y - playerTransform.position.y))
+            {
+                _animator.SetBool("isFacingRight", false); ;
+            }
+            else
+            {
+                _animator.SetBool("isFacingUp", false); ;
+            }
+        }
+        if (facingLeft && facingUp)
+        {
+            if (Mathf.Abs(transform.position.x - playerTransform.position.x) > Mathf.Abs(transform.position.y - playerTransform.position.y))
+            {
+                _animator.SetBool("isFacingRight", false); ;
+            }
+            else
+            {
+                _animator.SetBool("isFacingUp", true); ;
+            }
         }
         }
+
+    
 
     private void EndAttack()
     {
@@ -257,22 +308,29 @@ public class Enemie : MonoBehaviour
     }
     IEnumerator KnockbackCoroutine()
     {
-        Vector2 direction = (transform.position - playerTransform.position).normalized;
-        //_rb.AddForce(new Vector2(direction.x * PlayerAttacks.knockbackForce * standardKnockbackForceResistans, direction.y * PlayerAttacks.knockbackForce* standardKnockbackForceResistans), ForceMode2D.Impulse);
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(direction.x, direction.y), PlayerAttacks.knockbackForce * standardKnockbackForceResistans);
+        
+        allowedToAttack = false;
+        Vector2 dir = (transform.position - playerTransform.position).normalized;
+
+
+        //_rb.velocity = Vector2.zero;
+        _rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - standardKnockbackForceResistans)), ForceMode2D.Impulse);
+        Debug.Log("FORCE: " + PlayerAttacks.knockbackForce);
+
+
         yield return new WaitForSeconds(standardKnockbackduration);
+        _rb.linearVelocity = Vector2.zero;
+
+        allowedToMove = false;
+        isStunned = true;
+        yield return new WaitForSeconds(standardStunDuration);
+
+        
+        isStunned = false;
+        allowedToMove = true;
+
     }
-    //IEnumerator knockback(float knockbackDuration, float knockbackPower, Transform obj)
-    //{
-    //    float timer = 0;
-    //    while (knockbackDuration > timer)
-    //    {
-    //        timer += Time.deltaTime;
-    //        Vector2 direction = (obj.position - playerTransform.position).normalized;
-    //        _rb.AddForce(new Vector2(direction.x * knockbackPower, direction.y * knockbackPower));
-    //    }
-    //    yield return 0;
-    //}
+   
     private void OnDrawGizmos()
     {
         if (attackpoint == null) return;

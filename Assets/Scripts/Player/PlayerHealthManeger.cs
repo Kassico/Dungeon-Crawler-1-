@@ -9,21 +9,29 @@ public class PlayerHealthManager : MonoBehaviour
 
     public float knockbackForceResistans = 0.5f;
 
+    private float knockbackForce;
+
+    Rigidbody2D _rb;
+
     void Start()
     {
         playerHealth = maxHealth;
     }
-    private void Update()
+    void Awake()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+     void Update()
     {
         scoreText.text = "Health: " + playerHealth.ToString();
     }
-    public void TakeDmg(float damage)
+    public void TakeDmg(float damage, Vector2 enemyPos, string enemietype)
     {
         playerHealth -= damage;
         Debug.Log($"Player takes {damage} damage. Current health: {playerHealth}");
         scoreText.text = "Health: " + playerHealth.ToString();
 
-        TakeKnockback();
+        TakeKnockback(enemyPos, enemietype);
 
 
         if (playerHealth <= 0)
@@ -39,13 +47,22 @@ public class PlayerHealthManager : MonoBehaviour
         Debug.Log("Player has died.");
         // Add respawn, game over, etc.
     }
-    private void TakeKnockback()
+    private void TakeKnockback(Vector2 enemyPos, string enemietype)
     {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
+        
+        Vector2 dir = (transform.position - (Vector3)enemyPos).normalized;
+
+        switch (enemietype)
         {
-            Vector2 knockbackDirection = -rb.linearVelocity.normalized;
-            rb.AddForce(knockbackDirection * knockbackForceResistans, ForceMode2D.Impulse);
+            case "StandardEnemy":
+                knockbackForce = 40f;
+                break;
+            case "BosOrc":
+                knockbackForce = 50f;
+                break;
+
         }
+
+        _rb.AddForce(dir * (knockbackForce * (1 - knockbackForceResistans)), ForceMode2D.Impulse);
     }
 }
