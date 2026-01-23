@@ -31,7 +31,7 @@ public class PlayerAttacks : MonoBehaviour
     private float attackCooldown = 0.4f;
     private float attackTimer = 0f;
     public float attackDuration = 0.5f;  // hur länge hitboxen ska vara aktiv
-    public static float knockbackForce = 30;
+    public static float knockbackForce = 15;
 
 
 
@@ -59,6 +59,12 @@ public class PlayerAttacks : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         //allowedToTakeDmg = true;
 
+        if (playerData.instance != null && playerData.isInitialized)
+        {            
+            knockbackForce = playerData.instance.knockbackForce;
+            playerDmg = playerData.instance.damage;
+        }
+
     }
 
     // Update is called once per frame
@@ -82,7 +88,7 @@ public class PlayerAttacks : MonoBehaviour
         }
 
         if (InputManager.Attack)
-            Debug.Log("PlayerAttacks sees attack input");
+            //Debug.Log("PlayerAttacks sees attack input");
 
       if (activeHitBox != null && isAttacking)
         {
@@ -129,14 +135,14 @@ public class PlayerAttacks : MonoBehaviour
             
         }
         
-        Debug.Log("ATTACK FUNCTION RAN");
+        //Debug.Log("ATTACK FUNCTION RAN");
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(AttackingPoint.position, attackRadius, enemyLayers);
 
 
         foreach (Collider2D enemy in hitEnemies)
         {   
-            Debug.Log("Hit" +  enemy.name);
+            Debug.Log("Hit" +  enemy.name + Enemy.currentHealth); 
             enemy.GetComponent<Enemy>().TakeDmg(playerDmg);
         }
 

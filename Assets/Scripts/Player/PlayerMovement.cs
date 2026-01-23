@@ -30,7 +30,21 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
-            
+
+        if (playerData.instance != null && playerData.isInitialized)
+        {
+            _moveSpeed = playerData.instance.moveSpeed;
+        }
+
+    }
+
+    private void Start()
+    {
+        GameObject spawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
+        if (spawn != null)
+        {
+            transform.position = spawn.transform.position;
+        }
     }
 
     private void Update()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemie
   - Interacteble
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

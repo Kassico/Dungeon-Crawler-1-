@@ -7,6 +7,7 @@ using System.Collections;
 
 using Unity.Mathematics;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
+using NUnit.Framework.Constraints;
 
 public class Enemy: MonoBehaviour
 {
@@ -18,34 +19,42 @@ public class Enemy: MonoBehaviour
 
 
     //Changeble Stats
+    [Header("Enemy Stats")]
 
     public float maxHealth = 10f;
-    private float currentHealth;
+    public static float currentHealth;
     private float moveSpeed = 2f;
     private float chaseRange = 6f;
-    private float attackDamage = 1f;
+    private float attackDamage = 0.5f;
     private float attackRange = 1.1f;
     private float attackRate = 2f;
     private float KnockbackForceResistans = 0.5f;
-    
+
 
     //Fixed Stats 
-    private float StunDuration = 1f;
+    [Header("Fixed Stats")]
+
+    private float StunDuration = 0.2f;
     private float attackCooldown = 2f;
-    private float Knockbackduration = 0.1f;
+    private float Knockbackduration = 0.01f;
     public static float KnockbackForce = 20f;
     public float AttackHitBox = 1.4f;
     public float AttackDuration = 0.5f;
     public static float pointsValue = 1;
+    private float knockbackTime = 0.02f;
+    private float knockabactimer = 0f;
+    private float attackDeley = 0.5f;
 
 
     //Needed float
+    [Header("Needed Floats")]
     private float nextAttackTime;
     private float AttackTimer;
     private float distanceToPlayer;
 
 
     //needed bools
+    [Header("Needed Bools")]
     public bool allowedToAttack = true;
     public bool isChasing = false;
     public bool isAttacking = false;
@@ -56,6 +65,10 @@ public class Enemy: MonoBehaviour
     private bool facingDown = false;
     private bool isStunned = false;
     private bool allowedToMove = true;
+    public bool portalActiveOnDeath = true;
+    private bool isPreparingAttack = false;
+
+    [Header("stuff")]
 
 
     private PlayerHealthManager playerHealth;
@@ -63,16 +76,29 @@ public class Enemy: MonoBehaviour
     private const string _horizontal = "Horizontal";
     private const string _Vertical = "Vertical";
 
+    private Vector2 knockbackVelocity;
     private Vector2 _movement;
     private Rigidbody2D _rb;
     private Animator _animator;
     public LayerMask playerLayer;
+    public GameObject Portal;
+
+    [Header("Visuals")]
+
+    SpriteRenderer sr;
+    private Color originalColor;
+    public Color hitColor = Color.red;
+    public float hitFlashDuration = 0.1f;
+
+
 
     public static string enemietype = "Enemy";
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
 
         var Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
@@ -118,9 +144,9 @@ public class Enemy: MonoBehaviour
 
         isChasing = distanceToPlayer <= chaseRange;
 
-        if (isChasing && !isAttacking ) { ChasePlayer(); }
+        //if (isChasing && !isAttacking ) { ChasePlayer(); }
 
-        if (distanceToPlayer <= attackRange && !isAttacking && allowedToAttack) { AttackPlayer(); }
+        if (distanceToPlayer <= attackRange && !isAttacking && allowedToAttack && !isPreparingAttack) { StartCoroutine(PrepareAttack()); }
 
         if (isAttacking)
         {
@@ -137,6 +163,19 @@ public class Enemy: MonoBehaviour
             {
                 allowedToAttack = true;
                 attackCooldown = 1f;
+            }
+        }
+
+        if (knockabactimer > 0)
+        {
+            knockabactimer -= Time.deltaTime;
+            _rb.linearVelocity = knockbackVelocity;
+        }
+        else
+        {
+            if(isChasing && !isAttacking)
+            {
+                ChasePlayer();
             }
         }
 
@@ -173,28 +212,38 @@ public class Enemy: MonoBehaviour
             _animator.SetFloat(_Vertical, direction.y);
             _animator.SetBool("isAttacking", true);
 
-            Debug.Log("Enemy Attacks Player");
+            //Debug.Log("Enemy Attacks Player");
             DealDmg();
 
         //}
     }
 
+    private IEnumerator PrepareAttack()
+    {
+        isPreparingAttack = true;
+        _rb.linearVelocity = Vector2.zero;
+        //Debug.Log("Enemy is Preparing to Attack");
+        yield return new WaitForSeconds(attackDeley);
+        AttackPlayer();
+        isPreparingAttack = false;
+    }
+
     public void DealDmg()
     {
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, AttackHitBox, playerLayer);
-        Debug.Log("Enemy Dealing Damage to Player");
+        //Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
         {
             
-            Debug.Log("Enemy Hit Player");
+            //Debug.Log("Enemy Hit Player");
             if (playerHealth != null)
             {
                 playerHealth.TakeDmg(attackDamage, transform.position, enemietype);
                 Debug.Log("Enemy Dealt " + attackDamage + " Damage to Player");
             }
             else { Debug.LogError("playerHealth IS NULL"); }
-            Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
+            //Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
         }
  
 
@@ -281,7 +330,7 @@ public class Enemy: MonoBehaviour
         isAttacking = false;
         isChasing = true;
         _animator.SetBool("isAttacking", false);
-        Debug.Log("Enemy Finished Attack");
+        //Debug.Log("Enemy Finished Attack");
         allowedToAttack = false;
     }
 
@@ -289,18 +338,34 @@ public class Enemy: MonoBehaviour
     public void TakeDmg(float dmg)
     {
         currentHealth -= dmg;
-        //Debug.Log($"Enemy takes " + dmg + $" damage. And Has {playerHealth.playerHealth} Health Left");
+        Debug.Log($"Enemy takes " + dmg + $" damage. And Has {currentHealth} Health Left");
         //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, moveSpeed * 10 * Time.deltaTime);
         StartCoroutine(KnockbackCoroutine());
-        if (currentHealth <= 0) {Die();}
 
+        if (sr != null)
+        {
+            StartCoroutine(FlashHitColor());
+        }
+
+        if (currentHealth <= 0) {Die();}
+        if (currentHealth < 0) { currentHealth = 0; Die(); }
+
+    }
+    IEnumerator FlashHitColor()
+    {
+        sr.color = hitColor;
+        yield return new WaitForSeconds(hitFlashDuration);
+        sr.color = originalColor;
     }
 
     private void Die()
     {
         //PlayerPowerUpps.playerpoints += pointsValue;
-
-
+        if (portalActiveOnDeath)
+        {
+            Portal.SetActive(true);
+        }
+        PlayerPowerUpps.playerpoints += pointsValue;
         Debug.Log("Enemy Died");
         //Destroy(gameObject);
         _animator.SetBool("isDead", true);
@@ -316,20 +381,24 @@ public class Enemy: MonoBehaviour
 
 
         //_rb.velocity = Vector2.zero;
-        _rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - KnockbackForceResistans)), ForceMode2D.Impulse);
-        Debug.Log("FORCE: " + PlayerAttacks.knockbackForce);
+        //_rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - KnockbackForceResistans)), ForceMode2D.Impulse);
+        _rb.linearVelocity = dir * (KnockbackForce * (1 - KnockbackForceResistans));
+        //Debug.Log("FORCE: " + PlayerAttacks.knockbackForce); 
+
+        knockbackVelocity = dir * (KnockbackForce * (1 - KnockbackForceResistans));
+        knockabactimer = knockbackTime;
 
 
-        yield return new WaitForSeconds(Knockbackduration);
-        _rb.linearVelocity = Vector2.zero;
+        //yield return new WaitForSeconds(Knockbackduration);
+        //_rb.linearVelocity = Vector2.zero;
 
-        allowedToMove = false;
+        //allowedToMove = false;
         isStunned = true;
         yield return new WaitForSeconds(StunDuration);
 
-        
+
         isStunned = false;
-        allowedToMove = true;
+        //allowedToMove = true;
 
     }
    

@@ -29,8 +29,8 @@ public class InputManager : MonoBehaviour
         Attack = _attackaction.WasPerformedThisFrame();
         Dash = _dashaction.WasPerformedThisFrame();
 
-        if (Attack)
-            Debug.Log("ATTACK BUTTON PRESSED");
+        //if (Attack)
+            //Debug.Log("ATTACK BUTTON PRESSED");
 
     }
 }

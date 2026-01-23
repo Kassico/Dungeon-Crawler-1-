@@ -1,52 +1,44 @@
+using UnityEditor;
+using UnityEditor.Search;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class Portal : MonoBehaviour, IInteractable
-{
+public class Portal : MonoBehaviour
+{   
+    
 
-    public bool isused { get; private set; }
-    public GameObject itemPreFab;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] private string sceneToLoad = "Level 2";
+    [SerializeField] private Transform SpawnPoint;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player"))
-        {
-            Debug.Log("Player entered the portal.");
-            UnityEngine.SceneManagement.SceneManager.LoadScene(4);
-
-        }
+        if (!collision.CompareTag("Player")) return;
+        savePlayerData();
+        SceneManager.LoadScene("Level 2");
     }
 
-    public void Interact()
-    {
-        if(CompareTag("Interacteble") && !isused)
-        {
-            
-        }
-    }
 
-    public bool CanInteract()
+    private void savePlayerData()
     {
-        throw new System.NotImplementedException();
-    }
+        playerData.instance.Health = PlayerHealthManager.playerHealth;
+        playerData.instance.maxHealth = PlayerHealthManager.maxHealth;
+        playerData.instance.moveSpeed = PlayerMovement._moveSpeed;
+        playerData.instance.damage = PlayerAttacks.playerDmg;
+        playerData.instance.knockbackForce = PlayerAttacks.knockbackForce;
+        playerData.instance.points = PlayerPowerUpps.playerpoints;
+        playerData.instance.dashCooldown = PlayerDash.dashCooldown;
 
-    private void openPortal()
-    {
-        if (itemPreFab == null)
-        {
-            
-        }
 
+
+
+        PlayerPrefs.SetFloat("PlayerHealth", PlayerHealthManager.playerHealth);
+        PlayerPrefs.SetFloat("PlayerMoveSpeed", PlayerMovement._moveSpeed);
+        PlayerPrefs.SetFloat("PlayerDamage", PlayerAttacks.playerDmg);
+        PlayerPrefs.SetFloat("PlayerKnockbackForce", PlayerAttacks.knockbackForce);
+        PlayerPrefs.SetFloat("PlayerPoints", PlayerPowerUpps.playerpoints);
     }
 }
+
 

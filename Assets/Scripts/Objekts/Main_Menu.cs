@@ -22,6 +22,11 @@ public class Main_Menu : MonoBehaviour
 
     public void PlayGame()
     {
+        if (playerData.instance != null && !playerData.isInitialized)
+        {
+            playerData.instance.InitializedPlayerDefaultData();
+        }
+       
         SceneManager.LoadScene(2);
         
     } 

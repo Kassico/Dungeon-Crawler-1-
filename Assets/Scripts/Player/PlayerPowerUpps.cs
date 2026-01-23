@@ -35,6 +35,9 @@ public class PlayerPowerUpps : MonoBehaviour
     //private float baseDashCooldown = 1;
     //private float baseknockbackForce = 20;
 
+    // stuff for levle
+
+    private float currentLevel;
 
 
     //current stats
@@ -74,12 +77,16 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void Update()
     {
-        scoreText.text = "Score: " + playerpoints.ToString();
+        pointsToPowerup = 1 + (2 * currentLevel);
+        
+        scoreText.text = "Score: " + playerpoints.ToString() + "/" + pointsToPowerup;
+        
 
         // kollar efter powerups
 
         if (playerpoints >= pointsToPowerup && !powerupActive)
         {
+            currentLevel += 1;
             powerupActive = true;
             showPowerUps();
             playerpoints = 0;
@@ -137,7 +144,7 @@ public class PlayerPowerUpps : MonoBehaviour
         });
         powerUps.Add(new PowerUp
         {
-            description = "Knockback Force + 5",
+            description = "Knockback Force + 1",
             applayEffect = () => playerknockbackForce += 5
         });
     }
@@ -181,8 +188,9 @@ void ChosePowerUp(int index)
         PlayerMovement._moveSpeed = playerMoveSpeed;
         PlayerDash.dashCooldown = playerDashCooldown;
         PlayerAttacks.knockbackForce = playerknockbackForce;
-      
-        
+        PlayerHealthManager.maxHealth += extraPlayerHealth;
+
+
 
 
         powerUpPanel.SetActive(false);

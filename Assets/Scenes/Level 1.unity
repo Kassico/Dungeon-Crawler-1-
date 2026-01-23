@@ -4708,6 +4708,57 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!1 &1532930192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532930194}
+  - component: {fileID: 1532930193}
+  m_Layer: 0
+  m_Name: PlayerData
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1532930193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532930192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f68b925765d4cf4eb475f4a855da000, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::playerData
+  Health: 0
+  damage: 0
+  moveSpeed: 0
+  dashCooldown: 0
+  knockbackForce: 0
+  points: 0
+  maxHealth: 0
+--- !u!4 &1532930194
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532930192}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 70.99298, y: 10.45369, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1613567961
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,13 +5225,14 @@ GameObject:
   - component: {fileID: 1816894461}
   - component: {fileID: 1816894460}
   - component: {fileID: 1816894459}
+  - component: {fileID: 1816894462}
   m_Layer: 0
   m_Name: Portal
   m_TagString: Interacteble
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1816894458
 Transform:
   m_ObjectHideFlags: 0
@@ -5190,7 +5242,7 @@ Transform:
   m_GameObject: {fileID: 1816894457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.45557, y: 24.99673, z: 0}
+  m_LocalPosition: {x: -0.02, y: 14.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5313,6 +5365,20 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.5, y: 1}
   m_Direction: 0
+--- !u!114 &1816894462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1816894457}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89b0f3c9a94baee4ab65c9b2345fe30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Portal
+  sceneToLoad: 4
+  SpawnPoint: {fileID: 0}
 --- !u!1 &1821559567
 GameObject:
   m_ObjectHideFlags: 0
@@ -5494,9 +5560,13 @@ MonoBehaviour:
   allowedToAttack: 1
   isChasing: 0
   isAttacking: 0
+  portalActiveOnDeath: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  Portal: {fileID: 1816894457}
+  hitColor: {r: 1, g: 0, b: 0, a: 1}
+  hitFlashDuration: 0.1
 --- !u!95 &1821559573
 Animator:
   serializedVersion: 7
@@ -5893,3 +5963,4 @@ SceneRoots:
   - {fileID: 1711406212}
   - {fileID: 542630911}
   - {fileID: 1816894458}
+  - {fileID: 1532930194}

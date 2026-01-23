@@ -16,6 +16,11 @@ public class PlayerHealthManager : MonoBehaviour
     void Start()
     {
         playerHealth = maxHealth;
+        if (playerData.instance != null && playerData.isInitialized)
+         {
+            playerHealth = playerData.instance.Health;
+            maxHealth = playerData.instance.maxHealth;
+        }
     }
     void Awake()
     {

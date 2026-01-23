@@ -18,7 +18,10 @@ public class PlayerDash : MonoBehaviour
 
     void Start()
     {
-        
+        if (playerData.instance != null && playerData.isInitialized)
+        {
+            dashCooldown = playerData.instance.dashCooldown;
+        }
 
 
     }

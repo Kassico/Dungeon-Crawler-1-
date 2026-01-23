@@ -5,11 +5,15 @@ public class playerData : MonoBehaviour
 
     public static playerData instance;
 
+    public static bool isInitialized = false;
+
     public float Health;
     public float damage;
     public float moveSpeed;
     public float dashCooldown;
     public float knockbackForce;
+    public float points;
+    public float maxHealth;
 
 
     private void Awake()
@@ -25,14 +29,17 @@ public class playerData : MonoBehaviour
         }
     }
 
-void Start()
+    public void InitializedPlayerDefaultData()
     {
-        
-    }
+        maxHealth = PlayerHealthManager.maxHealth;
+        Health = maxHealth;
+        damage = PlayerAttacks.playerDmg;
+        moveSpeed = PlayerMovement._moveSpeed;
+        dashCooldown = PlayerDash.dashCooldown;
+        knockbackForce = PlayerAttacks.knockbackForce;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        isInitialized = true;
+
+
     }
 }
