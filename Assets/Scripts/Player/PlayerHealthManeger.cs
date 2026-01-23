@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
@@ -25,8 +26,32 @@ public class PlayerHealthManager : MonoBehaviour
     void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+
+        if (FindObjectsOfType<PlayerHealthManager>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
     }
-     void Update()
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Move player to spawn point in the new scene
+        Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
+        if (spawnPoint != null)
+            transform.position = spawnPoint.position;
+    }
+    void Update()
     {
         scoreText.text = "Health: " + playerHealth.ToString();
     }

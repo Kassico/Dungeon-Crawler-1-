@@ -8,6 +8,7 @@ using System.Collections;
 using Unity.Mathematics;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using NUnit.Framework.Constraints;
+using System;
 
 public class Enemy: MonoBehaviour
 {
@@ -18,17 +19,21 @@ public class Enemy: MonoBehaviour
 
 
 
+    //[SerializeField] private string enemyStats = "NormalEnemyStats";
+    public string enemyType = "NormalEnemy";
+    public EnemyStats[] allStats;
+
     //Changeble Stats
     [Header("Enemy Stats")]
 
-    public float maxHealth = 10f;
+    public float maxHealth;
     public static float currentHealth;
-    private float moveSpeed = 2f;
-    private float chaseRange = 6f;
-    private float attackDamage = 0.5f;
-    private float attackRange = 1.1f;
-    private float attackRate = 2f;
-    private float KnockbackForceResistans = 0.5f;
+    public float moveSpeed;
+    public float chaseRange;
+    public float attackDamage;
+    public float attackRange;
+    public float attackRate;
+    public float KnockbackForceResistans;
 
 
     //Fixed Stats 
@@ -113,11 +118,27 @@ public class Enemy: MonoBehaviour
 
        float difficulty = Difficulty.CurrentDifficulty;
 
+        foreach (var stats in allStats)
+        {
+            if (stats.enemyType == enemyType)
+            {
+                maxHealth = stats.normalMaxHealth;
+                moveSpeed = stats.normalMoveSpeed;
+                attackDamage = stats.normalAttackDamage;
+                chaseRange = stats.normalChaseRange;
+                attackRate = stats.normalAttackRate;
+                KnockbackForceResistans = stats.normalKnockbackForceResistans;
+                attackRange = stats.normalAttackRange;
+            }
 
-         maxHealth *= (difficulty + 1);
-         moveSpeed *= (difficulty + 1);
-         chaseRange *= (difficulty + 1);
-         attackDamage *= (difficulty + 1);
+        }
+
+
+
+        maxHealth *= (difficulty + 1);
+        moveSpeed *= (difficulty + 1);
+        chaseRange *= (difficulty + 1);
+        attackDamage *= (difficulty + 1);
         KnockbackForceResistans *= (1 - (difficulty * 0.1f));
         currentHealth = maxHealth;
       

@@ -17,6 +17,10 @@ public class Portal : MonoBehaviour
         if (!collision.CompareTag("Player")) return;
         savePlayerData();
         SceneManager.LoadScene("Level 2");
+
+        Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
+        if (spawnPoint != null)
+            transform.position = spawnPoint.position;
     }
 
 
