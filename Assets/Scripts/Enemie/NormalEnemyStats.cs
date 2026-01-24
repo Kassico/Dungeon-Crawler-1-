@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Scriptable Objects/NormalEnemyStats")]
-public class EnemyStats : ScriptableObject
+public class EnemyStats: ScriptableObject
 {
     public string enemyType = "NormalEnemy";
 
@@ -12,4 +12,5 @@ public class EnemyStats : ScriptableObject
     public float normalAttackRange = 1.1f;
     public float normalAttackRate = 2f;
     public float normalKnockbackForceResistans = 0.5f;
+    public float normalScoreValue = 1f;
 }

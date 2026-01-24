@@ -84,15 +84,15 @@ public class PlayerPowerUpps : MonoBehaviour
 
         // kollar efter powerups
 
-        if (playerpoints >= pointsToPowerup && !powerupActive)
+        if (playerpoints >= pointsToPowerup)
         {
             currentLevel += 1;
-            powerupActive = true;
+            //powerupActive = true;
             showPowerUps();
             playerpoints = 0;
         }
 
-       
+        
 
 
     }
@@ -194,6 +194,7 @@ void ChosePowerUp(int index)
 
 
         powerUpPanel.SetActive(false);
+        //powerupActive = false;
         Time.timeScale = 1;
 }
 }

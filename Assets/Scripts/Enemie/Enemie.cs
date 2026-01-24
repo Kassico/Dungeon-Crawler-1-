@@ -9,6 +9,8 @@ using Unity.Mathematics;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using NUnit.Framework.Constraints;
 using System;
+using TMPro.Examples;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy: MonoBehaviour
 {
@@ -26,7 +28,7 @@ public class Enemy: MonoBehaviour
     //Changeble Stats
     [Header("Enemy Stats")]
 
-    public float maxHealth;
+    private float maxHealth;
     public static float currentHealth;
     public float moveSpeed;
     public float chaseRange;
@@ -34,6 +36,8 @@ public class Enemy: MonoBehaviour
     public float attackRange;
     public float attackRate;
     public float KnockbackForceResistans;
+    public float health;
+    
 
 
     //Fixed Stats 
@@ -49,6 +53,7 @@ public class Enemy: MonoBehaviour
     private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
     private float attackDeley = 0.5f;
+    public float scaler = 1f;
 
 
     //Needed float
@@ -129,6 +134,7 @@ public class Enemy: MonoBehaviour
                 attackRate = stats.normalAttackRate;
                 KnockbackForceResistans = stats.normalKnockbackForceResistans;
                 attackRange = stats.normalAttackRange;
+                pointsValue = stats.normalScoreValue;
             }
 
         }
@@ -142,8 +148,10 @@ public class Enemy: MonoBehaviour
         KnockbackForceResistans *= (1 - (difficulty * 0.1f));
         currentHealth = maxHealth;
       
- 
+        attackHitBox.localScale = new Vector3(AttackHitBox, AttackHitBox, scaler);
 
+
+        
 
 
     }
@@ -154,9 +162,9 @@ public class Enemy: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        health = currentHealth;
 
-        //Debug.Log("Enemy Health: " + currentHealth);
+        Debug.Log("Enemy Health: " + currentHealth);
         if (isDead) { return; }
 
         if (playerTransform == null) {return;}
