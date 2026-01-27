@@ -26,12 +26,12 @@ public class PlayerAttacks : MonoBehaviour
 
     private Rigidbody2D rd;
     
-    public static float playerDmg;
+    public float playerDmg;
     public float attackRadius;
     private float attackCooldown = 0.4f;
     private float attackTimer = 0f;
     public float attackDuration = 0.5f;  // hur länge hitboxen ska vara aktiv
-    public static float knockbackForce = 15;
+    public  float knockbackForce = 15;
 
 
 
@@ -142,7 +142,7 @@ public class PlayerAttacks : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {   
-            Debug.Log("Hit" +  enemy.name + Enemy.currentHealth); 
+            //Debug.Log("Hit" +  enemy.name + Enemy.currentHealth); 
             enemy.GetComponent<Enemy>().TakeDmg(playerDmg);
         }
 

@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public static float maxHealth = 10f;
-    public static float playerHealth;
+    public float maxHealth = 10f;
+    public float playerHealth;
     public TextMeshProUGUI scoreText;
 
     public float knockbackForceResistans = 0.5f;

@@ -20,4 +20,4 @@ MonoBehaviour:
   normalAttackRange: 1.1
   normalAttackRate: 2
   normalKnockbackForceResistans: 0.5
-  normalScoreValue: 3
+  normalScoreValue: 2

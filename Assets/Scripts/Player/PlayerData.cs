@@ -15,6 +15,8 @@ public class playerData : MonoBehaviour
     public float points;
     public float maxHealth;
 
+    
+
 
     private void Awake()
     {
@@ -31,12 +33,20 @@ public class playerData : MonoBehaviour
 
     public void InitializedPlayerDefaultData()
     {
-        maxHealth = PlayerHealthManager.maxHealth;
+        PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();    
+        damage = playerAttacks.playerDmg;
+        knockbackForce = playerAttacks.knockbackForce;
+
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        moveSpeed = playerMovement._moveSpeed;
+
+        PlayerDash playerDash = FindObjectOfType<PlayerDash>();
+        dashCooldown = playerDash.dashCooldown;
+
+        PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
+        maxHealth = playerHealthManager.maxHealth;
         Health = maxHealth;
-        damage = PlayerAttacks.playerDmg;
-        moveSpeed = PlayerMovement._moveSpeed;
-        dashCooldown = PlayerDash.dashCooldown;
-        knockbackForce = PlayerAttacks.knockbackForce;
+      
 
         isInitialized = true;
 

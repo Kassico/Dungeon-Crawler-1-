@@ -17,7 +17,7 @@ MonoBehaviour:
   normalMoveSpeed: 1
   normalChaseRange: 5
   normalAttackDamage: 1
-  normalAttackRange: 1.1
+  normalAttackRange: 2.2
   normalAttackRate: 1
   normalKnockbackForceResistans: 0.9
   normalScoreValue: 5

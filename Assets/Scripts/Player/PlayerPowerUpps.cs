@@ -11,7 +11,7 @@ public class PlayerPowerUpps : MonoBehaviour
 {
     [Header("Points")]
 
-    public static float playerpoints = 0;
+    public float playerpoints = 0;
     public float pointsToPowerup = 1;
 
 
@@ -99,10 +99,17 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void initializePlayerstats()
     {
-        playerMoveSpeed = PlayerMovement._moveSpeed;
-        playerDamage = PlayerAttacks.playerDmg;
-        playerDashCooldown = PlayerDash.dashCooldown;
-        playerknockbackForce = PlayerAttacks.knockbackForce;
+
+
+        PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
+        playerDamage = playerAttacks.playerDmg;
+        playerknockbackForce = playerAttacks.knockbackForce;
+
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMoveSpeed = playerMovement._moveSpeed;
+
+        PlayerDash playerDash = FindObjectOfType<PlayerDash>();
+        playerDashCooldown = playerDash.dashCooldown;
     }
     void initialzePowerUps()
     {
@@ -183,17 +190,27 @@ void ChosePowerUp(int index)
 {
         powerUps[index].applayEffect.Invoke();
 
-        PlayerAttacks.playerDmg = playerDamage;
-        PlayerHealthManager.playerHealth += extraPlayerHealth;
-        PlayerMovement._moveSpeed = playerMoveSpeed;
-        PlayerDash.dashCooldown = playerDashCooldown;
-        PlayerAttacks.knockbackForce = playerknockbackForce;
-        PlayerHealthManager.maxHealth += extraPlayerHealth;
+
+        PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        PlayerDash playerDash = FindObjectOfType<PlayerDash>();
+        PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
+        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
+ 
+
+        playerAttacks.playerDmg = playerDamage;
+        playerHealthManager.playerHealth += extraPlayerHealth;
+        playerMovement._moveSpeed = playerMoveSpeed;
+        playerDash.dashCooldown = playerDashCooldown;
+        playerAttacks.knockbackForce = playerknockbackForce;
+        playerHealthManager.maxHealth += extraPlayerHealth;
 
 
 
 
         powerUpPanel.SetActive(false);
+        extraPlayerHealth = 0;
+        usedIddices.Clear();
         //powerupActive = false;
         Time.timeScale = 1;
 }

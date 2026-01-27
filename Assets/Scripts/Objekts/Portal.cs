@@ -26,22 +26,39 @@ public class Portal : MonoBehaviour
 
     private void savePlayerData()
     {
-        playerData.instance.Health = PlayerHealthManager.playerHealth;
-        playerData.instance.maxHealth = PlayerHealthManager.maxHealth;
-        playerData.instance.moveSpeed = PlayerMovement._moveSpeed;
-        playerData.instance.damage = PlayerAttacks.playerDmg;
-        playerData.instance.knockbackForce = PlayerAttacks.knockbackForce;
-        playerData.instance.points = PlayerPowerUpps.playerpoints;
-        playerData.instance.dashCooldown = PlayerDash.dashCooldown;
+        PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
+        playerData.instance.damage = playerAttacks.playerDmg;
+        playerData.instance.knockbackForce = playerAttacks.knockbackForce;
+
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        playerData.instance.moveSpeed = playerMovement._moveSpeed;
+
+        PlayerDash playerDash = FindObjectOfType<PlayerDash>();
+        playerData.instance.dashCooldown = playerDash.dashCooldown;
+
+        PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
+        playerData.instance.Health = playerHealthManager.playerHealth;
+        playerData.instance.maxHealth = playerHealthManager.maxHealth;
+
+        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
+        playerData.instance.points = playerPowerUpps.playerpoints;
+
+        //playerData.instance.Health = PlayerHealthManager.playerHealth;
+        //playerData.instance.maxHealth = PlayerHealthManager.maxHealth;
+        //playerData.instance.moveSpeed = PlayerMovement._moveSpeed;
+        //playerData.instance.damage = PlayerAttacks.playerDmg;
+        //playerData.instance.knockbackForce = PlayerAttacks.knockbackForce;
+        //playerData.instance.points = PlayerPowerUpps.playerpoints;
+        //playerData.instance.dashCooldown = PlayerDash.dashCooldown;
 
 
 
 
-        PlayerPrefs.SetFloat("PlayerHealth", PlayerHealthManager.playerHealth);
-        PlayerPrefs.SetFloat("PlayerMoveSpeed", PlayerMovement._moveSpeed);
-        PlayerPrefs.SetFloat("PlayerDamage", PlayerAttacks.playerDmg);
-        PlayerPrefs.SetFloat("PlayerKnockbackForce", PlayerAttacks.knockbackForce);
-        PlayerPrefs.SetFloat("PlayerPoints", PlayerPowerUpps.playerpoints);
+        PlayerPrefs.SetFloat("PlayerHealth", playerHealthManager.playerHealth);
+        PlayerPrefs.SetFloat("PlayerMoveSpeed", playerMovement._moveSpeed);
+        PlayerPrefs.SetFloat("PlayerDamage", playerAttacks.playerDmg);
+        PlayerPrefs.SetFloat("PlayerKnockbackForce", playerAttacks.knockbackForce);
+        PlayerPrefs.SetFloat("PlayerPoints", playerPowerUpps.playerpoints);
     }
 }
 

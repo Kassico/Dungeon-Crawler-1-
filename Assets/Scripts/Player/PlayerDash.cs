@@ -8,12 +8,14 @@ public class PlayerDash : MonoBehaviour
     public float dashSpeedmultiplier = 3f;
     public float dashDuration = 0.2f;
     private float dashTime;
-    public static float dashCooldown = 1f;
+    public float dashCooldown = 1f;
     private bool allowedToDash= true;
     private float dashCooldownTimer;
+    float playerMoveSpeed;
 
     private bool _allowedToMove = true;
-    
+   
+
 
 
     void Start()
@@ -23,6 +25,8 @@ public class PlayerDash : MonoBehaviour
             dashCooldown = playerData.instance.dashCooldown;
         }
 
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMoveSpeed = playerMovement._moveSpeed;
 
     }
 
@@ -35,7 +39,7 @@ public class PlayerDash : MonoBehaviour
             
             Debug.Log("DASH BUTTON PRESSED");
             isDashing = true;
-            PlayerMovement._moveSpeed *= dashSpeedmultiplier;
+            playerMoveSpeed *= dashSpeedmultiplier;
             _allowedToMove = false;
         }
         if (isDashing)
@@ -49,7 +53,7 @@ public class PlayerDash : MonoBehaviour
             {
                 isDashing = false;
                 dashTime = 0f;
-                PlayerMovement._moveSpeed /= dashSpeedmultiplier;
+                playerMoveSpeed /= dashSpeedmultiplier;
                 Invoke("ResetDash", dashCooldown);
                 _allowedToMove = true;
             }

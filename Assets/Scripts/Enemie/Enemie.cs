@@ -29,7 +29,7 @@ public class Enemy: MonoBehaviour
     [Header("Enemy Stats")]
 
     private float maxHealth;
-    public static float currentHealth;
+    public float currentHealth;
     public float moveSpeed;
     public float chaseRange;
     public float attackDamage;
@@ -46,14 +46,15 @@ public class Enemy: MonoBehaviour
     private float StunDuration = 0.2f;
     private float attackCooldown = 2f;
     private float Knockbackduration = 0.01f;
-    public static float KnockbackForce = 20f;
+    public float KnockbackForce = 20f;
     public float AttackHitBox = 1.4f;
     public float AttackDuration = 0.5f;
-    public static float pointsValue = 1;
+    public float pointsValue = 1;
     private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
     private float attackDeley = 0.5f;
     public float scaler = 1f;
+    private float playerPoints;
 
 
     //Needed float
@@ -120,7 +121,7 @@ public class Enemy: MonoBehaviour
 
     void Start()
     {
-
+        isDead = false;
        float difficulty = Difficulty.CurrentDifficulty;
 
         foreach (var stats in allStats)
@@ -139,6 +140,9 @@ public class Enemy: MonoBehaviour
 
         }
 
+
+
+       
 
 
         maxHealth *= (difficulty + 1);
@@ -162,10 +166,11 @@ public class Enemy: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (isDead) { return; }
         health = currentHealth;
 
         Debug.Log("Enemy Health: " + currentHealth);
-        if (isDead) { return; }
+        
 
         if (playerTransform == null) {return;}
 
@@ -366,6 +371,7 @@ public class Enemy: MonoBehaviour
 
     public void TakeDmg(float dmg)
     {
+        if (isDead) { return; }
         currentHealth -= dmg;
         Debug.Log($"Enemy takes " + dmg + $" damage. And Has {currentHealth} Health Left");
         //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, moveSpeed * 10 * Time.deltaTime);
@@ -377,7 +383,7 @@ public class Enemy: MonoBehaviour
         }
 
         if (currentHealth <= 0) {Die();}
-        if (currentHealth < 0) { currentHealth = 0; Die(); }
+
 
     }
     IEnumerator FlashHitColor()
@@ -390,11 +396,15 @@ public class Enemy: MonoBehaviour
     private void Die()
     {
         //PlayerPowerUpps.playerpoints += pointsValue;
+        
         if (portalActiveOnDeath)
         {
             Portal.SetActive(true);
         }
-        PlayerPowerUpps.playerpoints += pointsValue;
+        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
+        playerPowerUpps.playerpoints += pointsValue;
+
+        
         Debug.Log("Enemy Died");
         //Destroy(gameObject);
         _animator.SetBool("isDead", true);
