@@ -172,11 +172,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424e170dec97fe944b64779e256bf2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemieOrc
-  playerTransform: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+  playerTransform: {fileID: 3881559819916270258, guid: efff0bcd33c2dce41b69507807d61e31, type: 3}
   attackpoint: {fileID: 8844711134125756966}
   attackHitBox: {fileID: 952709070684240933}
   enemyType: NormalEnemy
-  allStats: []
+  allStats:
+  - {fileID: 0}
+  currentHealth: 0
   moveSpeed: 0
   chaseRange: 0
   attackDamage: 0
@@ -184,8 +186,11 @@ MonoBehaviour:
   attackRate: 0
   KnockbackForceResistans: 0
   health: 0
-  AttackHitBox: 1.4
+  attackDeley: 0
+  _attackHitBox: 0
+  KnockbackForce: 20
   AttackDuration: 0.5
+  pointsValue: 1
   scaler: 1
   allowedToAttack: 1
   isChasing: 0

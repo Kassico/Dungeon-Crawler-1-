@@ -304,6 +304,12 @@ void ChosePowerUp(int index)
         playerAttacks.knockbackForce += playerknockbackForce;
         playerHealthManager.maxHealth += extraPlayerHealth;
 
+        extraPlayerHealth = 0;
+        playerMoveSpeed = 0;
+        playerDamage = 0;
+        playerDashCooldown = 0;
+        playerknockbackForce = 0;
+        playerMoveSpeed = 0;
 
 
 

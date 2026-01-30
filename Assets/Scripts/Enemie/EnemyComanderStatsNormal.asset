@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyComanderStatsNormal
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   enemyType: NormalEnemyComander
-  normalMaxHealth: 5
+  normalMaxHealth: 18
   normalMoveSpeed: 3.5
   normalChaseRange: 4
   normalAttackDamage: 0.5
