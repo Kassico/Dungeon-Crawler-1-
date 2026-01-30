@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static UnityEngine.SceneManagement.SceneManager;
+
 
 
 
@@ -27,6 +31,16 @@ public class PlayerPowerUpps : MonoBehaviour
     public Button[] powerUpButtons;
     public TMP_Text[] powerUpText;
     public TextMeshProUGUI scoreText;
+
+    // The floats for random extra stats
+    private float randomHelath;
+    private float randomDmg;
+    private float randomSpeed;
+    private bool betterStats = false;
+    private bool biggerstats = false;
+    private float randomNumber;
+    private float extraStats;
+
 
     //// base stats
     //private float baseHealth = 10;
@@ -69,7 +83,10 @@ public class PlayerPowerUpps : MonoBehaviour
     {
         powerUpPanel.SetActive(false);
         initializePlayerstats();
-        initialzePowerUps();
+        //buffStats();
+        //initialzePowerUps();
+        powerUps = new List<PowerUp>();
+
 
 
     }
@@ -77,7 +94,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void Update()
     {
-        pointsToPowerup = 1 + (2 * currentLevel);
+       
         
         scoreText.text = "Score: " + playerpoints.ToString() + "/" + pointsToPowerup;
         
@@ -89,7 +106,8 @@ public class PlayerPowerUpps : MonoBehaviour
             currentLevel += 1;
             //powerupActive = true;
             showPowerUps();
-            playerpoints = 0;
+            playerpoints = playerpoints- pointsToPowerup;
+            pointsToPowerup = 1 + (4 * currentLevel);
         }
 
         
@@ -102,90 +120,171 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
         PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
-        playerDamage = playerAttacks.playerDmg;
-        playerknockbackForce = playerAttacks.knockbackForce;
+        currentDamage = playerAttacks.playerDmg;
+        currentknockbackForce = playerAttacks.knockbackForce;
 
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
-        playerMoveSpeed = playerMovement._moveSpeed;
+        currentMoveSpeed = playerMovement._moveSpeed;
 
         PlayerDash playerDash = FindObjectOfType<PlayerDash>();
-        playerDashCooldown = playerDash.dashCooldown;
+        currentDashCooldown = playerDash.dashCooldown;
+    }
+    void buffStats()
+    {
+        randomNumber = UnityEngine.Random.Range(1, 4);
+        switch (randomNumber)
+        {
+            case 1:
+                betterStats = false;
+                biggerstats = false;
+                break;
+            case 2:
+                betterStats = false;
+                biggerstats = true;
+                break;
+            case 3:
+                betterStats = true;
+                biggerstats = true;
+                break;
+
+
+        }
+        if (biggerstats)
+        {
+            randomDmg = UnityEngine.Random.Range(1,3);
+            randomHelath = UnityEngine.Random.Range(5, 11);
+            randomSpeed = UnityEngine.Random.Range(2, 7)/10;
+        }
+        else 
+        { 
+            randomDmg = 0;
+            randomHelath = 0;
+            randomNumber = 0;
+            randomSpeed = 0;
+        }
+ 
+
+
     }
     void initialzePowerUps()
     {
     
         powerUps.Add(new PowerUp
         {
-            description = "Health + 5",
-            applayEffect = () => extraPlayerHealth += 5
+            description = $"Health + {5 + randomHelath}",
+            applayEffect = () => extraPlayerHealth += 5+randomHelath
         });
         powerUps.Add(new PowerUp
         {
-            description = "Damage + 2",
-            applayEffect = () => playerDamage += 2
+            description = $"Damage + {1 + randomDmg}",
+            applayEffect = () => playerDamage += 1+randomDmg
         });
         powerUps.Add(new PowerUp
         {
-            description = "Speed + 0.5",
-            applayEffect = () => playerMoveSpeed += 0.5f
+            description = $"Speed + {0.5 + randomSpeed}",
+            applayEffect = () => playerMoveSpeed += 0.5f+randomSpeed
         });
-        powerUps.Add(new PowerUp
+
+        //powerUps.Add(new PowerUp
+        //{
+        //    description = "Health + 10",
+        //    applayEffect = () => extraPlayerHealth += 10
+        //});
+        //powerUps.Add(new PowerUp
+        //{
+        //    description = "Damage + 2",
+        //    applayEffect = () => playerDamage += 1
+        //});
+        //powerUps.Add(new PowerUp
+        //{
+        //    description = "Speed + 0.8",
+        //    applayEffect = () => playerMoveSpeed += 0.8f
+        //});
+        if (betterStats)
         {
-            description = "Health + 10",
-            applayEffect = () => extraPlayerHealth += 10
-        });
-        powerUps.Add(new PowerUp
-        {
-            description = "Damage + 1",
-            applayEffect = () => playerDamage += 1
-        });
-        powerUps.Add(new PowerUp
-        {
-            description = "Speed + 0.8",
-            applayEffect = () => playerMoveSpeed += 0.8f
-        });
-        powerUps.Add(new PowerUp
-        {
-            description = "Dash Cooldown - 0.1",
-            applayEffect = () => playerDashCooldown -= 0.1f
-        });
-        powerUps.Add(new PowerUp
-        {
-            description = "Knockback Force + 1",
-            applayEffect = () => playerknockbackForce += 5
-        });
+            powerUps.Add(new PowerUp
+            {
+                description = "Dash Cooldown - 0.1",
+                applayEffect = () => playerDashCooldown -= 0.1f
+            });
+            powerUps.Add(new PowerUp
+            {
+                description = "Knockback Force + 1",
+                applayEffect = () => playerknockbackForce += 5
+            });
+        }
+        
     }
 
 void showPowerUps()
 {
+        powerUps.Clear();
+
+        Debug.Log(
+    $"Buttons: {powerUpButtons.Length}, Texts: {powerUpText.Length}, PowerUps: {powerUps.Count}");
+
+        Debug.Log("PowerUps count: " + powerUps.Count);
+        buffStats();
+        initialzePowerUps();
         Time.timeScale = 0;
         powerUpPanel.SetActive(true);
         usedIddices.Clear();
 
-
-        List<int> usedIndices = new List<int>();
-
-        
-
-    for (int i = 0; i < powerUpButtons.Length; i++)
-    {
-        int randomIndex;
-        do
+        if (powerUps.Count < powerUpButtons.Length)
         {
-            randomIndex = Random.Range(0, powerUps.Count);
-        } while (usedIndices.Contains(randomIndex));
-        usedIndices.Add(randomIndex);
-        powerUpText[i].text = powerUps[randomIndex].description;
-
-        int idexcopy = randomIndex;
-        powerUpButtons[i].onClick.RemoveAllListeners();
-        powerUpButtons[i].onClick.AddListener(() =>
+            Debug.LogError("Not enough power-ups to fill all buttons.");
+            return;
+        }
+        else
         {
-            ChosePowerUp(idexcopy);
+            int choices = Mathf.Min(powerUpButtons.Length, powerUps.Count);
+            
+            List <int> avilebleIndices = new List<int>();
 
-        });
+            for (int i = 0; i < powerUps.Count; i++)
+            {
+                avilebleIndices.Add(i);
+            }
+
+            for (int i= 0; i < choices; i++)
+            {
+                int rand = UnityEngine.Random.Range(0, avilebleIndices.Count);
+                int powerUpIndex = avilebleIndices[rand];
+                avilebleIndices.RemoveAt(rand);
+
+                powerUpText[i].text = powerUps[powerUpIndex].description;
+
+                int indexCopy = powerUpIndex;
+                powerUpButtons[i].onClick.RemoveAllListeners();
+                powerUpButtons[i].onClick.AddListener(() =>
+                {
+                    ChosePowerUp(indexCopy);
+                } );
+
+            }
+
+
+            //List<int> usedIndices = new List<int>();
+            //for (int i = 0; i < choices; i++)
+            //{
+            //    int randomIndex;
+            //    do
+            //    {
+            //        randomIndex = Random.Range(0, usedIndices.Count);
+            //    } while (usedIndices.Contains(randomIndex));
+            //    usedIndices.Add(randomIndex);
+            //    powerUpText[i].text = powerUps[randomIndex].description;
+
+            //    int idexcopy = randomIndex;
+            //    powerUpButtons[i].onClick.RemoveAllListeners();
+            //    powerUpButtons[i].onClick.AddListener(() =>
+            //    {
+            //        ChosePowerUp(idexcopy);
+
+            //    });
+            //}
+        }
     }
-}
 void ChosePowerUp(int index)
 {
         powerUps[index].applayEffect.Invoke();
@@ -198,11 +297,11 @@ void ChosePowerUp(int index)
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
  
 
-        playerAttacks.playerDmg = playerDamage;
+        playerAttacks.playerDmg += playerDamage;
         playerHealthManager.playerHealth += extraPlayerHealth;
-        playerMovement._moveSpeed = playerMoveSpeed;
-        playerDash.dashCooldown = playerDashCooldown;
-        playerAttacks.knockbackForce = playerknockbackForce;
+        playerMovement._moveSpeed += playerMoveSpeed;
+        playerDash.dashCooldown -= playerDashCooldown;
+        playerAttacks.knockbackForce += playerknockbackForce;
         playerHealthManager.maxHealth += extraPlayerHealth;
 
 

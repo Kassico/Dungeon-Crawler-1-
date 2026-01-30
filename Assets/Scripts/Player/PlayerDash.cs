@@ -11,7 +11,7 @@ public class PlayerDash : MonoBehaviour
     public float dashCooldown = 1f;
     private bool allowedToDash= true;
     private float dashCooldownTimer;
-    float playerMoveSpeed;
+    public float playerMoveSpeed;
 
     private bool _allowedToMove = true;
    
@@ -27,12 +27,14 @@ public class PlayerDash : MonoBehaviour
 
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         playerMoveSpeed = playerMovement._moveSpeed;
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         PlayerMovement.allowedToMove = _allowedToMove;
         if (InputManager.Dash && allowedToDash )
         {
@@ -40,6 +42,8 @@ public class PlayerDash : MonoBehaviour
             Debug.Log("DASH BUTTON PRESSED");
             isDashing = true;
             playerMoveSpeed *= dashSpeedmultiplier;
+            
+            playerMovement._moveSpeed = playerMoveSpeed;
             _allowedToMove = false;
         }
         if (isDashing)
@@ -54,7 +58,8 @@ public class PlayerDash : MonoBehaviour
                 isDashing = false;
                 dashTime = 0f;
                 playerMoveSpeed /= dashSpeedmultiplier;
-                Invoke("ResetDash", dashCooldown);
+                playerMovement._moveSpeed = playerMoveSpeed;
+                //Invoke("ResetDash", dashCooldown);
                 _allowedToMove = true;
             }
             Debug.Log("Player is dashing!");
@@ -66,8 +71,9 @@ public class PlayerDash : MonoBehaviour
             {
                 allowedToDash = true;
                 dashCooldownTimer = 0f;
+
                 
-            }
+            } 
         }
 
 

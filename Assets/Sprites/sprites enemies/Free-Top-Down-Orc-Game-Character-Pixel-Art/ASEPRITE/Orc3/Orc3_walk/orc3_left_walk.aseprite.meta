@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 28
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 639053652237380087
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -141,7 +141,12 @@ ScriptedImporter:
       height: 200
     spriteID: 603b07e5da84c4d428db949fb4f45750
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 100}
+      - {x: -54.5, y: 100}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -162,7 +167,12 @@ ScriptedImporter:
       height: 199
     spriteID: 941414d559117e445b63c55090c5999b
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 99.5}
+      - {x: -54.5, y: 99.5}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -183,7 +193,12 @@ ScriptedImporter:
       height: 200
     spriteID: 933a7cea5446f0942a72d41668f348c0
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 100}
+      - {x: -54.5, y: 100}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -204,7 +219,12 @@ ScriptedImporter:
       height: 200
     spriteID: d126b8a869ecfd14699a3f1755e6db10
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 100}
+      - {x: -54.5, y: 100}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -225,7 +245,12 @@ ScriptedImporter:
       height: 199
     spriteID: d55c515067b42b64392b7bb176e92510
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 99.5}
+      - {x: -54.5, y: 99.5}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -246,7 +271,12 @@ ScriptedImporter:
       height: 200
     spriteID: ab9b84634f758b34a8a72ec0a17a9570
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: -21, y: 100}
+      - {x: -54.5, y: 100}
+      - {x: -54.5, y: 60}
+      - {x: -21, y: 60}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -327,7 +357,31 @@ ScriptedImporter:
     tileSetIndex: 0
     parentIndex: -1
   tileSets: []
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 

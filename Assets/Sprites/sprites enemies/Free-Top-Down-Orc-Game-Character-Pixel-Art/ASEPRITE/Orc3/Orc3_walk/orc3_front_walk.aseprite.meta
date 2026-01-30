@@ -36,7 +36,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 28
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -102,7 +102,7 @@ ScriptedImporter:
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 0
+  platformSettingsDirtyTick: 639053647843361928
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -141,7 +141,12 @@ ScriptedImporter:
       height: 196
     spriteID: a2e624ab18fcbc449a9c11df588640e6
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -162,7 +167,12 @@ ScriptedImporter:
       height: 199
     spriteID: 917cbaec125f5ea4caef19237c40e149
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -183,7 +193,12 @@ ScriptedImporter:
       height: 198
     spriteID: d0484a2930360cc43af2f9bdf0850bf2
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -204,7 +219,12 @@ ScriptedImporter:
       height: 196
     spriteID: 53a81235f5d801d4ebe2587d97889fb8
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -225,7 +245,12 @@ ScriptedImporter:
       height: 199
     spriteID: ca7f861496d4dae40b5f524fa0a713cf
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -246,7 +271,12 @@ ScriptedImporter:
       height: 198
     spriteID: 9a07cd3576af925478db902e3b6eef7a
     spriteBone: []
-    spriteOutline: []
+    spriteOutline:
+    - outline:
+      - {x: 132, y: 98}
+      - {x: 96, y: 98}
+      - {x: 95, y: 58}
+      - {x: 132, y: 58}
     vertices: []
     spritePhysicsOutline: []
     indices: 
@@ -327,7 +357,31 @@ ScriptedImporter:
     tileSetIndex: 0
     parentIndex: -1
   tileSets: []
-  platformSettings: []
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 16384
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 

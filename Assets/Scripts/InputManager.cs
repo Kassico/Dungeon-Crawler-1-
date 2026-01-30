@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
         Dash = _dashaction.WasPerformedThisFrame();
 
         //if (Attack)
-            //Debug.Log("ATTACK BUTTON PRESSED");
+            //Debug.Log("ATTACK BUTTON PRESSED");   
 
     }
 }

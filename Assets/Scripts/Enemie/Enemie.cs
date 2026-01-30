@@ -37,7 +37,11 @@ public class Enemy: MonoBehaviour
     public float attackRate;
     public float KnockbackForceResistans;
     public float health;
-    
+    public float attackDeley;
+    public float _attackHitBox;
+
+
+
 
 
     //Fixed Stats 
@@ -47,12 +51,10 @@ public class Enemy: MonoBehaviour
     private float attackCooldown = 2f;
     private float Knockbackduration = 0.01f;
     public float KnockbackForce = 20f;
-    public float AttackHitBox = 1.4f;
     public float AttackDuration = 0.5f;
     public float pointsValue = 1;
     private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
-    private float attackDeley = 0.5f;
     public float scaler = 1f;
     private float playerPoints;
 
@@ -136,6 +138,8 @@ public class Enemy: MonoBehaviour
                 KnockbackForceResistans = stats.normalKnockbackForceResistans;
                 attackRange = stats.normalAttackRange;
                 pointsValue = stats.normalScoreValue;
+                attackDeley = stats.normalAttackDeley;
+                _attackHitBox = stats.normalAttackHitBox;
             }
 
         }
@@ -152,7 +156,7 @@ public class Enemy: MonoBehaviour
         KnockbackForceResistans *= (1 - (difficulty * 0.1f));
         currentHealth = maxHealth;
       
-        attackHitBox.localScale = new Vector3(AttackHitBox, AttackHitBox, scaler);
+        attackHitBox.localScale = new Vector3(_attackHitBox, _attackHitBox, scaler);
 
 
         
@@ -169,7 +173,7 @@ public class Enemy: MonoBehaviour
         if (isDead) { return; }
         health = currentHealth;
 
-        Debug.Log("Enemy Health: " + currentHealth);
+        //Debug.Log("Enemy Health: " + currentHealth);
         
 
         if (playerTransform == null) {return;}
@@ -264,7 +268,7 @@ public class Enemy: MonoBehaviour
 
     public void DealDmg()
     {
-        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, AttackHitBox, playerLayer);
+        Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, _attackHitBox, playerLayer);
         //Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
@@ -446,7 +450,7 @@ public class Enemy: MonoBehaviour
         if (attackpoint == null) return;
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackpoint.position, AttackHitBox);
+        Gizmos.DrawWireSphere(attackpoint.position, _attackHitBox);
     }
 
 

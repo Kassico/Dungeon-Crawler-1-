@@ -13,4 +13,6 @@ public class EnemyStats: ScriptableObject
     public float normalAttackRate = 2f;
     public float normalKnockbackForceResistans = 0.5f;
     public float normalScoreValue = 1f;
+    public float normalAttackDeley = 0.5f;
+    public float normalAttackHitBox = 1.4f;
 }

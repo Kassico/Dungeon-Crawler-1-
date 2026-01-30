@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: NormalEnemyStats
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   enemyType: NormalEnemy
-  normalMaxHealth: 5
+  normalMaxHealth: 10
   normalMoveSpeed: 2
   normalChaseRange: 6
   normalAttackDamage: 0.5
-  normalAttackRange: 1.1
+  normalAttackRange: 0.4
   normalAttackRate: 2
   normalKnockbackForceResistans: 0.5
   normalScoreValue: 2
+  normalAttackDeley: 0.1
+  normalAttackHitBox: 1.4
