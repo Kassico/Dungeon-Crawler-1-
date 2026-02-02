@@ -1,9 +1,12 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Difficulty : MonoBehaviour
 {
     public static float CurrentDifficulty = 1f; // Normal
+    public TextMeshProUGUI difficultyDisplay;
 
     void Start()
     {
@@ -13,7 +16,7 @@ public class Difficulty : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        difficultyDisplay.text = "Difficulty: " + (CurrentDifficulty == 0.5f ? "Easy" : CurrentDifficulty == 1f ? "Normal" : "Hard");
     }
     public void Easy()
     {
