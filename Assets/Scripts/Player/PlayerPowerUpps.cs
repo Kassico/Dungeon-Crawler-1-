@@ -134,15 +134,15 @@ public class PlayerPowerUpps : MonoBehaviour
         randomNumber = UnityEngine.Random.Range(1, 4);
         switch (randomNumber)
         {
-            case 1:
+            case 1 : case 2: case 3: case 4: case 5:case 6:
                 betterStats = false;
                 biggerstats = false;
                 break;
-            case 2:
+            case 7:
                 betterStats = false;
                 biggerstats = true;
                 break;
-            case 3:
+            case 8:
                 betterStats = true;
                 biggerstats = true;
                 break;
@@ -151,9 +151,9 @@ public class PlayerPowerUpps : MonoBehaviour
         }
         if (biggerstats)
         {
-            randomDmg = UnityEngine.Random.Range(1,3);
-            randomHelath = UnityEngine.Random.Range(5, 11);
-            randomSpeed = UnityEngine.Random.Range(2, 7)/10;
+            randomDmg = UnityEngine.Random.Range(1,2); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
+            randomHelath = UnityEngine.Random.Range(5, 10); // då blir random mellan 5 - 10 extra
+            randomSpeed = UnityEngine.Random.Range(2, 7)/10; // mellan 0.2 - 0.7 extra speed
         }
         else 
         { 
@@ -204,13 +204,13 @@ public class PlayerPowerUpps : MonoBehaviour
         {
             powerUps.Add(new PowerUp
             {
-                description = "Dash Cooldown - 0.1",
-                applayEffect = () => playerDashCooldown -= 0.1f
+                description = "Dash Cooldown - 0.15",
+                applayEffect = () => playerDashCooldown -= 0.15f
             });
             powerUps.Add(new PowerUp
             {
-                description = "Knockback Force + 1",
-                applayEffect = () => playerknockbackForce += 5
+                description = "Knockback Force + 2",
+                applayEffect = () => playerknockbackForce += 2
             });
         }
         

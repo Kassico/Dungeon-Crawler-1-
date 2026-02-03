@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyType: NormalEnemy
   normalMaxHealth: 10
   normalMoveSpeed: 2
-  normalChaseRange: 6
+  normalChaseRange: 4
   normalAttackDamage: 0.5
   normalAttackRange: 0.4
   normalAttackRate: 2

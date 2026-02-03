@@ -53,7 +53,7 @@ public class PlayerHealthManager : MonoBehaviour
     }
     void Update()
     {
-        scoreText.text = "Health: " + playerHealth.ToString();
+        scoreText.text = playerHealth.ToString();
     }
     public void TakeDmg(float damage, Vector2 enemyPos, string enemietype)
     {
