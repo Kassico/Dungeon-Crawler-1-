@@ -20,7 +20,6 @@ public class Enemy: MonoBehaviour
     public Transform attackHitBox;
 
 
-
     //[SerializeField] private string enemyStats = "NormalEnemyStats";
     public string enemyType = "NormalEnemy";
     public EnemyStats[] allStats;
@@ -49,14 +48,14 @@ public class Enemy: MonoBehaviour
 
     private float StunDuration = 0.2f;
     private float attackCooldown = 2f;
-    private float Knockbackduration = 0.01f;
+    //private float Knockbackduration = 0.01f;
     public float KnockbackForce = 20f;
     public float AttackDuration = 0.5f;
     public float pointsValue = 1;
     private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
     public float scaler = 1f;
-    private float playerPoints;
+    //private float playerPoints;
 
 
     //Needed float
@@ -78,7 +77,7 @@ public class Enemy: MonoBehaviour
     private bool facingDown = false;
     private bool isStunned = false;
     private bool allowedToMove = true;
-    public bool portalActiveOnDeath = true;
+    public bool portalActiveOnDeath = false;
     private bool isPreparingAttack = false;
 
     [Header("stuff")]
@@ -116,7 +115,7 @@ public class Enemy: MonoBehaviour
         var Player = GameObject.FindGameObjectWithTag("Player");
         if (Player != null)
         {
-            playerTransform = Player.transform;
+        playerTransform = Player.transform;
             playerHealth = Player.GetComponent<PlayerHealthManager>();
         }
     }
@@ -130,23 +129,19 @@ public class Enemy: MonoBehaviour
         {
             if (stats.enemyType == enemyType)
             {
-                maxHealth = stats.normalMaxHealth;
-                moveSpeed = stats.normalMoveSpeed;
-                attackDamage = stats.normalAttackDamage;
-                chaseRange = stats.normalChaseRange;
-                attackRate = stats.normalAttackRate;
-                KnockbackForceResistans = stats.normalKnockbackForceResistans;
-                attackRange = stats.normalAttackRange;
-                pointsValue = stats.normalScoreValue;
-                attackDeley = stats.normalAttackDeley;
-                _attackHitBox = stats.normalAttackHitBox;
+                maxHealth = stats.maxHealth;
+                moveSpeed = stats.moveSpeed;
+                attackDamage = stats.attackDamage;
+                chaseRange = stats.chaseRange;
+                attackRate = stats.attackRate;
+                KnockbackForceResistans = stats.knockbackForceResistans;
+                attackRange = stats.attackRange;
+                pointsValue = stats.scoreValue;
+                attackDeley = stats.attackDeley;
+                _attackHitBox = stats.attackHitBox;
             }
 
         }
-
-
-
-       
 
 
         maxHealth *= (difficulty + 1);
@@ -170,7 +165,7 @@ public class Enemy: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) { return; }
+        if (isDead) { _rb.linearVelocity = Vector2.zero; return; }
         health = currentHealth;
 
         //Debug.Log("Enemy Health: " + currentHealth);
@@ -250,8 +245,8 @@ public class Enemy: MonoBehaviour
             _animator.SetFloat(_Vertical, direction.y);
             _animator.SetBool("isAttacking", true);
 
-            //Debug.Log("Enemy Attacks Player");
-            DealDmg();
+        //Debug.Log("Enemy Attacks Player");
+        //DealDmg() Är i animation event i attack animationen, så att den kallar på den funktionen när den ska göra skada, så att den inte gör skada direkt när den börjar attackera utan när den träffar spelaren i animationen.
 
         //}
     }
@@ -421,24 +416,13 @@ public class Enemy: MonoBehaviour
         
         allowedToAttack = false;
         Vector2 dir = (transform.position - playerTransform.position).normalized;
-
-
-        //_rb.velocity = Vector2.zero;
-        //_rb.AddForce(dir * (PlayerAttacks.knockbackForce * (1 - KnockbackForceResistans)), ForceMode2D.Impulse);
         _rb.linearVelocity = dir * (KnockbackForce * (1 - KnockbackForceResistans));
-        //Debug.Log("FORCE: " + PlayerAttacks.knockbackForce); 
 
         knockbackVelocity = dir * (KnockbackForce * (1 - KnockbackForceResistans));
         knockabactimer = knockbackTime;
 
-
-        //yield return new WaitForSeconds(Knockbackduration);
-        //_rb.linearVelocity = Vector2.zero;
-
-        //allowedToMove = false;
         isStunned = true;
         yield return new WaitForSeconds(StunDuration);
-
 
         isStunned = false;
         //allowedToMove = true;

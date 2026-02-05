@@ -1,18 +1,20 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Scriptable Objects/NormalEnemyStats")]
 public class EnemyStats: ScriptableObject
 {
     public string enemyType = "NormalEnemy";
 
-    public float normalMaxHealth = 5;
-    public float normalMoveSpeed = 2f;
-    public float normalChaseRange = 6f;
-    public float normalAttackDamage = 0.5f;
-    public float normalAttackRange = 1.1f;
-    public float normalAttackRate = 2f;
-    public float normalKnockbackForceResistans = 0.5f;
-    public float normalScoreValue = 1f;
-    public float normalAttackDeley = 0.5f;
-    public float normalAttackHitBox = 1.4f;
+    public float maxHealth = 5;
+    public float moveSpeed = 2f;
+    public float chaseRange = 6f;
+    public float attackDamage = 0.5f;
+    public float attackRange = 1.1f;
+    public float attackRate = 2f;
+    public float knockbackForceResistans = 0.5f;
+    public float scoreValue = 1f;
+    public float attackDeley = 0.5f;
+    public float attackHitBox = 1.4f;
+    public float rotateSpeed = 0.8f;        //används ändast för ranged enemies, hur snabbt de kan snurra runt för att sikta mor player, kanske ska användas.
 }
