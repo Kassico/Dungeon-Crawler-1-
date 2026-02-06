@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealthManager : MonoBehaviour
 {
-    public float maxHealth = 10f;
+    public float maxHealth;
     public float playerHealth;
     public TextMeshProUGUI scoreText;
 

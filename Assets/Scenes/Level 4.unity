@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 128758185}
   m_Layer: 0
   m_Name: Hitbox
-  m_TagString: Untagged
+  m_TagString: HitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1275,98 +1275,68 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1336845079
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1336845082}
-  - component: {fileID: 1336845081}
-  - component: {fileID: 1336845080}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1336845080
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336845079}
-  m_Enabled: 1
---- !u!20 &1336845081
-Camera:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336845079}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
-  m_GateFitMode: 2
-  m_FOVAxisMode: 0
-  m_Iso: 200
-  m_ShutterSpeed: 0.005
-  m_Aperture: 16
-  m_FocusDistance: 10
-  m_FocalLength: 50
-  m_BladeCount: 5
-  m_Curvature: {x: 2, y: 11}
-  m_BarrelClipping: 0.25
-  m_Anamorphism: 0
-  m_SensorSize: {x: 36, y: 24}
-  m_LensShift: {x: 0, y: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 5
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 1
-  m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
-  m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
---- !u!4 &1336845082
+--- !u!4 &799632844 stripped
 Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+  m_PrefabInstance: {fileID: 1735646177}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1336845079}
+--- !u!1001 &1735646177
+PrefabInstance:
+  m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.81
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7206426680946871252, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: m_Name
+      value: Player 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
 --- !u!1 &1766165844
 GameObject:
   m_ObjectHideFlags: 0
@@ -1381,9 +1351,9 @@ GameObject:
   - component: {fileID: 1766165850}
   - component: {fileID: 1766165849}
   - component: {fileID: 1766165848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Vampire
-  m_TagString: Untagged
+  m_TagString: Enemie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1535,7 +1505,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1546,7 +1516,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1766165850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1559,9 +1529,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdc9f53ae3f436438cb8b5b77a1593b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::vampire
-  playerTransform: {fileID: 0}
-  enemyType: NormalEnemy
-  allStats: []
+  playerTransform: {fileID: 799632844}
+  enemyType: NormalVampire
+  allStats:
+  - {fileID: 11400000, guid: 36a81d219d1700b4c9970935b9391c0e, type: 2}
   currentHealth: 0
   moveSpeed: 0
   chaseRange: 0
@@ -1573,6 +1544,7 @@ MonoBehaviour:
   attackDeley: 0
   _attackHitBox: 0
   rotateSpeed: 0
+  projectileSpeed: 0
   KnockbackForce: 20
   AttackDuration: 0.5
   pointsValue: 1
@@ -1585,6 +1557,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   Portal: {fileID: 0}
+  projectilePrefab: {fileID: 2896159898036364596, guid: d7078e1a07a819e42bad923815c82b6e, type: 3}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &1800628701
 GameObject:
@@ -1716,6 +1689,6 @@ Tilemap:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 1336845082}
   - {fileID: 1766165847}
   - {fileID: 355963118}
+  - {fileID: 1735646177}

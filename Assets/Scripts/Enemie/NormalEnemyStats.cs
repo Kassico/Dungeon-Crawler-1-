@@ -17,4 +17,5 @@ public class EnemyStats: ScriptableObject
     public float attackDeley = 0.5f;
     public float attackHitBox = 1.4f;
     public float rotateSpeed = 0.8f;        //används ändast för ranged enemies, hur snabbt de kan snurra runt för att sikta mor player, kanske ska användas.
+    public float projectileSpeed = 5f;     //används ändast för ranged enemies, hastigheten på deras projektiler.
 }

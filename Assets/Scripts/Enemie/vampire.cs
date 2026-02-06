@@ -22,19 +22,17 @@ public class vampire : MonoBehaviour
     public float attackDeley;
     public float _attackHitBox;
     public float rotateSpeed;
+    public float projectileSpeed;
 
     [Header("Fixed Stats")]
 
     private float StunDuration = 0.2f;
     private float attackCooldown = 2f;
-    private float Knockbackduration = 0.01f;
     public float KnockbackForce = 20f;
     public float AttackDuration = 0.5f;
     public float pointsValue = 1;
-    //private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
     public float scaler = 1f;
-    //private float playerPoints;
 
 
     [Header("Needed Floats")]
@@ -47,12 +45,7 @@ public class vampire : MonoBehaviour
     public bool isChasing = false;
     public bool isAttacking = false;
     private bool isDead = false;
-    private bool facingRight = false;
-    private bool facingLeft = false;
-    private bool facingUp = false;
-    private bool facingDown = false;
     private bool isStunned = false;
-    private bool allowedToMove = true;
     public bool portalActiveOnDeath = false;
     private bool isPreparingAttack = false;
 
@@ -65,11 +58,11 @@ public class vampire : MonoBehaviour
     private const string _Vertical = "Vertical";
 
     private Vector2 knockbackVelocity;
-    private Vector2 _movement;
     private Rigidbody2D _rb;
     private Animator _animator;
     public LayerMask playerLayer;
     public GameObject Portal;
+    public GameObject projectilePrefab;
 
     [Header("Visuals")]
 
@@ -106,6 +99,7 @@ public class vampire : MonoBehaviour
                 KnockbackForceResistans = stats.knockbackForceResistans * (1 - (difficulty / 10));
                 attackDeley = stats.attackDeley;
                 _attackHitBox = stats.attackHitBox;
+                projectileSpeed = stats.projectileSpeed;
             }
         }
         playerTransform = player.transform;
@@ -118,82 +112,116 @@ public class vampire : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isDead) _rb.linearVelocity = Vector2.zero; return;
+        if (isDead == true) { _rb.linearVelocity = Vector2.zero; return; }
 
         distanceToPlayer = Vector2.Distance(transform.position, playerHealth.transform.position);
+        if (isAttacking)
+        {
+            _rb.linearVelocity = Vector2.zero;
+            return;
+        }
+        if (!isAttacking && !isStunned)
+        {
+            if (distanceToPlayer <= attackRange && allowedToAttack)
+            {
+                AttackPlayer();
 
-        if (distanceToPlayer <= chaseRange && !isAttacking && !isStunned)
-        {
-            isChasing = true;
-            ChasePlayer();
+            }
+            else if (distanceToPlayer <= chaseRange)
+            {
+                ChasePlayer();
+            }
+
         }
-        else
-        {
-            isChasing = false;
-            _animator.SetBool("isRunning", false);
-        }
-        if (distanceToPlayer <= attackRange && allowedToAttack && !isStunned)
-        {
-            AttackPlayer();
-            isChasing = false;
-        }
+        //if (distanceToPlayer <= chaseRange && distanceToPlayer >= attackRange && !isAttacking && !isStunned)
+        //{
+        //    isChasing = true;
+        //    ChasePlayer();
+        //}
+        //else
+        //    {isChasing = false;}
+
+        //if (distanceToPlayer <= attackRange && allowedToAttack && !isStunned && !isAttacking)
+        //{
+        //    AttackPlayer();
+        //    isChasing = false;
+        //}
         if (isStunned)
         {
             _rb.linearVelocity = Vector2.zero;
         }
         if (!allowedToAttack)
         {
-            attackCooldown -= Time.deltaTime;
-            if (attackCooldown <= 0)
+            AttackTimer += Time.deltaTime;
+            if (AttackTimer >= attackCooldown)
             {
                 allowedToAttack = true;
-                attackCooldown = 1f;
+                AttackTimer = 0;
             }
         }
+
         if (knockabactimer > 0)
         {
             knockabactimer -= Time.deltaTime;
             _rb.linearVelocity = knockbackVelocity;
         }
-        else
+
+        if (!isChasing && !isAttacking)
         {
-            if (isChasing && !isAttacking)
-            {
-                ChasePlayer();
-            }
+            _animator.SetBool("isWalking", false);
         }
+
 
     }
 
+    //public void ChasePlayer()
+    //{
+    //    if (isStunned) return;
+    //    Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
+    //    if (distanceToPlayer >= (chaseRange - attackRange))
+    //    {
+    //        _rb.linearVelocity = direction * moveSpeed;
+    //        _animator.SetFloat(_horizontal, direction.x);
+    //        _animator.SetFloat(_Vertical, direction.y);
+    //        _animator.SetBool("isWalking", true);
+    //    }
+
+    //}
     public void ChasePlayer()
     {
         if (isStunned) return;
-        Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
-        if (distanceToPlayer >= (chaseRange - attackRange))
-        {
-            _rb.linearVelocity = direction * moveSpeed;
-            _animator.SetFloat(_horizontal, direction.x);
-            _animator.SetFloat(_Vertical, direction.y);
-        }
 
+        isChasing = true;
+
+        Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
+        _rb.linearVelocity = direction * moveSpeed;
+
+        _animator.SetFloat(_horizontal, direction.x);
+        _animator.SetFloat(_Vertical, direction.y);
+        _animator.SetBool("isWalking", true);
     }
+
 
     public void AttackPlayer()
     {
-        dir();
-
         if (isStunned) return;
-        isAttacking = true;
-        allowedToAttack = false;
-        Vector2 direction = (playerTransform.position - transform.position).normalized;
 
-        Invoke(nameof(PerformAttack), attackDeley);
-        Invoke(nameof(ResetAttack), AttackDuration);
-        _animator.SetFloat(_horizontal, direction.x);
-        _animator.SetFloat(_Vertical, direction.y);
+        allowedToAttack = false;
+        isAttacking = true;
+        _rb.linearVelocity = Vector2.zero;
+        _animator.SetBool("isWalking", false);
+        dir();
         _animator.SetBool("isAttacking", true);
 
+        //_rb.linearVelocity = Vector2.zero;
+        //isAttacking = true;
+        //_animator.SetBool("isWalking", false);
+        //Vector2 direction = (playerTransform.position - transform.position).normalized;
+        //allowedToAttack = false;
+
+        //_animator.SetBool("isAttacking", true);
     }
+    //}
     public void dir()
     {
         Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
@@ -201,14 +229,28 @@ public class vampire : MonoBehaviour
         _animator.SetFloat(_Vertical, direction.y);
     }
 
+    //public void PerformAttack()
+    //{
+    //    if (attackCooldown > AttackTimer)
+    //    {
+    //        AttackTimer = 0;
+    //        GameObject intBullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+    //        intBullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed, ForceMode2D.Impulse);
+    //        Invoke(nameof(ResetAttack), 1.57f); //så lång som attack animationen är
+    //                                        //isAttacking = false;
+    //                                        //_animator.SetBool("isAttacking", false);
+    //    }
+    //}
+
     public void PerformAttack()
     {
-        if (distanceToPlayer <= attackRange)
-        {
-            _rb.linearVelocity = Vector2.zero;
+        GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        bullet.GetComponent<Rigidbody2D>().AddForce(
+            (playerTransform.position - transform.position).normalized * projectileSpeed,
+            ForceMode2D.Impulse
+        );
 
-
-        }
+        //Invoke(nameof(ResetAttack), 1.57f);
     }
 
     public void ResetAttack()

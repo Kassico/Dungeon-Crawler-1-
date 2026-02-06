@@ -43,14 +43,6 @@ public class Portal : MonoBehaviour
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         playerData.instance.points = playerPowerUpps.playerpoints;
 
-        //playerData.instance.Health = PlayerHealthManager.playerHealth;
-        //playerData.instance.maxHealth = PlayerHealthManager.maxHealth;
-        //playerData.instance.moveSpeed = PlayerMovement._moveSpeed;
-        //playerData.instance.damage = PlayerAttacks.playerDmg;
-        //playerData.instance.knockbackForce = PlayerAttacks.knockbackForce;
-        //playerData.instance.points = PlayerPowerUpps.playerpoints;
-        //playerData.instance.dashCooldown = PlayerDash.dashCooldown;
-
 
 
 

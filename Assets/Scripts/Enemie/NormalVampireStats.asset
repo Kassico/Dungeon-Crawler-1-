@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5e452e8cffc8ce49a3221accba6f4e6, type: 3}
-  m_Name: HardEnemyStats
+  m_Name: NormalVampireStats
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  enemyType: HardEnemy
+  enemyType: NormalVampire
   maxHealth: 5
   moveSpeed: 2
-  chaseRange: 6
+  chaseRange: 9
   attackDamage: 0.5
-  attackRange: 1.1
+  attackRange: 7
   attackRate: 2
   knockbackForceResistans: 0.5
-  scoreValue: 1
+  scoreValue: 2
   attackDeley: 0.5
-  attackHitBox: 1.4
+  attackHitBox: 0
   rotateSpeed: 0.8
   projectileSpeed: 5
