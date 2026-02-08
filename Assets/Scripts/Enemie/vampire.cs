@@ -39,6 +39,7 @@ public class vampire : MonoBehaviour
     private float nextAttackTime;
     private float AttackTimer;
     private float distanceToPlayer;
+    private float projectileRotation;
 
     [Header("Needed Bools")]
     public bool allowedToAttack = true;
@@ -212,6 +213,7 @@ public class vampire : MonoBehaviour
         _animator.SetBool("isWalking", false);
         dir();
         _animator.SetBool("isAttacking", true);
+        Debug.Log("AttackPlayer called");
 
         //_rb.linearVelocity = Vector2.zero;
         //isAttacking = true;
@@ -244,15 +246,14 @@ public class vampire : MonoBehaviour
 
     public void PerformAttack()
     {
-        GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-        bullet.GetComponent<Rigidbody2D>().AddForce(
-            (playerTransform.position - transform.position).normalized * projectileSpeed,
-            ForceMode2D.Impulse
-        );
+        projectileRotation = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
+        GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0,0, projectileRotation));
+        bullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed,ForceMode2D.Impulse);
+        Debug.Log("Bullet instantiated and force applied");
 
         //Invoke(nameof(ResetAttack), 1.57f);
     }
-
+     
     public void ResetAttack()
     {
         isAttacking = false;

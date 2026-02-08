@@ -39,7 +39,7 @@ public class PlayerDash : MonoBehaviour
         if (InputManager.Dash && allowedToDash )
         {
             
-            Debug.Log("DASH BUTTON PRESSED");
+            //Debug.Log("DASH BUTTON PRESSED");
             isDashing = true;
             playerMoveSpeed *= dashSpeedmultiplier;
             
@@ -62,7 +62,7 @@ public class PlayerDash : MonoBehaviour
                 //Invoke("ResetDash", dashCooldown);
                 _allowedToMove = true;
             }
-            Debug.Log("Player is dashing!");
+            //Debug.Log("Player is dashing!");
         }
         if (!allowedToDash)
         {

@@ -5,9 +5,14 @@ public class projectile : MonoBehaviour
     private float dmg;
     void Start()
     {
-        dmg = GameObject.FindGameObjectWithTag("Enemie").GetComponent<vampire>().attackDamage;
+        //dmg = GameObject.FindGameObjectWithTag("Enemie").GetComponent<vampire>().attackDamage;
+        vampire vampireScript = FindObjectOfType<vampire>();
+        if (vampireScript != null)
+        {
+            dmg = vampireScript.attackDamage;
+        }
 
-         
+
     }
 
     // Update is called once per frame

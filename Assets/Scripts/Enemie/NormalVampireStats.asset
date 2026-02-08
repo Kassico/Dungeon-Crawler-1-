@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   enemyType: NormalVampire
   maxHealth: 5
-  moveSpeed: 2
+  moveSpeed: 1.4
   chaseRange: 9
   attackDamage: 0.5
   attackRange: 7
