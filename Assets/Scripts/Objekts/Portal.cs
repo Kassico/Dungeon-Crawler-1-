@@ -4,19 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
-{   
-    
+{
 
-    [SerializeField] private string sceneToLoad = "Level 2";
+
+    //[SerializeField] private string sceneToLoad = "Level 2";
     [SerializeField] private Transform SpawnPoint;
+    public int sceneIndexToLoad;
 
 
-    
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (sceneIndexToLoad == 0)
+        {
+            Debug.LogError("Scene index to load is not set on the portal.");
+            return;
+        }
         if (!collision.CompareTag("Player")) return;
         savePlayerData();
-        SceneManager.LoadScene("Level 2");
+        SceneManager.LoadScene(sceneIndexToLoad);
 
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
         if (spawnPoint != null)

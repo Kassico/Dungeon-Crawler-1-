@@ -141,11 +141,22 @@ public class PlayerAttacks : MonoBehaviour
 
 
         foreach (Collider2D enemy in hitEnemies)
-        {   
-            //Debug.Log("Hit" +  enemy.name + Enemy.currentHealth); 
-            enemy.GetComponent<Enemy>().TakeDmg(playerDmg);
-        }
+        {
+            if (enemy.TryGetComponent(out Enemy enemyHealth))
+            {
+                enemyHealth.TakeDmg(playerDmg);
+            }
+            else if (enemy.TryGetComponent(out vampire vampireHealth))
+            {
+                vampireHealth.TakeDmg(playerDmg);
+            }
 
+            //try { enemy.GetComponent<Enemy>().TakeDmg(playerDmg); }
+            //catch { Debug.LogError("Enemy does not have EnemyHealthManager component!"); }
+            //try { enemy.GetComponent<vampire>().TakeDmg(playerDmg); }
+            //catch { Debug.LogError("Enemy does not have EnemyHealthManager component!"); }
+        }
+        
         if (AttackHitboxP != null && activeHitBox == null)
             activeHitBox = Instantiate(AttackHitboxP, AttackingPoint.position, Quaternion.identity);
 

@@ -45,8 +45,11 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Front
+  - name: Hitbox
     uniqueID: 2677651383
+    locked: 0
+  - name: Deco
+    uniqueID: 646199843
     locked: 0
   m_RenderingLayers:
   - Default

@@ -20,11 +20,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     [Header("Player Stats")]
-    private float extraPlayerHealth;
-    private float playerMoveSpeed;
-    private float playerDamage;
-    private float playerDashCooldown;
-    private float playerknockbackForce;
+ 
 
     [Header("UI")]
     public GameObject powerUpPanel;
@@ -34,8 +30,15 @@ public class PlayerPowerUpps : MonoBehaviour
 
     // The floats for random extra stats
     private float randomHelath;
-    private float randomDmg;
+    private float randomAttackForce;
     private float randomSpeed;
+    private float DecreasePlayerDashCooldown;
+    private float extraPlayerHealth;
+    private float extraPlayerMoveSpeed;
+    private float extraPlayerAttackForce;
+    private float extraPlayerDashSpeed;
+
+
     private bool betterStats = false;
     private bool biggerstats = false;
     private float randomNumber;
@@ -151,13 +154,13 @@ public class PlayerPowerUpps : MonoBehaviour
         }
         if (biggerstats)
         {
-            randomDmg = UnityEngine.Random.Range(1,2); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
+            randomAttackForce = UnityEngine.Random.Range(1,2); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
             randomHelath = UnityEngine.Random.Range(5, 10); // då blir random mellan 5 - 10 extra
             randomSpeed = UnityEngine.Random.Range(2, 7)/10; // mellan 0.2 - 0.7 extra speed
         }
         else 
-        { 
-            randomDmg = 0;
+        {
+            randomAttackForce = 0;
             randomHelath = 0;
             randomNumber = 0;
             randomSpeed = 0;
@@ -176,13 +179,13 @@ public class PlayerPowerUpps : MonoBehaviour
         });
         powerUps.Add(new PowerUp
         {
-            description = $"Damage + {1 + randomDmg}",
-            applayEffect = () => playerDamage += 1+randomDmg
+            description = $"AttackForce + {1 + randomAttackForce}",
+            applayEffect = () => extraPlayerAttackForce += 1+ randomAttackForce
         });
         powerUps.Add(new PowerUp
         {
             description = $"Speed + {0.5 + randomSpeed}",
-            applayEffect = () => playerMoveSpeed += 0.5f+randomSpeed
+            applayEffect = () => extraPlayerMoveSpeed += 0.5f+randomSpeed
         });
 
         //powerUps.Add(new PowerUp
@@ -205,12 +208,12 @@ public class PlayerPowerUpps : MonoBehaviour
             powerUps.Add(new PowerUp
             {
                 description = "Dash Cooldown - 0.15",
-                applayEffect = () => playerDashCooldown -= 0.15f
+                applayEffect = () => DecreasePlayerDashCooldown -= 0.15f
             });
             powerUps.Add(new PowerUp
             {
-                description = "Knockback Force + 2",
-                applayEffect = () => playerknockbackForce += 2
+                description = "Dash Speed + 2",
+                applayEffect = () => extraPlayerDashSpeed += 2
             });
         }
         
@@ -285,8 +288,8 @@ void showPowerUps()
             //}
         }
     }
-void ChosePowerUp(int index)
-{
+    void ChosePowerUp(int index)
+    {
         powerUps[index].applayEffect.Invoke();
 
 
@@ -295,21 +298,27 @@ void ChosePowerUp(int index)
         PlayerDash playerDash = FindObjectOfType<PlayerDash>();
         PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
- 
 
-        playerAttacks.playerDmg += playerDamage;
+        if (playerAttacks == null || playerMovement == null || playerDash == null || playerHealthManager == null || playerPowerUpps == null)
+        {
+            Debug.LogError("One or more player components not found!");
+            return;
+        }
+        if (playerAttacks.playerDmg <= 2) // kan bara addera mera dmg om den inte är över 3, det är för att det inte ska bli för lätt.
+        { playerAttacks.playerDmg += extraPlayerAttackForce; }
         playerHealthManager.playerHealth += extraPlayerHealth;
-        playerMovement._moveSpeed += playerMoveSpeed;
-        playerDash.dashCooldown -= playerDashCooldown;
-        playerAttacks.knockbackForce += playerknockbackForce;
+        playerMovement._moveSpeed += extraPlayerMoveSpeed;
+        playerDash.dashCooldown -= DecreasePlayerDashCooldown;
+        playerAttacks.knockbackForce += extraPlayerAttackForce * 3;
         playerHealthManager.maxHealth += extraPlayerHealth;
+        playerDash.dashSpeedmultiplier += extraPlayerDashSpeed;
 
         extraPlayerHealth = 0;
-        playerMoveSpeed = 0;
-        playerDamage = 0;
-        playerDashCooldown = 0;
-        playerknockbackForce = 0;
-        playerMoveSpeed = 0;
+        extraPlayerMoveSpeed = 0;
+        extraPlayerAttackForce = 0;
+        DecreasePlayerDashCooldown = 0;
+        extraPlayerDashSpeed = 0;
+        extraPlayerMoveSpeed = 0;
 
 
 

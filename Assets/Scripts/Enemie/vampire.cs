@@ -213,7 +213,7 @@ public class vampire : MonoBehaviour
         _animator.SetBool("isWalking", false);
         dir();
         _animator.SetBool("isAttacking", true);
-        Debug.Log("AttackPlayer called");
+        //Debug.Log("AttackPlayer called");
 
         //_rb.linearVelocity = Vector2.zero;
         //isAttacking = true;
@@ -249,7 +249,7 @@ public class vampire : MonoBehaviour
         projectileRotation = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0,0, projectileRotation));
         bullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed,ForceMode2D.Impulse);
-        Debug.Log("Bullet instantiated and force applied");
+        //Debug.Log("Bullet instantiated and force applied");
 
         //Invoke(nameof(ResetAttack), 1.57f);
     }
@@ -261,10 +261,13 @@ public class vampire : MonoBehaviour
     }
 
 
-    public void TakeDamage(float damage)
+    public void TakeDmg(float damage)
     {
         if (isDead) return;
         currentHealth -= damage;
+        Debug.Log($"Vampire took {damage} damage, current health: {currentHealth}");
+        Vector2 dir = (transform.position - playerTransform.position).normalized;
+        ApplyKnockback(-dir);
         StartCoroutine(FlashHitColor());
         if (currentHealth <= 0)
         {
@@ -272,10 +275,23 @@ public class vampire : MonoBehaviour
         }
     }
 
+    private void ApplyKnockback(Vector2 attackDir)
+    {
+        Vector2 knockbackDirection = (transform.position - (Vector3)attackDir).normalized;
+        knockbackVelocity = knockbackDirection * KnockbackForce * (1 - KnockbackForceResistans);
+        knockabactimer = StunDuration;
+        isStunned = true;
+        Invoke(nameof(ResetStun), StunDuration);
+    }
+    private void ResetStun()
+    {
+        isStunned = false;
+    }
+
     private System.Collections.IEnumerator FlashHitColor()
     {
         sr.color = hitColor;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         sr.color = originalColor;
     }
 
