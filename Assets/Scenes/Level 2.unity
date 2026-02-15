@@ -188,6 +188,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -257,6 +265,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -326,6 +342,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -395,6 +419,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -464,6 +496,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -533,6 +573,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -602,6 +650,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -707,6 +763,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 14bf6b7c5642af243aebfaca64b6660c, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -780,6 +844,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -895,6 +967,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -20224,6 +20304,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25382,6 +25470,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25451,6 +25547,14 @@ PrefabInstance:
       propertyPath: 'allStats.Array.data[0]'
       value: 
       objectReference: {fileID: 11400000, guid: 25a252df198eca340a7c907b74c6fb30, type: 2}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7458343309608882356, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25579,6 +25683,14 @@ PrefabInstance:
     - target: {fileID: 1363383757407388494, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
       propertyPath: portalActiveOnDeath
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577053921256775967, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3577053921256775967, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7187821037755987289, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
       propertyPath: m_LocalPosition.x

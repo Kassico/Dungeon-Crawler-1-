@@ -45,15 +45,6 @@ public class PlayerPowerUpps : MonoBehaviour
     private float extraStats;
 
 
-    //// base stats
-    //private float baseHealth = 10;
-    //private float baseMoveSpeed = 5;
-    //private float baseDamage = 1;
-    //private float baseDashCooldown = 1;
-    //private float baseknockbackForce = 20;
-
-    // stuff for levle
-
     private float currentLevel;
 
 
@@ -106,6 +97,8 @@ public class PlayerPowerUpps : MonoBehaviour
 
         if (playerpoints >= pointsToPowerup)
         {
+            EndGame endGame = FindObjectOfType<EndGame>();
+            endGame.totalScore += playerpoints;
             currentLevel += 1;
             //powerupActive = true;
             showPowerUps();
@@ -134,7 +127,7 @@ public class PlayerPowerUpps : MonoBehaviour
     }
     void buffStats()
     {
-        randomNumber = UnityEngine.Random.Range(1, 4);
+        randomNumber = UnityEngine.Random.Range(1, 9);
         switch (randomNumber)
         {
             case 1 : case 2: case 3: case 4: case 5:case 6:
@@ -154,7 +147,7 @@ public class PlayerPowerUpps : MonoBehaviour
         }
         if (biggerstats)
         {
-            randomAttackForce = UnityEngine.Random.Range(1,2); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
+            randomAttackForce = UnityEngine.Random.Range(1,3); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
             randomHelath = UnityEngine.Random.Range(5, 10); // då blir random mellan 5 - 10 extra
             randomSpeed = UnityEngine.Random.Range(2, 7)/10; // mellan 0.2 - 0.7 extra speed
         }

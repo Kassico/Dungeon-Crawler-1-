@@ -51,5 +51,8 @@ TagManager:
   - name: Deco
     uniqueID: 646199843
     locked: 0
+  - name: Top
+    uniqueID: 3484903763
+    locked: 0
   m_RenderingLayers:
   - Default

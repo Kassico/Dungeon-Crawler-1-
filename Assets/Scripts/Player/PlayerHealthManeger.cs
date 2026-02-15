@@ -74,9 +74,14 @@ public class PlayerHealthManager : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Player has died.");
-        // Add respawn, game over, etc.
+        EndGame endGame = FindObjectOfType<EndGame>();
+        if (endGame != null)
+        {
+            endGame.gameEnd = true;
+            endGame.EndTheGame();
+        }
     }
+
     private void TakeKnockback(Vector2 enemyPos, string enemietype)
     {
         

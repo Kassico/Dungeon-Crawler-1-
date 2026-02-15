@@ -8,6 +8,8 @@ public class vampire : MonoBehaviour
     public string enemyType = "NormalEnemy";
     public EnemyStats[] allStats;
 
+    public GameObject damageNumberPrefab;
+
     [Header("Enemy Stats")]
 
     private float maxHealth;
@@ -265,6 +267,15 @@ public class vampire : MonoBehaviour
     {
         if (isDead) return;
         currentHealth -= damage;
+        GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        DamageNumber damagenuber = GetComponent<DamageNumber>();
+
+        FlotingHealthbar floatingHealthBar = GetComponentInChildren<FlotingHealthbar>();
+        if (floatingHealthBar != null)
+        {
+            floatingHealthBar.UppdateHealthBar(currentHealth, maxHealth);
+        }
+
         Debug.Log($"Vampire took {damage} damage, current health: {currentHealth}");
         Vector2 dir = (transform.position - playerTransform.position).normalized;
         ApplyKnockback(-dir);

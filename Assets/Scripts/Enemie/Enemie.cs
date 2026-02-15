@@ -1,15 +1,15 @@
 ﻿using JetBrains.Annotations;
+using NUnit.Framework.Constraints;
+using System;
+using System.Collections;
+using TMPro;
+using TMPro.Examples;
+using Unity.Mathematics;
 using Unity.VisualScripting;
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
-using System.Collections;
-
-using Unity.Mathematics;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using NUnit.Framework.Constraints;
-using System;
-using TMPro.Examples;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy: MonoBehaviour
@@ -18,6 +18,8 @@ public class Enemy: MonoBehaviour
     public Transform playerTransform;
     public Transform attackpoint;
     public Transform attackHitBox;
+    public GameObject damageNumberPrefab;
+
 
 
     //[SerializeField] private string enemyStats = "NormalEnemyStats";
@@ -371,9 +373,31 @@ public class Enemy: MonoBehaviour
     public void TakeDmg(float dmg)
     {
         if (isDead) { return; }
+
         currentHealth -= dmg;
+
+        //GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+
+
+        //GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up *1.5f, Quaternion.identity);
+        //TextMeshProUGUI dmgText = DmgObj.GetComponentInChildren<TextMeshProUGUI>();
+        //dmgText.text = dmg.ToString();
+
+        //DamageNumber damageNumber = DmgObj.GetComponent<DamageNumber>();
+        //damageNumber.DmgText(DmgObj);
+        //StartCoroutine(damageNumber.DmgText(DmgObj));
+        //StartCoroutine(DmgText(DmgObj));
+        GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
+        DamageNumber damagenuber = GetComponent<DamageNumber>();
+        //damagenuber.DmgText(dmg);
+
+        FlotingHealthbar floatingHealthBar = GetComponentInChildren<FlotingHealthbar>();
+        if (floatingHealthBar != null)
+        {
+            floatingHealthBar.UppdateHealthBar(currentHealth, maxHealth);
+        }
         Debug.Log($"Enemy takes " + dmg + $" damage. And Has {currentHealth} Health Left");
-        //transform.position = Vector2.MoveTowards(transform.position, -playerTransform.position, moveSpeed * 10 * Time.deltaTime);
+
         StartCoroutine(KnockbackCoroutine());
 
         if (sr != null)
@@ -382,9 +406,12 @@ public class Enemy: MonoBehaviour
         }
 
         if (currentHealth <= 0) {Die();}
-
-
     }
+
+
+
+
+
     IEnumerator FlashHitColor()
     {
         sr.color = hitColor;
