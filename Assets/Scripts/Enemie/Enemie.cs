@@ -10,6 +10,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem.Processors;
+using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class Enemy: MonoBehaviour
@@ -423,7 +424,7 @@ public class Enemy: MonoBehaviour
     {
         //PlayerPowerUpps.playerpoints += pointsValue;
         
-        if (portalActiveOnDeath)
+        if (portalActiveOnDeath || SceneManager.GetActiveScene().buildIndex == 2)
         {
             Portal.SetActive(true);
         }

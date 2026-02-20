@@ -1299,6 +1299,61 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
+--- !u!1 &1570908655
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1570908657}
+  - component: {fileID: 1570908656}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1570908656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570908655}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84bbfc5fc447875469800057818ca3c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemySpawnIn
+  Level1Enemies:
+  - {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+  Level2Enemies:
+  - {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+  Level3Enemies:
+  - {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+  - {fileID: 343823125381208570, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
+  Level4Enemies:
+  - {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
+  - {fileID: 343823125381208570, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
+  - {fileID: 3424731157826791341, guid: 277763403dafb7e41bf613847d5c4497, type: 3}
+--- !u!4 &1570908657
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1570908655}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.92518, y: 7.95876, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1792664770
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25718,3 +25773,4 @@ SceneRoots:
   - {fileID: 1341319233}
   - {fileID: 1941217724}
   - {fileID: 585962060}
+  - {fileID: 1570908657}
