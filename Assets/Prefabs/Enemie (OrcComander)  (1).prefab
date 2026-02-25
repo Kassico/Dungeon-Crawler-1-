@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 424e170dec97fe944b64779e256bf2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemieOrc
-  playerTransform: {fileID: 3881559819916270258, guid: efff0bcd33c2dce41b69507807d61e31, type: 3}
+  playerTransform: {fileID: 2255328522348927752, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
   attackpoint: {fileID: 3108699723490858543}
   attackHitBox: {fileID: 1289817899625422704}
   damageNumberPrefab: {fileID: 7156291500449135436, guid: 9c99a0dad11992d458a4e31bade78191, type: 3}
@@ -194,6 +194,7 @@ MonoBehaviour:
   AttackDuration: 0.5
   pointsValue: 1
   scaler: 1
+  stopDistance: 0.4
   allowedToAttack: 1
   isChasing: 0
   isAttacking: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
-  Portal: {fileID: 0}
+  Portal: {fileID: 6803505700508370216, guid: 715e57225b510f64581097e74cde7444, type: 3}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   hitFlashDuration: 0.1
 --- !u!95 &7457259165638396222

@@ -1,4 +1,5 @@
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,10 +11,31 @@ public class Portal : MonoBehaviour
     //[SerializeField] private string sceneToLoad = "Level 2";
     [SerializeField] private Transform SpawnPoint;
     public int sceneIndexToLoad;
+    SpriteRenderer sR;
+    public bool isActive = false;
 
 
+    private void Awake()
+    {
+        sR = GetComponent<SpriteRenderer>();
+        //sR.enabled = false;
+
+    }
+    private void Start()
+    {
+        sR.enabled = false;
+        GetComponent<Collider2D>().enabled = false;
+    }
+    public void Enable()
+    {
+        sR.enabled = true;
+        GetComponent<Collider2D>().enabled = true;
+        isActive = true;
+    }
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (sceneIndexToLoad == 0)
         {
             Debug.LogError("Scene index to load is not set on the portal.");

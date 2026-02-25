@@ -302,7 +302,7 @@ void showPowerUps()
         playerHealthManager.playerHealth += extraPlayerHealth;
         playerMovement._moveSpeed += extraPlayerMoveSpeed;
         playerDash.dashCooldown -= DecreasePlayerDashCooldown;
-        playerAttacks.knockbackForce += extraPlayerAttackForce * 3;
+        playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce påverkar knockbacken också, med en multiplikator på 3 
         playerHealthManager.maxHealth += extraPlayerHealth;
         playerDash.dashSpeedmultiplier += extraPlayerDashSpeed;
 

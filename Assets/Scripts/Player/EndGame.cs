@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class EndGame : MonoBehaviour
     void Start()
     {
         endGamePanel.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -28,12 +30,14 @@ public class EndGame : MonoBehaviour
     }
     public void EndTheGame()
     {
+        Main_Menu mainMenu = FindObjectOfType<Main_Menu>();
         if (gameEnd)
         {             // Display total score and end game screen
             Time.timeScale = 0f; //pousar spelet
 
             Debug.Log("Game Over! Total Score: " + totalScore);
-
+            //mainMenu.StatsPanelOf();
+            mainMenu.playerStatsPanel.active = false;
             endGamePanel.SetActive(true);
             scoreText.text = "Total Score: " + totalScore.ToString();
             backToMenu.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));

@@ -3,6 +3,7 @@ using UnityEngine;
 public class projectile : MonoBehaviour
 {
     private float dmg;
+    private float knockbackForce;
     void Start()
     {
         //dmg = GameObject.FindGameObjectWithTag("Enemie").GetComponent<vampire>().attackDamage;
@@ -10,6 +11,7 @@ public class projectile : MonoBehaviour
         if (vampireScript != null)
         {
             dmg = vampireScript.attackDamage;
+            knockbackForce = vampireScript.KnockbackForce;
         }
 
 
@@ -24,7 +26,7 @@ public class projectile : MonoBehaviour
         if (player != null)
         {
             //playerHealth.playerHealth -= dmg;
-            playerHealth.TakeDmg(dmg, transform.position, "vampire");
+            playerHealth.TakeDmg(dmg, transform.position, knockbackForce);
              Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("HitBox"))

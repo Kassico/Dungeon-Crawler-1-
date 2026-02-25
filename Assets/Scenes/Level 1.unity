@@ -3356,6 +3356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawnPoint
   alwaysSpawn: 1
+  spawnPortal: 1
 --- !u!1 &1613567961
 GameObject:
   m_ObjectHideFlags: 0
@@ -3413,11 +3414,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 378323005095872846, guid: 715e57225b510f64581097e74cde7444, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 378323005095872846, guid: 715e57225b510f64581097e74cde7444, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 13.2
+      value: 14.84
       objectReference: {fileID: 0}
     - target: {fileID: 378323005095872846, guid: 715e57225b510f64581097e74cde7444, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3450,6 +3451,10 @@ PrefabInstance:
     - target: {fileID: 378323005095872846, guid: 715e57225b510f64581097e74cde7444, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802042271027364228, guid: 715e57225b510f64581097e74cde7444, type: 3}
+      propertyPath: sceneIndexToLoad
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6803505700508370216, guid: 715e57225b510f64581097e74cde7444, type: 3}
       propertyPath: m_Name

@@ -297,6 +297,7 @@ MonoBehaviour:
   AttackDuration: 0.5
   pointsValue: 1
   scaler: 1
+  stopDistance: 0.4
   allowedToAttack: 1
   isChasing: 0
   isAttacking: 0

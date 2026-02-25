@@ -58,6 +58,7 @@ public class Enemy: MonoBehaviour
     private float knockbackTime = 0.02f;
     private float knockabactimer = 0f;
     public float scaler = 1f;
+    public float stopDistance = 0.4f; // detta är det avstånd som fienden kommer att stanna på när den är nära spelaren, så att den inte rör sig fram och tillbaka supersnabbt när den är nära spelaren. detta gör att fienden inte går igenom spelaren
     //private float playerPoints;
 
 
@@ -179,8 +180,15 @@ public class Enemy: MonoBehaviour
         distanceToPlayer = Vector2.Distance(transform.position, playerTransform.position);
 
         isChasing = distanceToPlayer <= chaseRange;
+        
 
-        //if (isChasing && !isAttacking ) { ChasePlayer(); }
+        if (distanceToPlayer <= stopDistance) // detta löser problemet med att fienden rörsig supersnabtt framochtillbacka i spelaren, detta gör att orcen inte går igenom spelaren men spealren kan fortfarande gå igenom orcen.
+        {
+            isChasing = false;
+            _rb.linearVelocity = Vector2.zero;
+        }
+
+
 
         if (distanceToPlayer <= attackRange && !isAttacking && allowedToAttack && !isPreparingAttack) { StartCoroutine(PrepareAttack()); }
 
@@ -237,8 +245,10 @@ public class Enemy: MonoBehaviour
             return;
         //if (Time.time >= nextAttackTime)
         //{
-            Dir();
-            nextAttackTime = Time.time + 1f / attackRate;
+            Debug.Log("Enemy Starts Attacking Player");
+        Dir();
+        _rb.linearVelocity = Vector2.zero;
+        nextAttackTime = Time.time + 1f / attackRate;
             AttackTimer = AttackDuration;
             isAttacking = true;
 
@@ -266,16 +276,17 @@ public class Enemy: MonoBehaviour
 
     public void DealDmg()
     {
+        Debug.Log("Enemy Dealing Damage to Player");
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, _attackHitBox, playerLayer);
         //Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
         {
             
-            //Debug.Log("Enemy Hit Player");
+            Debug.Log("Enemy Hit Player" + enemietype);
             if (playerHealth != null)
             {
-                playerHealth.TakeDmg(attackDamage, transform.position, enemietype);
+                playerHealth.TakeDmg(attackDamage, transform.position, KnockbackForce);
                 Debug.Log("Enemy Dealt " + attackDamage + " Damage to Player");
             }
             else { Debug.LogError("playerHealth IS NULL"); }
@@ -377,20 +388,8 @@ public class Enemy: MonoBehaviour
 
         currentHealth -= dmg;
 
-        //GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
-
-
-        //GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up *1.5f, Quaternion.identity);
-        //TextMeshProUGUI dmgText = DmgObj.GetComponentInChildren<TextMeshProUGUI>();
-        //dmgText.text = dmg.ToString();
-
-        //DamageNumber damageNumber = DmgObj.GetComponent<DamageNumber>();
-        //damageNumber.DmgText(DmgObj);
-        //StartCoroutine(damageNumber.DmgText(DmgObj));
-        //StartCoroutine(DmgText(DmgObj));
         GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
         DamageNumber damagenuber = GetComponent<DamageNumber>();
-        //damagenuber.DmgText(dmg);
 
         FlotingHealthbar floatingHealthBar = GetComponentInChildren<FlotingHealthbar>();
         if (floatingHealthBar != null)
@@ -423,10 +422,15 @@ public class Enemy: MonoBehaviour
     private void Die()
     {
         //PlayerPowerUpps.playerpoints += pointsValue;
-        
-        if (portalActiveOnDeath || SceneManager.GetActiveScene().buildIndex == 2)
+        Portal portal = FindObjectOfType<Portal>();
+        if (portalActiveOnDeath) // || SceneManager.GetActiveScene().buildIndex == 2
         {
-            Portal.SetActive(true);
+            ////Portal.SetActive(true);
+            //portal.sR.enabled = true;
+            //portal.GetComponent<Collider2D>().enabled = true;
+            portal.Enable();
+
+
         }
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         playerPowerUpps.playerpoints += pointsValue;

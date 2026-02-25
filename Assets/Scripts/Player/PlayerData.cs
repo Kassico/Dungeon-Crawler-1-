@@ -49,7 +49,19 @@ public class playerData : MonoBehaviour
       
 
         isInitialized = true;
+    }
 
-
+    public void GetPlayerDefaultData()
+    {   
+        PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
+        playerAttacks.playerDmg = damage;
+        playerAttacks.knockbackForce = knockbackForce;
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        playerMovement._moveSpeed = moveSpeed;
+        PlayerDash playerDash = FindObjectOfType<PlayerDash>();
+        playerDash.dashCooldown = dashCooldown;
+        PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
+        playerHealthManager.maxHealth = maxHealth;
+        playerHealthManager.playerHealth = Health;
     }
 }

@@ -31,6 +31,9 @@
                     alwaysSpawn.Add(p);
                 else
                     extraSpawn.Add(p);
+
+
+
         }
 
         //spawnPoints.AddRange(FindObjectsOfType<EnemySpawnPoint>());
@@ -45,16 +48,15 @@
                 Debug.LogWarning("No spawn points found for enemies.");
                 return;
             }
-        foreach (var p in Pool)
+        foreach (var p in alwaysSpawn)
         {
-            SpawnRandomEnemy(Pool, p.transform.position);
+            SpawnRandomEnemy(Pool, p);
         }
 
             //float difficulty = Difficulty.CurrentDifficulty;
             float difficultyFactor = Mathf.Clamp(Difficulty.CurrentDifficulty / 2.5f, 0f, 1f);
             int amountToSpawn = Mathf.RoundToInt(extraSpawn.Count * difficultyFactor);
 
-        //float amountToSpawn = Mathf.RoundToInt(Mathf.Clamp(difficulty * extraSpawn.Count / 3, 1, extraSpawn.Count));
 
         if (SceneManager.GetActiveScene().buildIndex == 2) // på nivå 1 ska bara 1 enemy spawna, oavsett svårighetsgrad
         {
@@ -65,15 +67,26 @@
 
             for ( int i = 1; i < amountToSpawn; i++) // i = 1 så att den inte spawnar 2 nör ammaount to Spawn är 1
         {
-            SpawnRandomEnemy(Pool, extraSpawn[i].transform.position);
+            SpawnRandomEnemy(Pool, extraSpawn[i]);
             }
 
         }
-        void SpawnRandomEnemy(GameObject[] pool, Vector3 position)
+        void SpawnRandomEnemy(GameObject[] pool, EnemySpawnPoint spawnPoint)
         {
             GameObject enemyToSpawn = pool[Random.Range(0, pool.Length)];
-            Instantiate(enemyToSpawn, position, Quaternion.identity);
-    }
+            GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoint.transform.position, Quaternion.identity);
+
+            Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
+
+            if (enemyComponent == null)
+                Debug.LogError("Spawned object does not have an Enemy component.");
+
+
+        if (spawnPoint.spawnPortal)
+            enemyComponent.portalActiveOnDeath = true;
+        else 
+            enemyComponent.portalActiveOnDeath = false;
+    }       
 
     GameObject[] GetEnemyPool()
         {
@@ -81,13 +94,13 @@
 
         switch (level)
         {
-            case 1:
-                return Level1Enemies;
             case 2:
-                return Level2Enemies;
+                return Level1Enemies;
             case 3:
-                return Level3Enemies;
+                return Level2Enemies;
             case 4:
+                return Level3Enemies;
+            case 5:
                 return Level4Enemies;
             default:
                 return Level1Enemies;

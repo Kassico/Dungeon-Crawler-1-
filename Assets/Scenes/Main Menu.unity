@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 920716997389535974, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: playerStatsPanel
+      value: 
+      objectReference: {fileID: 873279977}
     - target: {fileID: 1820964644871950686, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.6
@@ -546,6 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main_Menu
   playerStatsPanel: {fileID: 873279977}
+  alreadyStartedOnce: 0
   haveStarted: 0
 --- !u!1 &751558900
 GameObject:

@@ -7,6 +7,7 @@ public class PlayerHealthManager : MonoBehaviour
     public float maxHealth;
     public float playerHealth;
     public TextMeshProUGUI scoreText;
+    public GameObject playerStatsPanel;
 
     public float knockbackForceResistans = 0.5f;
 
@@ -55,13 +56,13 @@ public class PlayerHealthManager : MonoBehaviour
     {
         scoreText.text = playerHealth.ToString();
     }
-    public void TakeDmg(float damage, Vector2 enemyPos, string enemietype)
+    public void TakeDmg(float damage, Vector2 enemyPos, float enemyKnockbackForce)
     {
         playerHealth -= damage;
         Debug.Log($"Player takes {damage} damage. Current health: {playerHealth}");
         scoreText.text = "Health: " + playerHealth.ToString();
 
-        TakeKnockback(enemyPos, enemietype);
+        TakeKnockback(enemyPos, enemyKnockbackForce);
 
 
         if (playerHealth <= 0)
@@ -75,29 +76,22 @@ public class PlayerHealthManager : MonoBehaviour
     private void Die()
     {
         EndGame endGame = FindObjectOfType<EndGame>();
+        Main_Menu mainMenu = FindObjectOfType<Main_Menu>();
         if (endGame != null)
         {
             endGame.gameEnd = true;
+            //mainMenu.StatsPanelOf();
             endGame.EndTheGame();
         }
     }
 
-    private void TakeKnockback(Vector2 enemyPos, string enemietype)
+    private void TakeKnockback(Vector2 enemyPos, float enemyKnockbackForce)
     {
         
         Vector2 dir = (transform.position - (Vector3)enemyPos).normalized;
 
-        switch (enemietype)
-        {
-            case "StandardEnemy":
-                knockbackForce = 40f;
-                break;
-            case "BosOrc":
-                knockbackForce = 50f;
-                break;
+        
 
-        }
-
-        _rb.AddForce(dir * (knockbackForce * (1 - knockbackForceResistans)), ForceMode2D.Impulse);
+        _rb.AddForce(dir * (enemyKnockbackForce * (1 - knockbackForceResistans)), ForceMode2D.Impulse);
     }
 }
