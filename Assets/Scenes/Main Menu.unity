@@ -128,6 +128,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 920716997389535974, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
+      propertyPath: maxHealth
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 920716997389535974, guid: b0fc40f51ceb9de4888d12eb4e2f2dc1, type: 3}
       propertyPath: playerStatsPanel
       value: 
       objectReference: {fileID: 873279977}
@@ -446,7 +450,7 @@ GameObject:
   - component: {fileID: 562115392}
   - component: {fileID: 562115396}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: MainMenuCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -549,8 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c67af08c69ac94418e3cb20ce506816, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Main_Menu
-  playerStatsPanel: {fileID: 873279977}
-  alreadyStartedOnce: 0
   haveStarted: 0
 --- !u!1 &751558900
 GameObject:

@@ -42,7 +42,7 @@ public class Portal : MonoBehaviour
             return;
         }
         if (!collision.CompareTag("Player")) return;
-        savePlayerData();
+        //savePlayerData();
         SceneManager.LoadScene(sceneIndexToLoad);
 
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;

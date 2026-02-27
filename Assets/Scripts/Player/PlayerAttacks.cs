@@ -101,10 +101,13 @@ public class PlayerAttacks : MonoBehaviour
 
     void Attack()
     {
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
         isAttacking = true;
         attackTimer = attackCooldown;
+        playerAudioManeger.PlayAttack();
 
-        
+
         if (Mathf.Abs(lastMoveDir.x) > Mathf.Abs(lastMoveDir.y))
         {
             if (lastMoveDir.x > 0)
@@ -150,6 +153,9 @@ public class PlayerAttacks : MonoBehaviour
             {
                 vampireHealth.TakeDmg(playerDmg);
             }
+            if (enemy != null)
+                    playerAudioManeger.PlayHit();
+
 
             //try { enemy.GetComponent<Enemy>().TakeDmg(playerDmg); }
             //catch { Debug.LogError("Enemy does not have EnemyHealthManager component!"); }

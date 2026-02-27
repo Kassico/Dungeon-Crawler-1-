@@ -35,6 +35,8 @@ public class PlayerDash : MonoBehaviour
     void Update()
     {
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
         PlayerMovement.allowedToMove = _allowedToMove;
         if (InputManager.Dash && allowedToDash )
         {
@@ -42,7 +44,7 @@ public class PlayerDash : MonoBehaviour
             //Debug.Log("DASH BUTTON PRESSED");
             isDashing = true;
             playerMoveSpeed *= dashSpeedmultiplier;
-            
+            playerAudioManeger.PlayDash();
             playerMovement._moveSpeed = playerMoveSpeed;
             _allowedToMove = false;
         }

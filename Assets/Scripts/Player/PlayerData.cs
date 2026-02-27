@@ -30,6 +30,10 @@ public class playerData : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    private void Update()
+    {
+        
+    }
 
     public void InitializedPlayerDefaultData()
     {

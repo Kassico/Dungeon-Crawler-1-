@@ -11,6 +11,7 @@ public class EndGame : MonoBehaviour
     public Button backToMenu;
     public Button Quit; // med att man inte kan application.quit i editor så har jag inte gjort att den finns, just för att det inte ska finnas en knapp här som inte gör någont
     public TMPro.TextMeshProUGUI endGameText;
+    
 
 
     public float totalScore;
@@ -28,16 +29,32 @@ public class EndGame : MonoBehaviour
        
         
     }
+
+   
     public void EndTheGame()
+    
     {
-        Main_Menu mainMenu = FindObjectOfType<Main_Menu>();
+        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>();
+
+        //if (gameEnd)
+        //{
+        //    Debug.Log("StatsPanelManeger = " + statsPanelManeger);
+        //    Debug.Log("endGamePanel = " + endGamePanel);
+        //    Debug.Log("scoreText = " + scoreText);
+        //    Debug.Log("backToMenu = " + backToMenu);
+        //}
+    
         if (gameEnd)
         {             // Display total score and end game screen
             Time.timeScale = 0f; //pousar spelet
 
             Debug.Log("Game Over! Total Score: " + totalScore);
             //mainMenu.StatsPanelOf();
-            mainMenu.playerStatsPanel.active = false;
+            //mainMenu.playerStatsPanel.active = false;
+            if (statsPanelManeger != null)
+            {
+                statsPanelManeger.HidePanel();
+            }
             endGamePanel.SetActive(true);
             scoreText.text = "Total Score: " + totalScore.ToString();
             backToMenu.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));

@@ -88,8 +88,9 @@ public class PlayerPowerUpps : MonoBehaviour
 
     void Update()
     {
-       
-        
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
+
         scoreText.text = "Score: " + playerpoints.ToString() + "/" + pointsToPowerup;
         
 
@@ -100,7 +101,7 @@ public class PlayerPowerUpps : MonoBehaviour
             EndGame endGame = FindObjectOfType<EndGame>();
             endGame.totalScore += playerpoints;
             currentLevel += 1;
-            //powerupActive = true;
+            playerAudioManeger.PlayLevelUp();
             showPowerUps();
             playerpoints = playerpoints- pointsToPowerup;
             pointsToPowerup = 1 + (4 * currentLevel);

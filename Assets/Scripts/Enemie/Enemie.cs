@@ -151,7 +151,7 @@ public class Enemy: MonoBehaviour
         maxHealth *= (difficulty + 1);
         moveSpeed *= (difficulty + 1);
         chaseRange *= (difficulty + 1);
-        attackDamage *= (difficulty + 1);
+        attackDamage = attackDamage + (attackDamage* difficulty)/2; // här kan man tänla attackdamge som base attack, det kommer scala mettra med denna ekvation.
         KnockbackForceResistans *= (1 - (difficulty * 0.1f));
         currentHealth = maxHealth;
       
@@ -245,14 +245,14 @@ public class Enemy: MonoBehaviour
             return;
         //if (Time.time >= nextAttackTime)
         //{
-            Debug.Log("Enemy Starts Attacking Player");
+            //Debug.Log("Enemy Starts Attacking Player");
         Dir();
         _rb.linearVelocity = Vector2.zero;
         nextAttackTime = Time.time + 1f / attackRate;
-            AttackTimer = AttackDuration;
-            isAttacking = true;
+        AttackTimer = AttackDuration;
+        isAttacking = true;
 
-            isChasing = false;
+        isChasing = false;
             Vector2 direction = (playerTransform.position - transform.position).normalized;
             _animator.SetFloat(_horizontal, direction.x);
             _animator.SetFloat(_Vertical, direction.y);
@@ -267,27 +267,33 @@ public class Enemy: MonoBehaviour
     private IEnumerator PrepareAttack()
     {
         isPreparingAttack = true;
+        //isAttacking = true;ss
+
         _rb.linearVelocity = Vector2.zero;
         //Debug.Log("Enemy is Preparing to Attack");
         yield return new WaitForSeconds(attackDeley);
+
         AttackPlayer();
         isPreparingAttack = false;
     }
 
     public void DealDmg()
     {
-        Debug.Log("Enemy Dealing Damage to Player");
+        Debug.Log("DealDmg called");
+
+        //Debug.Log("Enemy Dealing Damage to Player");
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, _attackHitBox, playerLayer);
         //Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
         {
             
-            Debug.Log("Enemy Hit Player" + enemietype);
+            //Debug.Log("Enemy Hit Player" + enemietype);
             if (playerHealth != null)
             {
                 playerHealth.TakeDmg(attackDamage, transform.position, KnockbackForce);
                 Debug.Log("Enemy Dealt " + attackDamage + " Damage to Player");
+                break; // detta gör att fienden bara kan träffa spelaren en gång per attack, så att den inte träffar flera gånger i samma attack om spelaren är i hitboxen. Det kan hända att den räknar en av playerns andra collider som en träff, och då kan den göra att fienden träffar spelaren flera gånger i samma attack
             }
             else { Debug.LogError("playerHealth IS NULL"); }
             //Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);

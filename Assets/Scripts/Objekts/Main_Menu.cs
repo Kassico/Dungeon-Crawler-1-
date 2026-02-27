@@ -8,18 +8,20 @@ using Unity.VisualScripting.Antlr3.Runtime.Misc;
 
 public class Main_Menu : MonoBehaviour
 {
-    public GameObject playerStatsPanel;
-    public bool alreadyStartedOnce;
+    private GameObject playerStatsPanel;
+
 
     public bool haveStarted;
     void Start()
     {
-        //playerStatsPanel.SetActive(false);
-        alreadyStartedOnce = false;
-        //StatsPanelOf();
-        playerStatsPanel.active = false;
+        playerStatsPanel = GameObject.Find("PlayerStatsPanel");
+        playerStatsPanel.SetActive(false);
 
     }
+
+    
+        
+    
 
     // Update is called once per frame
     void Update()
@@ -41,47 +43,67 @@ public class Main_Menu : MonoBehaviour
 
     public void PlayGame() // starts the game and resets player stats to default values, and transfer player to the first level
     {
-        if (alreadyStartedOnce)
-            playerData.instance.GetPlayerDefaultData();
+        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta måste göras efter som att statspanel är i dontdestroyonLoad och då tappar mainmenyu typ bort den referensen, när man dör och det resetats.
+        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
+        EndGame endGame = FindObjectOfType<EndGame>();
+
+
         Debug.Log("Play!");
-        if (playerData.instance != null && !playerData.isInitialized && !alreadyStartedOnce)
-        {
-            playerData.instance.InitializedPlayerDefaultData();
-            alreadyStartedOnce = true;
-        }
 
 
-        //playerStatsPanel.SetActive(true);
-        //StatsPanelOn();
-        playerStatsPanel.active = true;
+        //if (alreadyStartedOnce)
+        //    playerData.instance.GetPlayerDefaultData();
 
 
+        //if (playerData.instance != null && !playerData.isInitialized && !alreadyStartedOnce)
+        //{
+        //    playerData.instance.InitializedPlayerDefaultData();
+        //    alreadyStartedOnce = true;
+        //}
+
+
+        //if(playerData.instance != null && !playerData.isInitialized)
+        //{
+        //    playerData.instance.InitializedPlayerDefaultData();
+        //    alreadyStartedOnce = true;
+        //}
+
+
+        if (playerData.instance != null && playerData.isInitialized)
+                playerData.instance.GetPlayerDefaultData();
+
+        if (!playerData.isInitialized)
+                playerData.instance.InitializedPlayerDefaultData();
+
+
+        statsPanelManeger.ShowPanel();
 
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
         if (spawnPoint != null)
             transform.position = spawnPoint.position;
 
-        EndGame endGame = FindObjectOfType<EndGame>();
-        //endGame.gameEnd = false;
         Time.timeScale = 1f;
-        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
-        //backToMenu.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
 
-        //SceneManager.LoadScene(2);
-        UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
+        SceneManager.LoadScene(2);
 
     } 
-    public void StatsPanelOf()
-    {
-        playerStatsPanel.SetActive(false);
-    }
-    public void StatsPanelOn()
-        
-    {
-        playerStatsPanel.SetActive(true);
-        Debug.Log("Stats Panel True");
 
-    }
+
+
+
+
+    //public void StatsPanelOf()
+    //{
+    //    playerStatsPanel.SetActive(false);
+    //}
+    //public void StatsPanelOn()
+
+    //{
+    //    playerStatsPanel.SetActive(true);
+    //    Debug.Log("Stats Panel True");
+
+    //}
     public void QuitGame()
     { 
         Debug.Log("QUIT!");

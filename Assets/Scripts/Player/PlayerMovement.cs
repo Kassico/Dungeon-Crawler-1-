@@ -18,10 +18,10 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _rb;
     private Animator _animator;
 
-
     public static bool allowedToMove = true;
 
-
+    private float footstepTimer;
+    private float footstepInterval = 0.4f; // hur ofta fotstegsljudet spelas när spelaren rör sig
 
     private const string _horizontal = "Horizontal";
     private const string _Vertical = "Vertical";
@@ -49,6 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 
 
 
@@ -56,6 +57,19 @@ public class PlayerMovement : MonoBehaviour
         { 
         _movement.Set(InputManager.Movement.x, InputManager.Movement.y);
         _rb.linearVelocity = _movement * _moveSpeed;
+
+
+
+            if (_rb.linearVelocity.sqrMagnitude > 0.1f)
+            {
+                footstepTimer -= Time.deltaTime;
+                if (footstepTimer <= 0)
+                {
+                    playerAudioManeger.PlayFootstep();
+                    footstepTimer = footstepInterval;
+                }
+            }
+
 
 
             _animator.SetFloat(_horizontal, _movement.x);

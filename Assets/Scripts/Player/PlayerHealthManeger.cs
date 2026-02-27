@@ -17,14 +17,22 @@ public class PlayerHealthManager : MonoBehaviour
 
     void Start()
     {
-        playerHealth = maxHealth;
         if (playerData.instance != null && playerData.isInitialized)
          {
             playerHealth = playerData.instance.Health;
             maxHealth = playerData.instance.maxHealth;
         }
+        else
+        {
+            playerHealth = maxHealth;
+        }
+        
     }
-    void Awake()
+    public void UpdateHealthUI()
+    {   
+        scoreText.text = "Health: " + playerHealth.ToString();
+    }
+void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
 
@@ -58,7 +66,10 @@ public class PlayerHealthManager : MonoBehaviour
     }
     public void TakeDmg(float damage, Vector2 enemyPos, float enemyKnockbackForce)
     {
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
         playerHealth -= damage;
+        playerAudioManeger.PlayTakeDamage();
         Debug.Log($"Player takes {damage} damage. Current health: {playerHealth}");
         scoreText.text = "Health: " + playerHealth.ToString();
 
@@ -77,6 +88,9 @@ public class PlayerHealthManager : MonoBehaviour
     {
         EndGame endGame = FindObjectOfType<EndGame>();
         Main_Menu mainMenu = FindObjectOfType<Main_Menu>();
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
+        playerAudioManeger.PlayDeath();
         if (endGame != null)
         {
             endGame.gameEnd = true;

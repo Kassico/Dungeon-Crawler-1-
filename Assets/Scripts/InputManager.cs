@@ -6,11 +6,14 @@ public class InputManager : MonoBehaviour
     public static Vector2 Movement;
 
     private PlayerInput _PlayerInput;
-    private InputAction _moveaction;
-    private InputAction _attackaction;
-    private InputAction _dashaction;
+    private InputAction _moveAction;
+    private InputAction _attackAction;
+    //private InputAction _moveActionBool;
+    private InputAction _dashAction;
     public static bool Attack;
     public static bool Dash;
+    //public static bool Moves;
+
 
 
 
@@ -18,19 +21,27 @@ public class InputManager : MonoBehaviour
     {
         _PlayerInput = GetComponent<PlayerInput>();
 
-        _moveaction = _PlayerInput.actions["Move"];
-        _attackaction = _PlayerInput.actions["attack"];
-        _dashaction = _PlayerInput.actions["dash"];
+        _moveAction = _PlayerInput.actions["Move"];
+        _attackAction = _PlayerInput.actions["attack"];
+        _dashAction = _PlayerInput.actions["dash"];
+        //_moveActionBool = _PlayerInput.actions["Move"];
     }
 
     private void Update()
     {
-        Movement = _moveaction.ReadValue<Vector2>();
-        Attack = _attackaction.WasPerformedThisFrame();
-        Dash = _dashaction.WasPerformedThisFrame();
+        PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
+
+        Movement = _moveAction.ReadValue<Vector2>();
+        Attack = _attackAction.WasPerformedThisFrame();
+        Dash = _dashAction.WasPerformedThisFrame();
+        //Moves = _moveActionBool.WasPerformedThisFrame();
+
+        //if (Moves)
+            //playerAudioManeger.PlayFootstep();
+
 
         //if (Attack)
-            //Debug.Log("ATTACK BUTTON PRESSED");   
+        //    Debug.Log("ATTACK BUTTON PRESSED");
 
     }
 }
