@@ -1,4 +1,5 @@
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class vampire : MonoBehaviour
@@ -327,13 +328,15 @@ public class vampire : MonoBehaviour
 
     public void Die()
     {
+        Portal portal = FindObjectOfType<Portal>();
+
         isDead = true;
         _animator.SetTrigger("Die");
         _rb.linearVelocity = Vector2.zero;
         MakeSoundOnDeath();
         if (portalActiveOnDeath)
         {
-            Instantiate(Portal, transform.position, Quaternion.identity);
+            portal.Enable();
         }
         Destroy(gameObject, 1f);
     }

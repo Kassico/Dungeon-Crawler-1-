@@ -50,24 +50,7 @@ public class Main_Menu : MonoBehaviour
 
         Debug.Log("Play!");
 
-
-        //if (alreadyStartedOnce)
-        //    playerData.instance.GetPlayerDefaultData();
-
-
-        //if (playerData.instance != null && !playerData.isInitialized && !alreadyStartedOnce)
-        //{
-        //    playerData.instance.InitializedPlayerDefaultData();
-        //    alreadyStartedOnce = true;
-        //}
-
-
-        //if(playerData.instance != null && !playerData.isInitialized)
-        //{
-        //    playerData.instance.InitializedPlayerDefaultData();
-        //    alreadyStartedOnce = true;
-        //}
-
+        playerPowerUpps.playerpoints = 0;
 
         if (playerData.instance != null && playerData.isInitialized)
                 playerData.instance.GetPlayerDefaultData();
@@ -91,19 +74,6 @@ public class Main_Menu : MonoBehaviour
 
 
 
-
-
-    //public void StatsPanelOf()
-    //{
-    //    playerStatsPanel.SetActive(false);
-    //}
-    //public void StatsPanelOn()
-
-    //{
-    //    playerStatsPanel.SetActive(true);
-    //    Debug.Log("Stats Panel True");
-
-    //}
     public void QuitGame()
     { 
         Debug.Log("QUIT!");

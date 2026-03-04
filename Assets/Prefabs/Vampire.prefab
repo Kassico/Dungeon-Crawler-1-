@@ -466,7 +466,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
-  Portal: {fileID: 0}
+  Portal: {fileID: 6803505700508370216, guid: 715e57225b510f64581097e74cde7444, type: 3}
   projectilePrefab: {fileID: 2896159898036364596, guid: d7078e1a07a819e42bad923815c82b6e, type: 3}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   takeDmgSource: {fileID: 1713979197472882427}

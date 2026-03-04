@@ -37,6 +37,7 @@ public class PlayerPowerUpps : MonoBehaviour
     private float extraPlayerMoveSpeed;
     private float extraPlayerAttackForce;
     private float extraPlayerDashSpeed;
+    private float extraPlayerAttackRadius;
 
 
     private bool betterStats = false;
@@ -54,6 +55,7 @@ public class PlayerPowerUpps : MonoBehaviour
     private float currentDamage;
     private float currentDashCooldown;
     private float currentknockbackForce;
+    private float currentPlayerAttackRadius;
 
     private List<int> usedIddices = new List<int>();
 
@@ -128,18 +130,18 @@ public class PlayerPowerUpps : MonoBehaviour
     }
     void buffStats()
     {
-        randomNumber = UnityEngine.Random.Range(1, 9);
+        randomNumber = UnityEngine.Random.Range(1, 13);
         switch (randomNumber)
         {
             case 1 : case 2: case 3: case 4: case 5:case 6:
                 betterStats = false;
                 biggerstats = false;
                 break;
-            case 7:
+            case 7: case 8: case 9:
                 betterStats = false;
                 biggerstats = true;
                 break;
-            case 8:
+            case 10: case 11: case 12:
                 betterStats = true;
                 biggerstats = true;
                 break;
@@ -181,6 +183,7 @@ public class PlayerPowerUpps : MonoBehaviour
             description = $"Speed + {0.5 + randomSpeed}",
             applayEffect = () => extraPlayerMoveSpeed += 0.5f+randomSpeed
         });
+        
 
         //powerUps.Add(new PowerUp
         //{
@@ -208,6 +211,11 @@ public class PlayerPowerUpps : MonoBehaviour
             {
                 description = "Dash Speed + 2",
                 applayEffect = () => extraPlayerDashSpeed += 2
+            });
+            powerUps.Add(new PowerUp
+            {
+                description = "Attack Radius + 0.125 ",
+                applayEffect = () => extraPlayerAttackRadius += 0.125f
             });
         }
         
@@ -306,6 +314,7 @@ void showPowerUps()
         playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce påverkar knockbacken också, med en multiplikator på 3 
         playerHealthManager.maxHealth += extraPlayerHealth;
         playerDash.dashSpeedmultiplier += extraPlayerDashSpeed;
+        playerAttacks.attackRadius += extraPlayerAttackRadius;
 
         extraPlayerHealth = 0;
         extraPlayerMoveSpeed = 0;
@@ -313,6 +322,7 @@ void showPowerUps()
         DecreasePlayerDashCooldown = 0;
         extraPlayerDashSpeed = 0;
         extraPlayerMoveSpeed = 0;
+        extraPlayerAttackRadius = 0;
 
 
 

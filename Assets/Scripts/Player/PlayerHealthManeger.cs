@@ -32,6 +32,7 @@ public class PlayerHealthManager : MonoBehaviour
     {   
         scoreText.text = "Health: " + playerHealth.ToString();
     }
+
 void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -55,10 +56,31 @@ void Awake()
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        bool inGameScene = scene.buildIndex >= 2;
+        SetPlayerVisible(inGameScene);
+
         // Move player to spawn point in the new scene
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
+
         if (spawnPoint != null)
             transform.position = spawnPoint.position;
+
+    }
+
+    private void SetPlayerVisible(bool visible)
+    {
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            r.enabled = visible;
+        }
+
+        PlayerAttacks playerAttacks = GetComponent<PlayerAttacks>();
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+
+        if (playerMovement != null) playerMovement.enabled = visible;
+        if (playerAttacks != null) playerAttacks.enabled = visible;
+        if (_rb != null) _rb.simulated = visible;
     }
     void Update()
     {
