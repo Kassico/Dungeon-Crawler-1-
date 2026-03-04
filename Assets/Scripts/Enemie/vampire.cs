@@ -74,7 +74,23 @@ public class vampire : MonoBehaviour
     public Color hitColor = Color.red;
     //public float hitFlashDuration = 0.1f;
 
-    // 
+
+
+    [Header("Sources")]
+
+    public AudioSource takeDmgSource;
+    public AudioSource attackSource;
+    public AudioSource deathSource;
+
+
+    [Header("Clips")]
+
+    public AudioClip takeDmgClip;
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+
+
+   
     private void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
@@ -248,6 +264,7 @@ public class vampire : MonoBehaviour
 
     public void PerformAttack()
     {
+        MakeSoundOnAttack();
         projectileRotation = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0,0, projectileRotation));
         bullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed,ForceMode2D.Impulse);
@@ -269,6 +286,8 @@ public class vampire : MonoBehaviour
         currentHealth -= damage;
         GameObject DmgObj = Instantiate(damageNumberPrefab, transform.position + Vector3.up * 1.5f, Quaternion.identity);
         DamageNumber damagenuber = GetComponent<DamageNumber>();
+
+        MakeSoundOnDmg();
 
         FlotingHealthbar floatingHealthBar = GetComponentInChildren<FlotingHealthbar>();
         if (floatingHealthBar != null)
@@ -311,11 +330,45 @@ public class vampire : MonoBehaviour
         isDead = true;
         _animator.SetTrigger("Die");
         _rb.linearVelocity = Vector2.zero;
+        MakeSoundOnDeath();
         if (portalActiveOnDeath)
         {
             Instantiate(Portal, transform.position, Quaternion.identity);
         }
         Destroy(gameObject, 1f);
+    }
+
+
+
+    private void MakeSoundOnDmg()
+    {
+        if (attackClip != null)
+        {
+            takeDmgSource.PlayOneShot(takeDmgClip);
+        }
+
+
+    }
+
+
+    private void MakeSoundOnDeath()
+    {
+
+        if (deathClip != null)
+        {
+            deathSource.PlayOneShot(deathClip);
+        }
+
+    }
+
+    private void MakeSoundOnAttack()
+    {
+        if (attackClip != null)
+        {
+
+            attackSource.PlayOneShot(attackClip);
+        }
+
     }
 
 

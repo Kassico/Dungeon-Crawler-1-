@@ -108,6 +108,23 @@ public class Enemy: MonoBehaviour
 
 
 
+    
+    [Header("Sources")]
+
+    public AudioSource takeDmgSource;
+    public AudioSource attackSource;
+    public AudioSource deathSource;
+
+     
+    [Header("Clips")]
+
+    public AudioClip takeDmgClip;
+    public AudioClip attackClip;
+    public AudioClip deathClip;
+
+
+
+
     public static string enemietype = "Enemy";
     private void Awake()
     {
@@ -258,6 +275,8 @@ public class Enemy: MonoBehaviour
             _animator.SetFloat(_Vertical, direction.y);
             _animator.SetBool("isAttacking", true);
 
+        MakeSoundOnAttack(); // kallar på funktionen som spelar ljudet när fienden attackerar
+
         //Debug.Log("Enemy Attacks Player");
         //DealDmg() Är i animation event i attack animationen, så att den kallar på den funktionen när den ska göra skada, så att den inte gör skada direkt när den börjar attackera utan när den träffar spelaren i animationen.
 
@@ -404,6 +423,8 @@ public class Enemy: MonoBehaviour
         }
         Debug.Log($"Enemy takes " + dmg + $" damage. And Has {currentHealth} Health Left");
 
+        MakeSoundOnDmg(); //kallar på funktionen som spelar ljudet när fienden tar skada
+
         StartCoroutine(KnockbackCoroutine());
 
         if (sr != null)
@@ -413,9 +434,6 @@ public class Enemy: MonoBehaviour
 
         if (currentHealth <= 0) {Die();}
     }
-
-
-
 
 
     IEnumerator FlashHitColor()
@@ -445,10 +463,14 @@ public class Enemy: MonoBehaviour
         Debug.Log("Enemy Died");
         //Destroy(gameObject);
         _animator.SetBool("isDead", true);
+
+        MakeSoundOnDeath(); // kallar på funktionen som spelar ljudet när fienden dör
+
         isDead = true;
 
 
     }
+
     IEnumerator KnockbackCoroutine()
     {
         
@@ -475,5 +497,52 @@ public class Enemy: MonoBehaviour
         Gizmos.DrawWireSphere(attackpoint.position, _attackHitBox);
     }
 
+    private void MakeSoundOnDmg()
+    {
+        if (attackClip != null)
+        {
+            if (enemietype.Contains("Comander"))
+                takeDmgSource.pitch = 0.8f; // sänker pitch för commander fiender
+            else
+                takeDmgSource.pitch = 1f; // standard pitch för vanliga ORC fiender
+
+
+            takeDmgSource.PlayOneShot(takeDmgClip);
+        }
+        
+
+    }
+
+
+    private void MakeSoundOnDeath()
+    {
+
+        if (deathClip != null)
+        {
+            if (enemietype.Contains("Comander"))
+                deathSource.pitch = 0.8f; // sänker pitch för commander fiender
+            else
+                deathSource.pitch = 1f; // standard pitch för vanliga ORC fiender
+
+
+
+            deathSource.PlayOneShot(deathClip);
+        }
+
+    }
+
+    private void MakeSoundOnAttack()
+    {
+        if (attackClip != null)
+        {
+            if (enemietype.Contains("Comander"))
+                attackSource.pitch = 0.8f; // sänker pitch för commander fiender
+            else
+                attackSource.pitch = 1f; // standard pitch för vanliga ORC fiender
+
+            attackSource.PlayOneShot(attackClip);
+        }
+
+    }
 
 }

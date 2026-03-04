@@ -4,6 +4,15 @@ public class projectile : MonoBehaviour
 {
     private float dmg;
     private float knockbackForce;
+
+    [Header("Sources")]
+    public AudioSource fireBallSource;
+
+    [Header("Clips")]
+
+    public AudioClip fireBallClip;
+
+
     void Start()
     {
         //dmg = GameObject.FindGameObjectWithTag("Enemie").GetComponent<vampire>().attackDamage;
@@ -26,13 +35,22 @@ public class projectile : MonoBehaviour
         if (player != null)
         {
             //playerHealth.playerHealth -= dmg;
+            PlayFireBallSound();// kommer ej att funka eftersom ljudet inte hinner spelas innan projektilen förstörs men ändå valt att det räker med ljudet spelaren gör
             playerHealth.TakeDmg(dmg, transform.position, knockbackForce);
              Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("HitBox"))
         {
+            PlayFireBallSound();// kommer ej att funka eftersom ljudet inte hinner spelas innan projektilen förstörs men ändå valt att det räker med ljudet spelaren gör
             Destroy(gameObject);
         }
 
+    }
+
+
+    public void PlayFireBallSound() 
+    {
+        if (fireBallClip == null) return;
+        fireBallSource.PlayOneShot(fireBallClip);
     }
 }
