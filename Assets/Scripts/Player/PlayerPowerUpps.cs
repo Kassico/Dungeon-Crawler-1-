@@ -17,6 +17,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
     public float playerpoints = 0;
     public float pointsToPowerup = 1;
+    public float totalPoints = 0;
 
 
     [Header("Player Stats")]
@@ -46,7 +47,7 @@ public class PlayerPowerUpps : MonoBehaviour
     private float extraStats;
 
 
-    private float currentLevel;
+    public float currentLevel;
 
 
     //current stats
@@ -70,7 +71,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     public bool powerupActive = false;
-    //private bool powerUpChosen = false;
+    //private bool powerUpChosen = false;ö
 
 
 
@@ -103,6 +104,7 @@ public class PlayerPowerUpps : MonoBehaviour
             EndGame endGame = FindObjectOfType<EndGame>();
             endGame.totalScore += playerpoints;
             currentLevel += 1;
+            totalPoints += playerpoints;
             playerAudioManeger.PlayLevelUp();
             showPowerUps();
             playerpoints = playerpoints- pointsToPowerup;
@@ -151,8 +153,8 @@ public class PlayerPowerUpps : MonoBehaviour
         if (biggerstats)
         {
             randomAttackForce = UnityEngine.Random.Range(1,3); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
-            randomHelath = UnityEngine.Random.Range(5, 10); // då blir random mellan 5 - 10 extra
-            randomSpeed = UnityEngine.Random.Range(2, 7)/10; // mellan 0.2 - 0.7 extra speed
+            randomHelath = UnityEngine.Random.Range(5, 11); // då blir random mellan 5 - 10 extra
+            randomSpeed = UnityEngine.Random.Range(2, 8)/10; // mellan 0.2 - 0.7 extra speed
         }
         else 
         {

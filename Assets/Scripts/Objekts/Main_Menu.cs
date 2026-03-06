@@ -19,11 +19,6 @@ public class Main_Menu : MonoBehaviour
 
     }
 
-    
-        
-    
-
-    // Update is called once per frame
     void Update()
     {
         EndGame endGame = FindObjectOfType<EndGame>();

@@ -184,15 +184,15 @@ public class PlayerAttacks : MonoBehaviour
     }
 
 
-    private void OnDrawGizmos()
-    {
-      
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(attackUpPoint.position, attackRadius);
-            Gizmos.DrawWireSphere(attackDownPoint.position, attackRadius);
-            Gizmos.DrawWireSphere(attackLeftPoint.position, attackRadius);  
-            Gizmos.DrawWireSphere(attackRightPoint.position, attackRadius);
-    }
+    //private void OnDrawGizmos() // detta är bara för att visa attackens räckvidd, det är inte nödvändigt för spelet att fungera, så det kan kommenteras bort, används för att se attackens strolek altså, detta ska inte vara synligt i det färdiga spelet
+    //{
+
+    //        Gizmos.color = Color.red;
+    //        Gizmos.DrawWireSphere(attackUpPoint.position, attackRadius);
+    //        Gizmos.DrawWireSphere(attackDownPoint.position, attackRadius);
+    //        Gizmos.DrawWireSphere(attackLeftPoint.position, attackRadius);  
+    //        Gizmos.DrawWireSphere(attackRightPoint.position, attackRadius);
+    //}
 
 
 
