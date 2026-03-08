@@ -23,34 +23,20 @@ public class EndGame : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-        
-    }
 
-   
     public void EndTheGame()
     
     {
         StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>();
 
-        //if (gameEnd)
-        //{
-        //    Debug.Log("StatsPanelManeger = " + statsPanelManeger);
-        //    Debug.Log("endGamePanel = " + endGamePanel);
-        //    Debug.Log("scoreText = " + scoreText);
-        //    Debug.Log("backToMenu = " + backToMenu);
-        //}
+
     
         if (gameEnd)
         {             // Display total score and end game screen
             Time.timeScale = 0f; //pousar spelet
 
             Debug.Log("Game Over! Total Score: " + totalScore);
-            //mainMenu.StatsPanelOf();
-            //mainMenu.playerStatsPanel.active = false;
+
             if (statsPanelManeger != null)
             {
                 statsPanelManeger.HidePanel();

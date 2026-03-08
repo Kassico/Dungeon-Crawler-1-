@@ -16,11 +16,8 @@ public class PlayerAttacks : MonoBehaviour
 
 
 
-
     public bool isAttacking;
-    //private bool AttackHitBoxStill;
-    //private bool AttackHitBoxDone;
-    //private bool allowedToTakeDmg;
+
 
     private Animator anim;
 
@@ -28,11 +25,11 @@ public class PlayerAttacks : MonoBehaviour
     
     public float playerDmg;
     public float attackRadius;
-    private float attackCooldown = 0.4f;
-    private float attackTimer = 0f;
     public float attackDuration = 0.5f;  // hur länge hitboxen ska vara aktiv
-    public  float knockbackForce = 15;
+    public float knockbackForce = 15;
 
+    private float attackTimer = 0f;
+    private float attackCooldown = 0.4f;
 
 
     public SpriteRenderer sr;
@@ -156,11 +153,6 @@ public class PlayerAttacks : MonoBehaviour
             if (enemy != null)
                     playerAudioManeger.PlayHit();
 
-
-            //try { enemy.GetComponent<Enemy>().TakeDmg(playerDmg); }
-            //catch { Debug.LogError("Enemy does not have EnemyHealthManager component!"); }
-            //try { enemy.GetComponent<vampire>().TakeDmg(playerDmg); }
-            //catch { Debug.LogError("Enemy does not have EnemyHealthManager component!"); }
         }
         
         if (AttackHitboxP != null && activeHitBox == null)

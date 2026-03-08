@@ -70,7 +70,6 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     public bool powerupActive = false;
-    //private bool powerUpChosen = false;
 
 
 
@@ -79,11 +78,7 @@ public class PlayerPowerUpps : MonoBehaviour
     {
         powerUpPanel.SetActive(false);
         initializePlayerstats();
-        //buffStats();
-        //initialzePowerUps();
         powerUps = new List<PowerUp>();
-
-
 
     }
 
@@ -95,8 +90,6 @@ public class PlayerPowerUpps : MonoBehaviour
 
         scoreText.text = "Score: " + playerpoints.ToString() + "/" + pointsToPowerup;
         
-
-        // kollar efter powerups
 
         if (playerpoints >= pointsToPowerup)
         {
@@ -185,21 +178,6 @@ public class PlayerPowerUpps : MonoBehaviour
         });
         
 
-        //powerUps.Add(new PowerUp
-        //{
-        //    description = "Health + 10",
-        //    applayEffect = () => extraPlayerHealth += 10
-        //});
-        //powerUps.Add(new PowerUp
-        //{
-        //    description = "Damage + 2",
-        //    applayEffect = () => playerDamage += 1
-        //});
-        //powerUps.Add(new PowerUp
-        //{
-        //    description = "Speed + 0.8",
-        //    applayEffect = () => playerMoveSpeed += 0.8f
-        //});
         if (betterStats)
         {
             powerUps.Add(new PowerUp
@@ -268,26 +246,6 @@ void showPowerUps()
 
             }
 
-
-            //List<int> usedIndices = new List<int>();
-            //for (int i = 0; i < choices; i++)
-            //{
-            //    int randomIndex;
-            //    do
-            //    {
-            //        randomIndex = Random.Range(0, usedIndices.Count);
-            //    } while (usedIndices.Contains(randomIndex));
-            //    usedIndices.Add(randomIndex);
-            //    powerUpText[i].text = powerUps[randomIndex].description;
-
-            //    int idexcopy = randomIndex;
-            //    powerUpButtons[i].onClick.RemoveAllListeners();
-            //    powerUpButtons[i].onClick.AddListener(() =>
-            //    {
-            //        ChosePowerUp(idexcopy);
-
-            //    });
-            //}
         }
     }
     void ChosePowerUp(int index)

@@ -20,9 +20,5 @@ public class StatsPanelManeger : MonoBehaviour
         statsPanel.SetActive(false);
     }
 
-    //public void TogglePanel()
-    //{
-    //    statsPanel.SetActive(!statsPanel.activeSelf);
-    //}
 
 }

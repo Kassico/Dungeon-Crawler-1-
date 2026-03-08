@@ -18,9 +18,7 @@ public class Main_Menu : MonoBehaviour
         playerStatsPanel.SetActive(false);
 
     }
-
-    
-        
+      
     
 
     // Update is called once per frame

@@ -260,9 +260,7 @@ public class Enemy: MonoBehaviour
     {
         if (isStunned || !allowedToAttack)
             return;
-        //if (Time.time >= nextAttackTime)
-        //{
-            //Debug.Log("Enemy Starts Attacking Player");
+
         Dir();
         _rb.linearVelocity = Vector2.zero;
         nextAttackTime = Time.time + 1f / attackRate;
@@ -286,10 +284,8 @@ public class Enemy: MonoBehaviour
     private IEnumerator PrepareAttack()
     {
         isPreparingAttack = true;
-        //isAttacking = true;ss
 
         _rb.linearVelocity = Vector2.zero;
-        //Debug.Log("Enemy is Preparing to Attack");
         yield return new WaitForSeconds(attackDeley);
 
         AttackPlayer();
@@ -300,14 +296,11 @@ public class Enemy: MonoBehaviour
     {
         Debug.Log("DealDmg called");
 
-        //Debug.Log("Enemy Dealing Damage to Player");
         Collider2D[] hitPlayers = Physics2D.OverlapCircleAll(attackpoint.position, _attackHitBox, playerLayer);
-        //Debug.Log("Enemy Dealing Damage to Player");
 
         foreach (Collider2D player in hitPlayers)
         {
             
-            //Debug.Log("Enemy Hit Player" + enemietype);
             if (playerHealth != null)
             {
                 playerHealth.TakeDmg(attackDamage, transform.position, KnockbackForce);
@@ -315,7 +308,7 @@ public class Enemy: MonoBehaviour
                 break; // detta gör att fienden bara kan träffa spelaren en gång per attack, så att den inte träffar flera gånger i samma attack om spelaren är i hitboxen. Det kan hända att den räknar en av playerns andra collider som en träff, och då kan den göra att fienden träffar spelaren flera gånger i samma attack
             }
             else { Debug.LogError("playerHealth IS NULL"); }
-            //Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length);
+            //Debug.Log("Enemy Dealing Damage to Player | Hits found: " + hitPlayers.Length)
         }
  
 
@@ -445,13 +438,10 @@ public class Enemy: MonoBehaviour
 
     private void Die()
     {
-        //PlayerPowerUpps.playerpoints += pointsValue;
         Portal portal = FindObjectOfType<Portal>();
-        if (portalActiveOnDeath) // || SceneManager.GetActiveScene().buildIndex == 2
+        if (portalActiveOnDeath) 
         {
-            ////Portal.SetActive(true);
-            //portal.sR.enabled = true;
-            //portal.GetComponent<Collider2D>().enabled = true;
+
             portal.Enable();
 
 
@@ -461,7 +451,6 @@ public class Enemy: MonoBehaviour
 
         
         Debug.Log("Enemy Died");
-        //Destroy(gameObject);
         _animator.SetBool("isDead", true);
 
         MakeSoundOnDeath(); // kallar på funktionen som spelar ljudet när fienden dör
@@ -485,7 +474,6 @@ public class Enemy: MonoBehaviour
         yield return new WaitForSeconds(StunDuration);
 
         isStunned = false;
-        //allowedToMove = true;
 
     }
    

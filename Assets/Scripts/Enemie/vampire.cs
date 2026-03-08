@@ -73,7 +73,6 @@ public class vampire : MonoBehaviour
     SpriteRenderer sr;
     private Color originalColor;
     public Color hitColor = Color.red;
-    //public float hitFlashDuration = 0.1f;
 
 
 
@@ -98,7 +97,6 @@ public class vampire : MonoBehaviour
         _animator = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         originalColor = sr.color;
-        //playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerHealthManager>();
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
@@ -153,19 +151,7 @@ public class vampire : MonoBehaviour
             }
 
         }
-        //if (distanceToPlayer <= chaseRange && distanceToPlayer >= attackRange && !isAttacking && !isStunned)
-        //{
-        //    isChasing = true;
-        //    ChasePlayer();
-        //}
-        //else
-        //    {isChasing = false;}
 
-        //if (distanceToPlayer <= attackRange && allowedToAttack && !isStunned && !isAttacking)
-        //{
-        //    AttackPlayer();
-        //    isChasing = false;
-        //}
         if (isStunned)
         {
             _rb.linearVelocity = Vector2.zero;
@@ -194,19 +180,6 @@ public class vampire : MonoBehaviour
 
     }
 
-    //public void ChasePlayer()
-    //{
-    //    if (isStunned) return;
-    //    Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
-    //    if (distanceToPlayer >= (chaseRange - attackRange))
-    //    {
-    //        _rb.linearVelocity = direction * moveSpeed;
-    //        _animator.SetFloat(_horizontal, direction.x);
-    //        _animator.SetFloat(_Vertical, direction.y);
-    //        _animator.SetBool("isWalking", true);
-    //    }
-
-    //}
     public void ChasePlayer()
     {
         if (isStunned) return;
@@ -232,17 +205,9 @@ public class vampire : MonoBehaviour
         _animator.SetBool("isWalking", false);
         dir();
         _animator.SetBool("isAttacking", true);
-        //Debug.Log("AttackPlayer called");
 
-        //_rb.linearVelocity = Vector2.zero;
-        //isAttacking = true;
-        //_animator.SetBool("isWalking", false);
-        //Vector2 direction = (playerTransform.position - transform.position).normalized;
-        //allowedToAttack = false;
-
-        //_animator.SetBool("isAttacking", true);
     }
-    //}
+    
     public void dir()
     {
         Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
@@ -250,18 +215,6 @@ public class vampire : MonoBehaviour
         _animator.SetFloat(_Vertical, direction.y);
     }
 
-    //public void PerformAttack()
-    //{
-    //    if (attackCooldown > AttackTimer)
-    //    {
-    //        AttackTimer = 0;
-    //        GameObject intBullet = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
-    //        intBullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed, ForceMode2D.Impulse);
-    //        Invoke(nameof(ResetAttack), 1.57f); //så lång som attack animationen är
-    //                                        //isAttacking = false;
-    //                                        //_animator.SetBool("isAttacking", false);
-    //    }
-    //}
 
     public void PerformAttack()
     {
@@ -269,9 +222,6 @@ public class vampire : MonoBehaviour
         projectileRotation = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
         GameObject bullet = Instantiate(projectilePrefab, transform.position, Quaternion.Euler(0,0, projectileRotation));
         bullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed,ForceMode2D.Impulse);
-        //Debug.Log("Bullet instantiated and force applied");
-
-        //Invoke(nameof(ResetAttack), 1.57f);
     }
      
     public void ResetAttack()

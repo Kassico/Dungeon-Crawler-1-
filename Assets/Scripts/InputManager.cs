@@ -8,11 +8,9 @@ public class InputManager : MonoBehaviour
     private PlayerInput _PlayerInput;
     private InputAction _moveAction;
     private InputAction _attackAction;
-    //private InputAction _moveActionBool;
     private InputAction _dashAction;
     public static bool Attack;
     public static bool Dash;
-    //public static bool Moves;
 
 
 
@@ -24,7 +22,6 @@ public class InputManager : MonoBehaviour
         _moveAction = _PlayerInput.actions["Move"];
         _attackAction = _PlayerInput.actions["attack"];
         _dashAction = _PlayerInput.actions["dash"];
-        //_moveActionBool = _PlayerInput.actions["Move"];
     }
 
     private void Update()
@@ -34,14 +31,7 @@ public class InputManager : MonoBehaviour
         Movement = _moveAction.ReadValue<Vector2>();
         Attack = _attackAction.WasPerformedThisFrame();
         Dash = _dashAction.WasPerformedThisFrame();
-        //Moves = _moveActionBool.WasPerformedThisFrame();
 
-        //if (Moves)
-            //playerAudioManeger.PlayFootstep();
-
-
-        //if (Attack)
-        //    Debug.Log("ATTACK BUTTON PRESSED");
 
     }
 }

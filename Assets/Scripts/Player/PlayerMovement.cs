@@ -11,7 +11,6 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
 
-    //[SerializeField] private float _moveSpeed = 2.5f;
     public float _moveSpeed = 5f;
 
     private Vector2 _movement;

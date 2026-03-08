@@ -60,7 +60,6 @@ void Awake()
         bool inGameScene = scene.buildIndex >= 2;
         SetPlayerVisible(inGameScene);
 
-        // Move player to spawn point in the new scene
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
 
         if (spawnPoint != null)
@@ -116,7 +115,6 @@ void Awake()
         if (endGame != null)
         {
             endGame.gameEnd = true;
-            //mainMenu.StatsPanelOf();
             endGame.EndTheGame();
         }
     }

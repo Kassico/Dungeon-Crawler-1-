@@ -81,33 +81,7 @@ public class EnemySpawnIn : MonoBehaviour
       
 
     }
-    //GameObject[] Pool = GetEnemyPool(); //Pool är alla möjliga enemies för den aktuella nivån
-    //if (Pool.Length == 0)
-    //    {
-    //        Debug.LogWarning("No spawn points found for enemies.");
-    //        return;
-    //    }
-    //foreach (var p in alwaysSpawn)
-    //{
-    //    SpawnRandomEnemy(Pool, p);
-    //}
 
-    //    //float difficulty = Difficulty.CurrentDifficulty;
-    //    float difficultyFactor = Mathf.Clamp(Difficulty.CurrentDifficulty / 2.5f, 0f, 1f);
-    //    int amountToSpawn = Mathf.RoundToInt(extraSpawn.Count * difficultyFactor);
-
-
-    //if (SceneManager.GetActiveScene().buildIndex == 2) // på nivå 1 ska bara 1 enemy spawna, oavsett svårighetsgrad
-    //{
-    //        amountToSpawn = 1;
-    //}
-
-    //Shuffle(extraSpawn);
-
-    //    for ( int i = 1; i < amountToSpawn; i++) // i = 1 så att den inte spawnar 2 nör ammaount to Spawn är 1
-    //{
-    //    SpawnRandomEnemy(Pool, extraSpawn[i]);
-    //    }
 
     void SpawnWeightedEnemy(WeightedEnemy[] pool, EnemySpawnPoint spawnPoint)
     {
@@ -142,28 +116,7 @@ public class EnemySpawnIn : MonoBehaviour
         return pool[pool.Length - 1].enemyPrefab; // fallback, should never reach here if weights are set correctly
     }
 
-    //    void SpawnRandomEnemy(GameObject[] pool, EnemySpawnPoint spawnPoint)
-    //    {
-    //        GameObject enemyToSpawn = pool[Random.Range(0, pool.Length)];
-    //        GameObject spawnedEnemy = Instantiate(enemyToSpawn, spawnPoint.transform.position, Quaternion.identity);
-
-    //        Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
-    //        vampire vampireComponent = spawnedEnemy.GetComponent<vampire>();
-
-
-    //    if (enemyComponent == null && vampireComponent != null)
-    //    {
-    //        Debug.LogError("Spawned object does not have an Enemy component.");
-    //        return;
-    //    }
-
-
-
-    //    if (spawnPoint.spawnPortal)
-    //        enemyComponent.portalActiveOnDeath = true;
-    //    else 
-    //        enemyComponent.portalActiveOnDeath = false;
-    //}       
+ 
 
     void SetPortalOnDeath(GameObject spawnedEnemy, EnemySpawnPoint spawnPoint)
         {

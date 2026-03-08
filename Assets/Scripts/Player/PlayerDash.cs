@@ -2,20 +2,18 @@ using UnityEngine;
 
 public class PlayerDash : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private bool isDashing = false;
+    private bool allowedToDash = true;
+
+    private float dashTime;
+    private float dashCooldownTimer;
+    private bool _allowedToMove = true;
+
     public float dashSpeedmultiplier = 3f;
     public float dashDuration = 0.2f;
-    private float dashTime;
-    public float dashCooldown = 1f;
-    private bool allowedToDash= true;
-    private float dashCooldownTimer;
     public float playerMoveSpeed;
-
-    private bool _allowedToMove = true;
-   
-
+    public float dashCooldown = 1f;
 
 
     void Start()
@@ -61,7 +59,6 @@ public class PlayerDash : MonoBehaviour
                 dashTime = 0f;
                 playerMoveSpeed /= dashSpeedmultiplier;
                 playerMovement._moveSpeed = playerMoveSpeed;
-                //Invoke("ResetDash", dashCooldown);
                 _allowedToMove = true;
             }
             //Debug.Log("Player is dashing!");
