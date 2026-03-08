@@ -17,6 +17,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
     public float playerpoints = 0;
     public float pointsToPowerup = 1;
+    public float totalPoints = 0;
 
 
     [Header("Player Stats")]
@@ -46,7 +47,7 @@ public class PlayerPowerUpps : MonoBehaviour
     private float extraStats;
 
 
-    private float currentLevel;
+    public float currentLevel;
 
 
     //current stats
@@ -70,6 +71,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     public bool powerupActive = false;
+    //private bool powerUpChosen = false;ï¿½
 
 
 
@@ -96,6 +98,7 @@ public class PlayerPowerUpps : MonoBehaviour
             EndGame endGame = FindObjectOfType<EndGame>();
             endGame.totalScore += playerpoints;
             currentLevel += 1;
+            totalPoints += playerpoints;
             playerAudioManeger.PlayLevelUp();
             showPowerUps();
             playerpoints = playerpoints- pointsToPowerup;
@@ -143,9 +146,9 @@ public class PlayerPowerUpps : MonoBehaviour
         }
         if (biggerstats)
         {
-            randomAttackForce = UnityEngine.Random.Range(1,3); // nu blir det alltid 1 men att kunfa få +3 dmg är lite för OP.
-            randomHelath = UnityEngine.Random.Range(5, 10); // då blir random mellan 5 - 10 extra
-            randomSpeed = UnityEngine.Random.Range(2, 7)/10; // mellan 0.2 - 0.7 extra speed
+            randomAttackForce = UnityEngine.Random.Range(1,3); // nu blir det alltid 1 men att kunfa fï¿½ +3 dmg ï¿½r lite fï¿½r OP.
+            randomHelath = UnityEngine.Random.Range(5, 11); // dï¿½ blir random mellan 5 - 10 extra
+            randomSpeed = UnityEngine.Random.Range(2, 8)/10; // mellan 0.2 - 0.7 extra speed
         }
         else 
         {
@@ -264,12 +267,12 @@ void showPowerUps()
             Debug.LogError("One or more player components not found!");
             return;
         }
-        if (playerAttacks.playerDmg <= 2) // kan bara addera mera dmg om den inte är över 3, det är för att det inte ska bli för lätt.
+        if (playerAttacks.playerDmg <= 2) // kan bara addera mera dmg om den inte ï¿½r ï¿½ver 3, det ï¿½r fï¿½r att det inte ska bli fï¿½r lï¿½tt.
         { playerAttacks.playerDmg += extraPlayerAttackForce; }
         playerHealthManager.playerHealth += extraPlayerHealth;
         playerMovement._moveSpeed += extraPlayerMoveSpeed;
         playerDash.dashCooldown -= DecreasePlayerDashCooldown;
-        playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce påverkar knockbacken också, med en multiplikator på 3 
+        playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce pï¿½verkar knockbacken ocksï¿½, med en multiplikator pï¿½ 3 
         playerHealthManager.maxHealth += extraPlayerHealth;
         playerDash.dashSpeedmultiplier += extraPlayerDashSpeed;
         playerAttacks.attackRadius += extraPlayerAttackRadius;

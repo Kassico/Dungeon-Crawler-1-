@@ -16,6 +16,7 @@ public class Difficulty : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //difficultyDisplay.text = "Difficulty: " + (CurrentDifficulty == 0.5f ? "Easy" : CurrentDifficulty == 1f ? "Normal" : "Hard");
 
         difficultyDisplay.text = "Difficulty: " + (CurrentDifficulty == 0.25f ? "Heven" : CurrentDifficulty == 0.5f ? "Easy" : CurrentDifficulty == 1f ? "Normal" : CurrentDifficulty == 1.5f ? "Hard" : "Hell");
     }

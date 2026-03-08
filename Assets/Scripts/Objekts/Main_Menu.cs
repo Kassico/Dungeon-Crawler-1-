@@ -22,6 +22,7 @@ public class Main_Menu : MonoBehaviour
     
 
     // Update is called once per frame
+
     void Update()
     {
         EndGame endGame = FindObjectOfType<EndGame>();
@@ -41,7 +42,7 @@ public class Main_Menu : MonoBehaviour
 
     public void PlayGame() // starts the game and resets player stats to default values, and transfer player to the first level
     {
-        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta måste göras efter som att statspanel är i dontdestroyonLoad och då tappar mainmenyu typ bort den referensen, när man dör och det resetats.
+        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta mï¿½ste gï¿½ras efter som att statspanel ï¿½r i dontdestroyonLoad och dï¿½ tappar mainmenyu typ bort den referensen, nï¿½r man dï¿½r och det resetats.
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         EndGame endGame = FindObjectOfType<EndGame>();
 

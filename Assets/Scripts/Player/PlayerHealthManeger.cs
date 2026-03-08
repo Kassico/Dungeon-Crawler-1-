@@ -57,7 +57,7 @@ void Awake()
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
 
-        bool inGameScene = scene.buildIndex >= 2;
+        bool inGameScene = scene.buildIndex >= 2 && scene.buildIndex != 6;
         SetPlayerVisible(inGameScene);
 
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
