@@ -32,6 +32,8 @@ public class EndGame : MonoBehaviour
 
     
         if (gameEnd)
+
+        { 
             Time.timeScale = 0f; //pousar spelet
 
             Debug.Log("Game Over! Total Score: " + totalScore);
@@ -45,7 +47,7 @@ public class EndGame : MonoBehaviour
             backToMenu.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene(0));
             Button quitButton = backToMenu.GetComponent<Button>();
             quitButton.onClick.AddListener(() => Application.Quit());
-
+        }
     }
 
 }

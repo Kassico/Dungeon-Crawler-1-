@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputManager : MonoBehaviour
+public class InputManager : MonoBehaviour // så att all input fungerar bra
 {
     public static Vector2 Movement;
 
@@ -24,7 +24,7 @@ public class InputManager : MonoBehaviour
         _dashAction = _PlayerInput.actions["dash"];
     }
 
-    private void Update()
+    private void Update() 
     {
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 

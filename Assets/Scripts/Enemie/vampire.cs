@@ -39,7 +39,6 @@ public class vampire : MonoBehaviour
 
 
     [Header("Needed Floats")]
-    private float nextAttackTime;
     private float AttackTimer;
     private float distanceToPlayer;
     private float projectileRotation;
@@ -91,7 +90,7 @@ public class vampire : MonoBehaviour
 
 
    
-    private void Awake()
+    private void Awake() //skafat stats och annat viktigt, kontrolerar så att det finns en player och hämtar den, och sätter upp allt så att det är klart när spelet startar
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -128,7 +127,7 @@ public class vampire : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // kollar saker som avståndet till spelaren, om den ska attackera eller jaga, och hanterar cooldowns och stun och sånt
     {
         if (isDead == true) { _rb.linearVelocity = Vector2.zero; return; }
 
@@ -180,7 +179,7 @@ public class vampire : MonoBehaviour
 
     }
 
-    public void ChasePlayer()
+    public void ChasePlayer() // jagar spelaren genom att räkna ut riktningen mot spelaren och sätta fiendens velocity i den riktningen, samt uppdaterar animationen så att den ser ut att gå åt rätt håll
     {
         if (isStunned) return;
 
@@ -195,7 +194,7 @@ public class vampire : MonoBehaviour
     }
 
 
-    public void AttackPlayer()
+    public void AttackPlayer() // attackerar spelaren genom att först kolla så att den inte är stunned, sedan sätter allowedToAttack till false och isAttacking till true, stoppar fiendens rörelse, uppdaterar animationen så att den ser ut att attackera åt rätt håll, och sedan startar attackanimationen
     {
         if (isStunned) return;
 
@@ -208,7 +207,7 @@ public class vampire : MonoBehaviour
 
     }
     
-    public void dir()
+    public void dir() // kollar riktningen mot spelaren och uppdaterar animationen så att den ser ut att attackera åt rätt håll, används i AttackPlayer() för att se till att fienden alltid attackerar i riktning mot spelaren
     {
         Vector2 direction = (playerHealth.transform.position - transform.position).normalized;
         _animator.SetFloat(_horizontal, direction.x);
@@ -216,7 +215,7 @@ public class vampire : MonoBehaviour
     }
 
 
-    public void PerformAttack()
+    public void PerformAttack() // gör sjävla attack, denna ropas som en animationevent i animationen, den spelar attack ljudet, räknar ut rotationen för projektilen så att den riktas mot spelaren, instansierar projektilen och ger den en impuls i riktning mot spelaren
     {
         MakeSoundOnAttack();
         projectileRotation = Mathf.Atan2(playerTransform.position.y - transform.position.y, playerTransform.position.x - transform.position.x) * Mathf.Rad2Deg;
@@ -224,14 +223,14 @@ public class vampire : MonoBehaviour
         bullet.GetComponent<Rigidbody2D>().AddForce((playerTransform.position - transform.position).normalized * projectileSpeed,ForceMode2D.Impulse);
     }
      
-    public void ResetAttack()
+    public void ResetAttack() 
     {
         isAttacking = false;
         _animator.SetBool("isAttacking", false);
     }
 
 
-    public void TakeDmg(float damage)
+    public void TakeDmg(float damage) // gör så vampien tar skada, den kollar först om den redan är död, sedan drar den av skadan från currentHealth, instansierar en damage number prefab som visar hur mycket skada den tog, uppdaterar healthbaren, räknar ut riktningen från spelaren och applicerar knockback i motsatt riktning, startar en coroutine som gör att fienden flashar röd när den tar skada, och kollar sedan om currentHealth är mindre eller lika med 0 för att se om fienden ska dö
     {
         if (isDead) return;
         currentHealth -= damage;
@@ -256,7 +255,7 @@ public class vampire : MonoBehaviour
         }
     }
 
-    private void ApplyKnockback(Vector2 attackDir)
+    private void ApplyKnockback(Vector2 attackDir) // applicierar knockback på fienden i motsatt riktning från där attacken kom ifrån, den räknar ut riktningen från attacken
     {
         Vector2 knockbackDirection = (transform.position - (Vector3)attackDir).normalized;
         knockbackVelocity = knockbackDirection * KnockbackForce * (1 - KnockbackForceResistans);
@@ -264,19 +263,19 @@ public class vampire : MonoBehaviour
         isStunned = true;
         Invoke(nameof(ResetStun), StunDuration);
     }
-    private void ResetStun()
+    private void ResetStun() // tar bort stun efter en viss tid, denna ropas av ApplyKnockback() efter StunDuration har gått
     {
         isStunned = false;
     }
 
-    private System.Collections.IEnumerator FlashHitColor()
+    private System.Collections.IEnumerator FlashHitColor() // gör så att fienden flashar röd när den tar skada
     {
         sr.color = hitColor;
         yield return new WaitForSeconds(0.2f);
         sr.color = originalColor;
     }
 
-    public void Die()
+    public void Die() // kollar om den ska spawna portalen när den dör, gör döds ljud sedan förstörs fienden efter en sekund så animation och ljud hinner spelas
     {
         Portal portal = FindObjectOfType<Portal>();
 

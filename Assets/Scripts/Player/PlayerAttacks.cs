@@ -47,7 +47,7 @@ public class PlayerAttacks : MonoBehaviour
 
 
 
-    void Start()
+    void Start() // samlar saker som stats  och komponenter, och sätter default värden, detta är viktigt för att spelet ska fungera, så det inte blir null referenses eller att spelaren inte gör någon skada när den attackerar
     {
         playerDmg = 1;
         attackRadius = 0.5f;
@@ -65,7 +65,7 @@ public class PlayerAttacks : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // kollar efter input och gör så att spelaren attackerar
     {
         Vector2 move = InputManager.Movement;
 
@@ -96,7 +96,7 @@ public class PlayerAttacks : MonoBehaviour
         anim.SetBool(Attacking, isAttacking);
     }
 
-    void Attack()
+    void Attack() // gör själva attacken, den kollar vilken riktning spelaren rör sig i och spelar rätt attack animation, den kollar också efter fiender i närheten av attackpunkten och gör skada på dem, den skapar också en hitbox som är aktiv under attackens duration, detta är viktigt för att spelet ska fungera som det ska, så att spelaren kan skada fiender och att attacken ser bra ut
     {
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 
@@ -156,11 +156,11 @@ public class PlayerAttacks : MonoBehaviour
         }
         
         if (AttackHitboxP != null && activeHitBox == null)
-            activeHitBox = Instantiate(AttackHitboxP, AttackingPoint.position, Quaternion.identity);
+                activeHitBox = Instantiate(AttackHitboxP, AttackingPoint.position, Quaternion.identity);
 
         
         if (activeHitBox != null)
-            activeHitBox.SetActive(true); activeHitBox.transform.position = AttackingPoint.position;
+                activeHitBox.SetActive(true); activeHitBox.transform.position = AttackingPoint.position;
 
         
 
@@ -169,7 +169,7 @@ public class PlayerAttacks : MonoBehaviour
     }
 
 
-    void StopAttack()
+    void StopAttack() // stopar attacken
     { 
         isAttacking = false;
         if (activeHitBox != null)   {activeHitBox.SetActive(false);}

@@ -26,7 +26,7 @@ public class PlayerAudioManeger : MonoBehaviour
 
 
     //FoorSteps
-    public void PlayFootstep()
+    public void PlayFootstep() // spelar ljud när spelaren rör sig
     {
         if (footstepClips.Length == 0) return;
         
@@ -37,7 +37,7 @@ public class PlayerAudioManeger : MonoBehaviour
 
 
     //Attack
-    public void PlayAttack()
+    public void PlayAttack() // spelar ljud när spelaren attackerar
     {
         if (attackClip == null) return;
         attackSource.PlayOneShot(attackClip);
@@ -46,7 +46,7 @@ public class PlayerAudioManeger : MonoBehaviour
     }
 
     // Take Damage
-    public void PlayTakeDamage()
+    public void PlayTakeDamage() // spelar ljud när spelaren tar skada
     {
         if(dmgClips.Length == 0) return;
         AudioClip clip = dmgClips[Random.Range(0, dmgClips.Length)];
@@ -55,26 +55,26 @@ public class PlayerAudioManeger : MonoBehaviour
     }
 
     // Level Up
-    public void PlayLevelUp()
+    public void PlayLevelUp() //spelar ljud om levelupp, atlså när spelaren får powerup
     {
         if (levelUpClip == null) return;
         levelUpSource.PlayOneShot(levelUpClip);
     }
 
     // Death
-    public void PlayDeath()
+    public void PlayDeath() // spelare ljud vid död
     {
         if (deathClip == null) return;
         deathSource.PlayOneShot(deathClip);
     }
     // Hit
-    public void PlayHit()
+    public void PlayHit()//spelar ljud vid att spelaren blir träffad
     {
         if (hitClip == null) return;
         hitSource.PlayOneShot(hitClip);
     }
     //Dash
-    public void PlayDash()
+    public void PlayDash() // spelar ljud vid playerdash
     {
         if (dashClip == null) return;
         dashSource.PlayOneShot(dashClip);

@@ -23,7 +23,7 @@ public class DamageNumber : MonoBehaviour
         dmgValue = GetComponentInChildren<TMP_Text>();
     }
 
-    private void Start()
+    private void Start()  //väljer vart texten ska spawna och hur den ska röra sig, samt när den ska förstöras
     {   
         rb.linearVelocity = new Vector2(Random.Range(-initialXVelocityRange, initialXVelocityRange), initialYVelocity);
         Destroy(gameObject, lifeTime);
@@ -33,7 +33,7 @@ public class DamageNumber : MonoBehaviour
             DmgText(playerAttacks.playerDmg);
         }
     }
-    public void DmgText(float damageAmount)
+    public void DmgText(float damageAmount) //sätter vad dmgtexten ska vara
     {
         dmgValue.text = damageAmount.ToString();
     }

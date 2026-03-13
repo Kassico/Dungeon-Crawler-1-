@@ -9,13 +9,13 @@ public class StatsPanelManeger : MonoBehaviour
             statsPanel = GameObject.Find("PlayerStatsPanel");
     }
 
-    public void ShowPanel()
+    public void ShowPanel() // när kallad på aktiverar statspanel
     {         
         statsPanel.SetActive(true);
 
     }
 
-    public void HidePanel()
+    public void HidePanel() // när kallad på inaktiverar statspanel
     {
         statsPanel.SetActive(false);
     }

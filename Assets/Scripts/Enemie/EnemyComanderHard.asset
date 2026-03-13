@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5e452e8cffc8ce49a3221accba6f4e6, type: 3}
-  m_Name: HardEnemyStats
+  m_Name: EnemyComanderHard
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  enemyType: HardEnemy
-  maxHealth: 15
-  moveSpeed: 2
+  enemyType: HardEnemyComander
+  maxHealth: 22
+  moveSpeed: 3.2
   chaseRange: 6
-  attackDamage: 2
+  attackDamage: 1
   attackRange: 1.1
   attackRate: 2
-  knockbackForceResistans: 0.85
-  scoreValue: 5
+  knockbackForceResistans: 0.75
+  scoreValue: 8
   attackDeley: 0.3
   attackHitBox: 1.4
   rotateSpeed: 0.8

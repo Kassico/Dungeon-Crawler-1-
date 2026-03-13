@@ -18,7 +18,7 @@ public class playerData : MonoBehaviour
     
 
 
-    private void Awake()
+    private void Awake() //
     {
         if (instance == null)
         {
@@ -30,12 +30,8 @@ public class playerData : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    private void Update()
-    {
-        
-    }
 
-    public void InitializedPlayerDefaultData()
+    public void InitializedPlayerDefaultData() // sätter default data för spelaren, görs första gången spelaren startar
     {
         PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();    
         damage = playerAttacks.playerDmg;
@@ -55,7 +51,7 @@ public class playerData : MonoBehaviour
         isInitialized = true;
     }
 
-    public void GetPlayerDefaultData()
+    public void GetPlayerDefaultData() // sätter spelarens stats till default värdena, detta används
     {   
         PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
         playerAttacks.playerDmg = damage;

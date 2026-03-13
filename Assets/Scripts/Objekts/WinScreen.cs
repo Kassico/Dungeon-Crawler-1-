@@ -13,7 +13,7 @@ public class WinScreen : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI difficultyText;
 
-    void Start()
+    void Start() // tar reda på vissa saker som vad för difficulty som var klarad oh vad för score/level spelaren klarade.
     {
         PlayerPowerUpps playerPowerUpps = FindFirstObjectByType<PlayerPowerUpps>();
         StatsPanelManeger statsPanelManeger = FindFirstObjectByType<StatsPanelManeger>();
@@ -35,7 +35,7 @@ public class WinScreen : MonoBehaviour
     }
 
 
-    void DisplayStats()
+    void DisplayStats() // visar upp spelarens score, level och vilken difficulty som klarades.
     {
      
 
@@ -43,7 +43,7 @@ public class WinScreen : MonoBehaviour
         difficultyText.text = "Difficulty: " + completedDifficulty;
     }
 
-    public void BackToMenu()
+    public void BackToMenu() // tar än tillback til mainmenu8 när man trycker på en knapp som e kopplad till denna funktion
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }

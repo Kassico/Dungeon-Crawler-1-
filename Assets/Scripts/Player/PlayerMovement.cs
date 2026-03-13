@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private const string _horizontal = "Horizontal";
     private const string _Vertical = "Vertical";
 
-    private void Awake()
+    private void Awake() // hämtar komponenter och sätter moveSpeed till det som är satt i playerData, så att den kan sparas mellan sceneer
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Start()
+    private void Start() // flyttar spelaren till spawn pointen när scenen startar
     {
         GameObject spawn = GameObject.FindGameObjectWithTag("PlayerSpawn");
         if (spawn != null)
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void Update() // hanterar rörelse och animationer, samt spelar fotstegsljud när spelaren rör sig
     {
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 

@@ -71,12 +71,11 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     public bool powerupActive = false;
-    //private bool powerUpChosen = false;�
 
 
 
 
-    void Start()
+    void Start() // sätter powerup panelen till false så att den inte syns
     {
         powerUpPanel.SetActive(false);
         initializePlayerstats();
@@ -85,7 +84,7 @@ public class PlayerPowerUpps : MonoBehaviour
     }
 
 
-    void Update()
+    void Update() // uppdaterar score texten och kollar om spelaren har tillräckligt med poäng för att få en powerup, om den har det så läggs poängen till total score i endgame scriptet, leveln ökar, total points ökar, spelarens audio manager spelar en ljud och powerup panelen visas
     {
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 
@@ -110,7 +109,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
     }
 
-    void initializePlayerstats()
+    void initializePlayerstats() // hämtar spelarens nuvarande stats så att powerups kan addera till dessa, detta är viktigt för att powerups ska fungera som det är tänkt, så att de adderar till spelarens nuvarande stats och inte bara sätter dem till ett nytt värde
     {
 
 
@@ -124,7 +123,7 @@ public class PlayerPowerUpps : MonoBehaviour
         PlayerDash playerDash = FindObjectOfType<PlayerDash>();
         currentDashCooldown = playerDash.dashCooldown;
     }
-    void buffStats()
+    void buffStats() // kollar villekn typ av powerups som ska genereras baserat på en random number mellan 1-12, där 1-6 ger inga extra stats, 7-9 ger lite extra stats och 10-12 ger bättre stats, detta är viktigt för att det ska finnas en variation i powerups som spelaren får, så att det inte alltid är samma sak och att det finns en chans att få bättre powerups
     {
         randomNumber = UnityEngine.Random.Range(1, 13);
         switch (randomNumber)
@@ -161,7 +160,7 @@ public class PlayerPowerUpps : MonoBehaviour
 
 
     }
-    void initialzePowerUps()
+    void initialzePowerUps() // skapar powerups baserat på de random stats som genererats i buffstats funktionen, och lägger till dem i powerups listan
     {
     
         powerUps.Add(new PowerUp
@@ -202,8 +201,8 @@ public class PlayerPowerUpps : MonoBehaviour
         
     }
 
-void showPowerUps()
-{
+void showPowerUps() // visar powerups på knapparna i powerup panelen, och lägger till on click listeners på knapparna, med att det kan finnas mera än 3 powerups tillgänglit så är det random villka som blir valda
+    {
         powerUps.Clear();
 
         Debug.Log(
@@ -251,7 +250,7 @@ void showPowerUps()
 
         }
     }
-    void ChosePowerUp(int index)
+    void ChosePowerUp(int index) // när man väljen en powerupp så upptaterarden/adderar den staten till player
     {
         powerUps[index].applayEffect.Invoke();
 

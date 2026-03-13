@@ -23,7 +23,7 @@ public class Main_Menu : MonoBehaviour
 
     // Update is called once per frame
 
-    void Update()
+    void Update() // kollar om det finns ett endgame script i scenen och om det finns så döljer den endgame panelen
     {
         EndGame endGame = FindObjectOfType<EndGame>();
         if (endGame != null)
@@ -40,9 +40,9 @@ public class Main_Menu : MonoBehaviour
         
     }
 
-    public void PlayGame() // starts the game and resets player stats to default values, and transfer player to the first level
+    public void PlayGame() // startar spelet, resetar spelarens poäng och hämtar default data för spelaren, visar statspanelen och flyttar spelaren till spawn pointen. Och laddar in scenen med index 2 som är spelet.
     {
-        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta m�ste g�ras efter som att statspanel �r i dontdestroyonLoad och d� tappar mainmenyu typ bort den referensen, n�r man d�r och det resetats.
+        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta m�ste g�ras efter som att statspanel �r i dontdestroyonLoad och d� tappar mainmenyu typ bort den referensen, n�r man d�r och det resetats. å ä ö försvan för någon anledning
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         EndGame endGame = FindObjectOfType<EndGame>();
 
@@ -66,19 +66,18 @@ public class Main_Menu : MonoBehaviour
 
         Time.timeScale = 1f;
 
-        //UnityEngine.SceneManagement.SceneManager.LoadScene(2);
         SceneManager.LoadScene(2);
 
     } 
 
 
 
-    public void QuitGame()
+    public void QuitGame() // stänger av spelet om det inte körs i unity efter som att det inte går att stänga ned genom denna kåd
     { 
         Debug.Log("QUIT!");
         Application.Quit();
     }
-    public void Difficulty()
+    public void Difficulty() // laddar in så man kan ändra difficulty, detta är en separat scene
     {
         SceneManager.LoadScene(1);
     }

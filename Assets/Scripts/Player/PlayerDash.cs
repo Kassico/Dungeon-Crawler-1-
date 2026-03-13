@@ -16,7 +16,7 @@ public class PlayerDash : MonoBehaviour
     public float dashCooldown = 1f;
 
 
-    void Start()
+    void Start() // hämtar dash cooldown från player data och move speed från player movement
     {
         if (playerData.instance != null && playerData.isInitialized)
         {
@@ -30,7 +30,7 @@ public class PlayerDash : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Update() // kollar efter input för dashen och hanterar dash logiken, inklusive cooldown och att återställa hastigheten efter dash är klar
     {
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();

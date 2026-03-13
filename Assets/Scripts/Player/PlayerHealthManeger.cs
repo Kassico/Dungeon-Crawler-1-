@@ -15,7 +15,22 @@ public class PlayerHealthManager : MonoBehaviour
 
     Rigidbody2D _rb;
 
-    void Start()
+
+
+
+    void Awake() // hämtar rigidbody komponenten och ser till att det bara finns en PlayerHealthManager i scenen,  och sertial at spelaren inte dubbliceras och blir dontdestroyed on load så att spelaren klarar scene bytet
+    {
+        _rb = GetComponent<Rigidbody2D>();
+
+        if (FindObjectsOfType<PlayerHealthManager>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
+
+    void Start() // hämtar max health från player data om det finns anars anar tar den från inspektorn
     {
         if (playerData.instance != null && playerData.isInitialized)
          {
@@ -28,33 +43,23 @@ public class PlayerHealthManager : MonoBehaviour
         }
         
     }
-    public void UpdateHealthUI()
+    public void UpdateHealthUI() // uppdaterar health texten i UI
     {   
         scoreText.text = "Health: " + playerHealth.ToString();
     }
 
-void Awake()
-    {
-        _rb = GetComponent<Rigidbody2D>();
-
-        if (FindObjectsOfType<PlayerHealthManager>().Length > 1)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
-    }
-    private void OnEnable()
+ 
+    private void OnEnable() // håller kol på villken scene det är
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void OnDisable()
+    private void OnDisable()// håller kol på villken scene det är
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode) // körs varje scne byte och kollar om spelaren ska vara synlig eller inte beroende på villken scene det är, spelare ska inte vara synlig vid menu scener.
     {
 
         bool inGameScene = scene.buildIndex >= 2 && scene.buildIndex != 6;
@@ -67,7 +72,7 @@ void Awake()
 
     }
 
-    private void SetPlayerVisible(bool visible)
+    private void SetPlayerVisible(bool visible) // blir kallad av onsceneLoaded  och sätter på eller av alla komponenter för spelaren, 
     {
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
         {
@@ -85,7 +90,7 @@ void Awake()
     {
         scoreText.text = playerHealth.ToString();
     }
-    public void TakeDmg(float damage, Vector2 enemyPos, float enemyKnockbackForce)
+    public void TakeDmg(float damage, Vector2 enemyPos, float enemyKnockbackForce) // tar skada och knockback från fiender, och kollar om spelaren dör eller inte, och uppdaterar UI
     {
         PlayerAudioManeger playerAudioManeger = GetComponent<PlayerAudioManeger>();
 
@@ -105,7 +110,7 @@ void Awake()
     }
 
 
-    private void Die()
+    private void Die() // kör logiken för när spelaren e död
     {
         EndGame endGame = FindObjectOfType<EndGame>();
         Main_Menu mainMenu = FindObjectOfType<Main_Menu>();
@@ -119,7 +124,7 @@ void Awake()
         }
     }
 
-    private void TakeKnockback(Vector2 enemyPos, float enemyKnockbackForce)
+    private void TakeKnockback(Vector2 enemyPos, float enemyKnockbackForce) // tar knockback.
     {
         
         Vector2 dir = (transform.position - (Vector3)enemyPos).normalized;

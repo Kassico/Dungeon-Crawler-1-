@@ -13,7 +13,7 @@ public class projectile : MonoBehaviour
     public AudioClip fireBallClip;
 
 
-    void Start()
+    void Start() //hittar vad saker ska vara lika med , asså vad dmg ocj knockbackforcen ska vara
     {
         //dmg = GameObject.FindGameObjectWithTag("Enemie").GetComponent<vampire>().attackDamage;
         vampire vampireScript = FindObjectOfType<vampire>();
@@ -27,28 +27,25 @@ public class projectile : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //kollar om projektilen träffar spelaren eller en hitbox och gör så att spelaren tar skada och knockback eller att projektilen förstörs
     {
         PlayerHealthManager playerHealth = FindObjectOfType<PlayerHealthManager>();
 
         PlayerHealthManager player = collision.GetComponent<PlayerHealthManager>();
         if (player != null)
         {
-            //playerHealth.playerHealth -= dmg;
-            PlayFireBallSound();// kommer ej att funka eftersom ljudet inte hinner spelas innan projektilen förstörs men ändå valt att det räker med ljudet spelaren gör
             playerHealth.TakeDmg(dmg, transform.position, knockbackForce);
              Destroy(gameObject);
         }
         if (collision.gameObject.CompareTag("HitBox"))
         {
-            PlayFireBallSound();// kommer ej att funka eftersom ljudet inte hinner spelas innan projektilen förstörs men ändå valt att det räker med ljudet spelaren gör
             Destroy(gameObject);
         }
 
     }
 
 
-    public void PlayFireBallSound() 
+    public void PlayFireBallSound()  //skulle göra ljud när projektilen träffar något men den tas bort innan ljudet hinner spelas så det funkar inte, därav används inte denna funktion längre
     {
         if (fireBallClip == null) return;
         fireBallSource.PlayOneShot(fireBallClip);

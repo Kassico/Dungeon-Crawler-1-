@@ -5,7 +5,7 @@ public class UIAudioManeger : MonoBehaviour
    public AudioSource audioSource;
    public AudioClip buttonClickClip;
 
-    public void PlayButtonClickSound()
+    public void PlayButtonClickSound() // gör ljud om en knapp trycks på om objecter har denna script
     {
         if (audioSource != null && buttonClickClip != null)
         {

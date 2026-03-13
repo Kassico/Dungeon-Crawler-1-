@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 431713948441957553}
   - component: {fileID: 1604233294919757072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: deathClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 8304990500507657731}
   - component: {fileID: 1526500017030470162}
   - component: {fileID: 8720188540739392731}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.0001
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 0
@@ -390,7 +390,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 200
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -477,7 +477,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6857595192230803748}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +514,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8844711134125756966}
   - component: {fileID: 4952429065827177498}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrcAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -582,7 +582,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7420039206875189843}
   - component: {fileID: 6622902691683900289}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: takeDmgClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3696426588333155404}
   - component: {fileID: 8927310414552123578}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: attackClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -840,7 +840,7 @@ GameObject:
   m_Component:
   - component: {fileID: 952709070684240933}
   - component: {fileID: 5871265120097214627}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrcAttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -909,7 +909,7 @@ GameObject:
   - component: {fileID: 6521616551123761908}
   - component: {fileID: 4626250342265697216}
   - component: {fileID: 3849350749496866271}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1012,7 +1012,7 @@ GameObject:
   - component: {fileID: 7458343309608882356}
   - component: {fileID: 849169331849756740}
   - component: {fileID: 8520331172758376908}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1087,7 @@ GameObject:
   - component: {fileID: 4868676811491052643}
   - component: {fileID: 7416149769920017469}
   - component: {fileID: 1615080603865748986}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}

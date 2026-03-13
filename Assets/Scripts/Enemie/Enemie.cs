@@ -126,7 +126,7 @@ public class Enemy: MonoBehaviour
 
 
     public static string enemietype = "Enemy";
-    private void Awake()
+    private void Awake() // hämtar komponenter och hittar spelaren, och hämtar player health manager från spelaren, så att den kan göra skada på spelaren
     {
         _rb = GetComponent<Rigidbody2D>();
         _animator = GetComponent<Animator>();
@@ -141,7 +141,7 @@ public class Enemy: MonoBehaviour
         }
     }
 
-    void Start()
+    void Start() // sätter stats beroände på villken typ av orc det är och anppasar de beroände på svårighetsgraden
     {
         isDead = false;
        float difficulty = Difficulty.CurrentDifficulty;
@@ -184,7 +184,7 @@ public class Enemy: MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void Update() // kollar efter vad orcen ska göra, attackera jaga sperlaren osv, och hållerkol på coldowns
     {
         if (isDead) { _rb.linearVelocity = Vector2.zero; return; }
         health = currentHealth;
@@ -243,7 +243,7 @@ public class Enemy: MonoBehaviour
     }
 
 
-    public void ChasePlayer()
+    public void ChasePlayer() // jagar spelaren och hanterar animationer för det, kollar villken riktning spelaren e och går dit
     {
         if (isStunned || !allowedToMove)
             return;
@@ -256,7 +256,7 @@ public class Enemy: MonoBehaviour
         _rb.linearVelocity = direction * moveSpeed;
     }
 
-    private void AttackPlayer() 
+    private void AttackPlayer()  // atackerar spelaren och hanterar animation för attack, kollar riktningen och sånt.
     {
         if (isStunned || !allowedToAttack)
             return;
@@ -275,13 +275,12 @@ public class Enemy: MonoBehaviour
 
         MakeSoundOnAttack(); // kallar på funktionen som spelar ljudet när fienden attackerar
 
-        //Debug.Log("Enemy Attacks Player");
         //DealDmg() Är i animation event i attack animationen, så att den kallar på den funktionen när den ska göra skada, så att den inte gör skada direkt när den börjar attackera utan när den träffar spelaren i animationen.
 
         //}
     }
 
-    private IEnumerator PrepareAttack()
+    private IEnumerator PrepareAttack() // påbörjar attacken när spelaren e tillräkligt nära och orcen får attackerar, startar attackplayer
     {
         isPreparingAttack = true;
 
@@ -292,7 +291,7 @@ public class Enemy: MonoBehaviour
         isPreparingAttack = false;
     }
 
-    public void DealDmg()
+    public void DealDmg() //anroppas av animationevent och gör att spelaren tar skada om den blir träffad.
     {
         Debug.Log("DealDmg called");
 
@@ -316,7 +315,7 @@ public class Enemy: MonoBehaviour
     }
 
 
-    public void Dir()
+    public void Dir() 
         {
 
         // det som händer här är att den kollar vilken riktning fienden borde attackera/kolla i förhållande till spelaren, och sätter bools för det.
@@ -390,7 +389,7 @@ public class Enemy: MonoBehaviour
 
     
 
-    private void EndAttack()
+    private void EndAttack()// slutar attacken och sätter bools till vad de ska vara
     {
         isAttacking = false;
         isChasing = true;
@@ -400,7 +399,7 @@ public class Enemy: MonoBehaviour
     }
 
 
-    public void TakeDmg(float dmg)
+    public void TakeDmg(float dmg) // blir kallad av spelaren när spelaren träffar en orcen och gör att den tar skad, upptaterar healthbar och gör ljud och hanterar andra saker när orcen blir träffad, ökar massan så att den putar bort andra enemies när knockbackad
     {
         if (isDead) { return; }
 
@@ -417,7 +416,8 @@ public class Enemy: MonoBehaviour
         Debug.Log($"Enemy takes " + dmg + $" damage. And Has {currentHealth} Health Left");
 
         MakeSoundOnDmg(); //kallar på funktionen som spelar ljudet när fienden tar skada
-
+        _rb.mass = 10f;
+        Invoke(nameof(ResetMass), 0.15f);
         StartCoroutine(KnockbackCoroutine());
 
         if (sr != null)
@@ -429,14 +429,14 @@ public class Enemy: MonoBehaviour
     }
 
 
-    IEnumerator FlashHitColor()
+    IEnumerator FlashHitColor() // flashar röd färg när träffad
     {
         sr.color = hitColor;
         yield return new WaitForSeconds(hitFlashDuration);
         sr.color = originalColor;
     }
 
-    private void Die()
+    private void Die() // lohiken när orcen för, kollar om den ska spawn portal eller inte och gör lljud. Hanterar också layers så att en död enemy inte interactar med levande
     {
         Portal portal = FindObjectOfType<Portal>();
         if (portalActiveOnDeath) 
@@ -446,10 +446,18 @@ public class Enemy: MonoBehaviour
 
 
         }
+
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+
+        //_rb.gameObject.SetActive(false);
+        _rb.excludeLayers = LayerMask.GetMask("Enemie");
+
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         playerPowerUpps.playerpoints += pointsValue;
 
-        
+
+
+
         Debug.Log("Enemy Died");
         _animator.SetBool("isDead", true);
 
@@ -460,7 +468,12 @@ public class Enemy: MonoBehaviour
 
     }
 
-    IEnumerator KnockbackCoroutine()
+    private void ResetMass() // tar massan tillback till det vanliga
+    {
+        _rb.mass = 0.001f;
+    
+    }
+    IEnumerator KnockbackCoroutine() // applicerar knockback på orcen
     {
         
         allowedToAttack = false;
@@ -470,6 +483,9 @@ public class Enemy: MonoBehaviour
         knockbackVelocity = dir * (KnockbackForce * (1 - KnockbackForceResistans));
         knockabactimer = knockbackTime;
 
+
+    
+            
         isStunned = true;
         yield return new WaitForSeconds(StunDuration);
 
@@ -477,7 +493,7 @@ public class Enemy: MonoBehaviour
 
     }
    
-    private void OnDrawGizmos()
+    private void OnDrawGizmos() 
     {
         if (attackpoint == null) return;
 
@@ -485,7 +501,7 @@ public class Enemy: MonoBehaviour
         Gizmos.DrawWireSphere(attackpoint.position, _attackHitBox);
     }
 
-    private void MakeSoundOnDmg()
+    private void MakeSoundOnDmg() // hanterar ljud om den tar skada.
     {
         if (attackClip != null)
         {
@@ -502,7 +518,7 @@ public class Enemy: MonoBehaviour
     }
 
 
-    private void MakeSoundOnDeath()
+    private void MakeSoundOnDeath() // hanterar ljud när den dör
     {
 
         if (deathClip != null)
@@ -519,7 +535,7 @@ public class Enemy: MonoBehaviour
 
     }
 
-    private void MakeSoundOnAttack()
+    private void MakeSoundOnAttack()// hanterar ljud när den attackerar
     {
         if (attackClip != null)
         {

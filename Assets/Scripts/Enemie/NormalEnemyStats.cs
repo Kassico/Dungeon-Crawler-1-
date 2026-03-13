@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 
 [CreateAssetMenu(fileName = "EnemyStats", menuName = "Scriptable Objects/NormalEnemyStats")]
-public class EnemyStats: ScriptableObject
+public class EnemyStats: ScriptableObject // bara ett scriptable object som håller alla stats för en normal enemy, används för att lätt kunna ändra stats i inspector utan att behöva ändra i koden, och för att kunna ha olika stats för olika typer
 {
     public string enemyType = "NormalEnemy";
 

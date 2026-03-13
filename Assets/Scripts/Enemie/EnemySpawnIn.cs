@@ -9,7 +9,7 @@ public class EnemySpawnIn : MonoBehaviour
 {
 
     [System.Serializable]
-    public class WeightedEnemy
+    public class WeightedEnemy  // vad denna class gör är att den håller en referens till en enemy prefab och en vikt som används för att bestämma hur ofta den spawnas i förhållande till andra enemies i samma pool
     {
 
         public GameObject enemyPrefab;
@@ -32,7 +32,7 @@ public class EnemySpawnIn : MonoBehaviour
 
 
 
-    private void Start()
+    private void Start() //sammalr ihop alla spawnpoints i scenen och delar upp dem i två listor baserat på om de alltid ska spawna eller inte, och sedan kallar den på SpawnEnemies() för att börja spawna fienderna
     {
         EnemySpawnPoint[] allSpawnPoints = FindObjectsOfType<EnemySpawnPoint>();
         foreach (var p in allSpawnPoints)
@@ -45,7 +45,7 @@ public class EnemySpawnIn : MonoBehaviour
 
         SpawnEnemies();
     }
-    void SpawnEnemies()
+    void SpawnEnemies() // spawnar fiender baserat på de spawn points som finns i scenen och den viktade poolen av fiender för den aktuella nivån genom att kalla på spawnweightedenemy. Först spawnas alla fiender som är kopplade till spawn points som alltid ska spawna, och sedan spawnas ett antal extra fiender baserat på svårighetsgraden och antalet tillgängliga spawn points.
     {
 
         WeightedEnemy[] pool = GetEnemyPool();
@@ -83,7 +83,7 @@ public class EnemySpawnIn : MonoBehaviour
     }
 
 
-    void SpawnWeightedEnemy(WeightedEnemy[] pool, EnemySpawnPoint spawnPoint)
+    void SpawnWeightedEnemy(WeightedEnemy[] pool, EnemySpawnPoint spawnPoint) // spawnar en fiende baserat på den viktade poolen och placerar den på den angivna spawn pointen. Efter att fienden har spawnats, kopplas dess död till att aktivera en portal om spawn pointen har det inställt.
     {
         GameObject prefab = PickWeightedRandom(pool);
         if (prefab == null)
@@ -96,7 +96,7 @@ public class EnemySpawnIn : MonoBehaviour
         SetPortalOnDeath(spawnedEnemy, spawnPoint);
     }
 
-    GameObject PickWeightedRandom(WeightedEnemy[] pool)
+    GameObject PickWeightedRandom(WeightedEnemy[] pool) // väljer en fiende från den viktade poolen baserat på deras vikter. Den räknar först ut den totala vikten, rullar ett slumpmässigt tal inom det intervallet, och sedan itererar genom poolen för att hitta vilken fiende som motsvarar det rullade talet.
     {
         int totalWeight = 0;
         foreach (var enemy in pool)
@@ -113,13 +113,13 @@ public class EnemySpawnIn : MonoBehaviour
                 return enemy.enemyPrefab;
             }
         }
-        return pool[pool.Length - 1].enemyPrefab; // fallback, should never reach here if weights are set correctly
+        return pool[pool.Length - 1].enemyPrefab;
     }
 
  
 
-    void SetPortalOnDeath(GameObject spawnedEnemy, EnemySpawnPoint spawnPoint)
-        {
+    void SetPortalOnDeath(GameObject spawnedEnemy, EnemySpawnPoint spawnPoint) // kollar om enemy ska spawna portalen när den sedan dör, kollar på både orcs och vampires, och ser des som olika
+    {
             Enemy enemyComponent = spawnedEnemy.GetComponent<Enemy>();
             vampire vampireComponent = spawnedEnemy.GetComponent<vampire>();
 
@@ -157,13 +157,13 @@ public class EnemySpawnIn : MonoBehaviour
 
 
         void Shuffle(List<EnemySpawnPoint> list)
-    {
-        for (int i = 0; i < list.Count; i++)
         {
-            EnemySpawnPoint temp = list[i];
-            int randomIndex = Random.Range(i, list.Count);
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            for (int i = 0; i < list.Count; i++)
+            {
+                EnemySpawnPoint temp = list[i];
+                int randomIndex = Random.Range(i, list.Count);
+                list[i] = list[randomIndex];
+                list[randomIndex] = temp;
+            }
         }
-    }
 }
