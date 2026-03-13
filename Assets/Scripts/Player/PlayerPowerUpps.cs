@@ -272,7 +272,8 @@ void showPowerUps()
         playerHealthManager.playerHealth += extraPlayerHealth;
         playerMovement._moveSpeed += extraPlayerMoveSpeed;
         playerDash.dashCooldown -= DecreasePlayerDashCooldown;
-        playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce p�verkar knockbacken ocks�, med en multiplikator p� 3 
+        playerAttacks.knockbackForce += extraPlayerAttackForce * 3; //  Attackforce p�verkar knockbacken ocks�, med en multiplikator p� 3
+
         playerHealthManager.maxHealth += extraPlayerHealth;
         playerDash.dashSpeedmultiplier += extraPlayerDashSpeed;
         playerAttacks.attackRadius += extraPlayerAttackRadius;
@@ -285,6 +286,10 @@ void showPowerUps()
         extraPlayerMoveSpeed = 0;
         extraPlayerAttackRadius = 0;
 
+        if (playerAttacks.playerDmg >= 3) // en check så att dmg inte överstifger 3, det kan hända att om dmg är 2 och man får +2 så blir det 4 eftersom det överstiger fösta checken då dmg kan öka med mer än 1
+        {
+            playerAttacks.playerDmg = 3;
+        }
 
 
         powerUpPanel.SetActive(false);

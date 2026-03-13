@@ -32,7 +32,6 @@ public class EndGame : MonoBehaviour
 
     
         if (gameEnd)
-        {             // Display total score and end game screen
             Time.timeScale = 0f; //pousar spelet
 
             Debug.Log("Game Over! Total Score: " + totalScore);
@@ -47,7 +46,7 @@ public class EndGame : MonoBehaviour
             Button quitButton = backToMenu.GetComponent<Button>();
             quitButton.onClick.AddListener(() => Application.Quit());
 
-        }
-
     }
+
 }
+

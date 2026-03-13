@@ -1593,7 +1593,7 @@ Transform:
   m_GameObject: {fileID: 4949466110657732623}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 71.57708, y: -28.870329, z: -10}
+  m_LocalPosition: {x: 946.6561, y: 473.55408, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2953,8 +2953,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerDash
   dashSpeedmultiplier: 4
   dashDuration: 0.2
-  dashCooldown: 1
   playerMoveSpeed: 0
+  dashCooldown: 1
 --- !u!114 &7991656960347308267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,6 +2969,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPowerUpps
   playerpoints: 0
   pointsToPowerup: 1
+  totalPoints: 0
   powerUpPanel: {fileID: 22536836252132832}
   powerUpButtons:
   - {fileID: 6036249952629268895}
@@ -2979,6 +2980,7 @@ MonoBehaviour:
   - {fileID: 3873026157416425074}
   - {fileID: 4922397171529750927}
   scoreText: {fileID: 2465333923727644271}
+  currentLevel: 0
   powerUps: []
   powerupActive: 0
 --- !u!114 &7285427021270335102
@@ -3433,7 +3435,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.23529412}
+  m_Color: {r: 1, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
