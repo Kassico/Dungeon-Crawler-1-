@@ -436,6 +436,7 @@ public class Enemy: MonoBehaviour
         sr.color = originalColor;
     }
 
+
     private void Die() // lohiken när orcen för, kollar om den ska spawn portal eller inte och gör lljud. Hanterar också layers så att en död enemy inte interactar med levande
     {
         Portal portal = FindObjectOfType<Portal>();
@@ -447,10 +448,20 @@ public class Enemy: MonoBehaviour
 
         }
 
-        gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+        //SetLayerRecursivly(gameObject, "DeadEnemie")
+        //
+        foreach (Transform Child in gameObject.GetComponentInChildren<Transform>(true))
+        { 
+            Child.gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+            
+        }
+        _rb.excludeLayers = LayerMask.GetMask("Enemie", "Player");
+        sr.sortingLayerName = "DeadEnemy";
 
-        //_rb.gameObject.SetActive(false);
-        _rb.excludeLayers = LayerMask.GetMask("Enemie");
+
+
+
+
 
         PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
         playerPowerUpps.playerpoints += pointsValue;

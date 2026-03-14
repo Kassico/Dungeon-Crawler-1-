@@ -11,9 +11,11 @@ public class playerData : MonoBehaviour
     public float damage;
     public float moveSpeed;
     public float dashCooldown;
+    public float dashSpeed;
     public float knockbackForce;
     public float points;
     public float maxHealth;
+    public float attackRadius;
 
     
 
@@ -36,12 +38,14 @@ public class playerData : MonoBehaviour
         PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();    
         damage = playerAttacks.playerDmg;
         knockbackForce = playerAttacks.knockbackForce;
+        attackRadius = playerAttacks.attackRadius;
 
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         moveSpeed = playerMovement._moveSpeed;
 
         PlayerDash playerDash = FindObjectOfType<PlayerDash>();
         dashCooldown = playerDash.dashCooldown;
+        dashSpeed = playerDash.dashSpeedmultiplier;
 
         PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
         maxHealth = playerHealthManager.maxHealth;
@@ -56,10 +60,12 @@ public class playerData : MonoBehaviour
         PlayerAttacks playerAttacks = FindObjectOfType<PlayerAttacks>();
         playerAttacks.playerDmg = damage;
         playerAttacks.knockbackForce = knockbackForce;
+        playerAttacks.attackRadius = attackRadius;
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         playerMovement._moveSpeed = moveSpeed;
         PlayerDash playerDash = FindObjectOfType<PlayerDash>();
         playerDash.dashCooldown = dashCooldown;
+        playerDash.dashSpeedmultiplier = dashSpeed;
         PlayerHealthManager playerHealthManager = FindObjectOfType<PlayerHealthManager>();
         playerHealthManager.maxHealth = maxHealth;
         playerHealthManager.playerHealth = Health;

@@ -49,9 +49,9 @@ MonoBehaviour:
     weight: 100
   Level2Enemies:
   - enemyPrefab: {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
-    weight: 60
+    weight: 70
   - enemyPrefab: {fileID: 343823125381208570, guid: eeae91ad4902d3a4b9553fa683d123a2, type: 3}
-    weight: 40
+    weight: 30
   Level3Enemies:
   - enemyPrefab: {fileID: 3293717909919083311, guid: 95638abbd0d7d8946812c3e76cdd7761, type: 3}
     weight: 50

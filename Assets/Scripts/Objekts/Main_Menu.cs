@@ -42,24 +42,7 @@ public class Main_Menu : MonoBehaviour
 
     public void PlayGame() // startar spelet, resetar spelarens poäng och hämtar default data för spelaren, visar statspanelen och flyttar spelaren till spawn pointen. Och laddar in scenen med index 2 som är spelet.
     {
-        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta m�ste g�ras efter som att statspanel �r i dontdestroyonLoad och d� tappar mainmenyu typ bort den referensen, n�r man d�r och det resetats. å ä ö försvan för någon anledning
-        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
-        EndGame endGame = FindObjectOfType<EndGame>();
-
-
-        Debug.Log("Play!");
-
-        playerPowerUpps.playerpoints = 0;
-
-        if (playerData.instance != null && playerData.isInitialized)
-                playerData.instance.GetPlayerDefaultData();
-
-        if (!playerData.isInitialized)
-                playerData.instance.InitializedPlayerDefaultData();
-
-
-        statsPanelManeger.ShowPanel();
-
+        ResetStuff();
         Transform spawnPoint = GameObject.Find("PlayerSpawnPoint")?.transform;
         if (spawnPoint != null)
             transform.position = spawnPoint.position;
@@ -81,5 +64,28 @@ public class Main_Menu : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    
+
+    private void ResetStuff() //resetar saker så att spelet ska kunna restartas, bland annat level och score.
+    {
+        StatsPanelManeger statsPanelManeger = FindObjectOfType<StatsPanelManeger>(); // detta m�ste g�ras efter som att statspanel �r i dontdestroyonLoad och d� tappar mainmenyu typ bort den referensen, n�r man d�r och det resetats. å ä ö försvan för någon anledning
+        PlayerPowerUpps playerPowerUpps = FindObjectOfType<PlayerPowerUpps>();
+        EndGame endGame = FindObjectOfType<EndGame>();
+
+        statsPanelManeger.ShowPanel();
+
+
+        playerPowerUpps.playerpoints = 0;
+        playerPowerUpps.pointsToPowerup = 1;
+        playerPowerUpps.currentLevel = 0;
+        playerPowerUpps.totalPoints = 0;
+
+        if (playerData.instance != null && playerData.isInitialized)
+            playerData.instance.GetPlayerDefaultData();
+
+        if (!playerData.isInitialized)
+            playerData.instance.InitializedPlayerDefaultData();
+
+
+
+    }
 }

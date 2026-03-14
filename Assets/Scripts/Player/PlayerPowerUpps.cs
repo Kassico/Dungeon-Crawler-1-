@@ -266,7 +266,7 @@ void showPowerUps() // visar powerups på knapparna i powerup panelen, och lägg
             Debug.LogError("One or more player components not found!");
             return;
         }
-        if (playerAttacks.playerDmg <= 2) // kan bara addera mera dmg om den inte �r �ver 3, det �r f�r att det inte ska bli f�r l�tt.
+        if (playerAttacks.playerDmg <= 3) // kan bara addera mera dmg om den inte �r �ver 3, det �r f�r att det inte ska bli f�r l�tt.
         { playerAttacks.playerDmg += extraPlayerAttackForce; }
         playerHealthManager.playerHealth += extraPlayerHealth;
         playerMovement._moveSpeed += extraPlayerMoveSpeed;
@@ -285,9 +285,9 @@ void showPowerUps() // visar powerups på knapparna i powerup panelen, och lägg
         extraPlayerMoveSpeed = 0;
         extraPlayerAttackRadius = 0;
 
-        if (playerAttacks.playerDmg >= 3) // en check så att dmg inte överstifger 3, det kan hända att om dmg är 2 och man får +2 så blir det 4 eftersom det överstiger fösta checken då dmg kan öka med mer än 1
+        if (playerAttacks.playerDmg >= 4) // en check så att dmg inte överstifger 3, det kan hända att om dmg är 2 och man får +2 så blir det 4 eftersom det överstiger fösta checken då dmg kan öka med mer än 1
         {
-            playerAttacks.playerDmg = 3;
+            playerAttacks.playerDmg = 4;
         }
 
 

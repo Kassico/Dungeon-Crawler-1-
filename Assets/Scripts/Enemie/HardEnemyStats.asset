@@ -22,6 +22,6 @@ MonoBehaviour:
   knockbackForceResistans: 0.85
   scoreValue: 5
   attackDeley: 0.3
-  attackHitBox: 1.4
+  attackHitBox: 2.8
   rotateSpeed: 0.8
   projectileSpeed: 5

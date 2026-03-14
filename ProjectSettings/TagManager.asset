@@ -45,6 +45,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: DeadEnemy
+    uniqueID: 3183371495
+    locked: 0
+  - name: Enemy
+    uniqueID: 3091393709
+    locked: 0
+  - name: Player
+    uniqueID: 4219150847
+    locked: 0
   - name: Hitbox
     uniqueID: 2677651383
     locked: 0

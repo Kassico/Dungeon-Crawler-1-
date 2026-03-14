@@ -29,7 +29,7 @@ public class PlayerAttacks : MonoBehaviour
     public float knockbackForce = 15;
 
     private float attackTimer = 0f;
-    private float attackCooldown = 0.4f;
+    private float attackCooldown = 0.6f;
 
 
     public SpriteRenderer sr;

@@ -129,7 +129,6 @@ public class PlayerHealthManager : MonoBehaviour
         
         Vector2 dir = (transform.position - (Vector3)enemyPos).normalized;
 
-        
 
         _rb.AddForce(dir * (enemyKnockbackForce * (1 - knockbackForceResistans)), ForceMode2D.Impulse);
     }

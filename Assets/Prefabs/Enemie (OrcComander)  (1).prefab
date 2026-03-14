@@ -86,8 +86,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1203573587
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 611106200920642291, guid: f3baa0a650f4fee4a9c3e98535528de1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -159,7 +159,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 200
+    m_Bits: 136
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 3577053921256775967}
   - component: {fileID: 8840242415553381741}
   - component: {fileID: 4264424065713368123}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   - component: {fileID: 3735742076504884557}
   - component: {fileID: 854009172590709685}
   - component: {fileID: 2609609445890338704}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1289817899625422704}
   - component: {fileID: 7663690505245935200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrcAttackHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7474609012727752323}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -500,7 +500,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3108699723490858543}
   - component: {fileID: 72764021463813650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: OrcAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,7 +568,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3717868586150771926}
   - component: {fileID: 8878484621761875713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: takeDmgClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 61399665138611075}
   - component: {fileID: 7060040119141548126}
   - component: {fileID: 8678138106886795780}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -800,7 +800,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2858160066915826432}
   - component: {fileID: 362235148228190720}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: attackClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -929,7 +929,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4337963427883028673}
   - component: {fileID: 7006688891903009631}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: deathClip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,7 +1060,7 @@ GameObject:
   - component: {fileID: 1559980232092644289}
   - component: {fileID: 4812349308535177052}
   - component: {fileID: 6528294722825966751}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

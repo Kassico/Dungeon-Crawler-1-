@@ -50,7 +50,6 @@ public class vampire : MonoBehaviour
     private bool isDead = false;
     private bool isStunned = false;
     public bool portalActiveOnDeath = false;
-    private bool isPreparingAttack = false;
 
     [Header("stuff")]
 
@@ -110,7 +109,7 @@ public class vampire : MonoBehaviour
                 currentHealth = maxHealth;
                 moveSpeed = stats.moveSpeed * (difficulty + 1);
                 chaseRange = stats.chaseRange;
-                attackDamage = stats.attackDamage * (difficulty + 1);
+                attackDamage = attackDamage + (attackDamage * difficulty) / 2; // här kan man tänla attackdamge som base attack, det kommer scala mettra med denna ekvation.
                 attackRange = stats.attackRange;
                 attackRate = stats.attackRate;
                 KnockbackForceResistans = stats.knockbackForceResistans * (1 - (difficulty / 10));

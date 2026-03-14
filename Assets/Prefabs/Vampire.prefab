@@ -390,8 +390,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1203573587
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -4622778640565343425, guid: 85d74529756319d4ba80910a1f422ea0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -462,11 +462,11 @@ MonoBehaviour:
   allowedToAttack: 1
   isChasing: 0
   isAttacking: 0
-  portalActiveOnDeath: 0
+  portalActiveOnDeath: 1
   playerLayer:
     serializedVersion: 2
     m_Bits: 0
-  Portal: {fileID: 6803505700508370216, guid: 715e57225b510f64581097e74cde7444, type: 3}
+  Portal: {fileID: 0}
   projectilePrefab: {fileID: 2896159898036364596, guid: d7078e1a07a819e42bad923815c82b6e, type: 3}
   hitColor: {r: 1, g: 0, b: 0, a: 1}
   takeDmgSource: {fileID: 1713979197472882427}
