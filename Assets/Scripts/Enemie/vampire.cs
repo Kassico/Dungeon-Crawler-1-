@@ -109,7 +109,7 @@ public class vampire : MonoBehaviour
                 currentHealth = maxHealth;
                 moveSpeed = stats.moveSpeed * (difficulty + 1);
                 chaseRange = stats.chaseRange;
-                attackDamage = attackDamage + (attackDamage * difficulty) / 2; // här kan man tänla attackdamge som base attack, det kommer scala mettra med denna ekvation.
+                attackDamage = stats.attackDamage + (stats.attackDamage * difficulty) / 2; // här kan man tänla attackdamge som base attack, det kommer scala mettra med denna ekvation.
                 attackRange = stats.attackRange;
                 attackRate = stats.attackRate;
                 KnockbackForceResistans = stats.knockbackForceResistans * (1 - (difficulty / 10));
